@@ -1,0 +1,138 @@
+/* Hakkimizda – tüm stiller bu komponente aittir */
+
+.hakkimizda {
+  display: flex;
+  min-height: 60vh;
+  background-color: #f5f3ef;
+  box-sizing: border-box;
+}
+
+.hakkimizda__images {
+  flex: 0 0 42%;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  padding: 3rem 2rem;
+  min-height: 380px;
+}
+
+.hakkimizda__image {
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.hakkimizda__image--top {
+  margin-bottom: 2.5rem;
+  aspect-ratio: 4/5;
+  max-width: 48%;
+  transition-delay: 0.1s;
+}
+
+.hakkimizda__image--bottom {
+  margin-top: 2.5rem;
+  aspect-ratio: 3/4;
+  max-width: 48%;
+  transition-delay: 0.25s;
+}
+
+.hakkimizda--in-view .hakkimizda__image {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hakkimizda__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hakkimizda__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem 4rem 3rem 5rem;
+  max-width: 56%;
+  opacity: 0;
+  transform: translateX(32px);
+  transition: opacity 0.8s ease-out 0.2s, transform 0.8s ease-out 0.2s;
+}
+
+.hakkimizda--in-view .hakkimizda__content {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.hakkimizda__brand {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #c9a227;
+  margin-bottom: 0.75rem;
+}
+
+.hakkimizda__heading {
+  margin: 0 0 1.5rem;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 700;
+  color: #2c2c2c;
+  line-height: 1.25;
+}
+
+.hakkimizda__heading .hakkimizda__heading-line2 {
+  display: block;
+  font-size: 1.05em;
+}
+
+.hakkimizda__paragraph {
+  margin: 0 0 2rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #5a5a5a;
+  max-width: 520px;
+}
+
+.hakkimizda__cta {
+  display: inline-block;
+  padding: 0.85rem 2.25rem;
+  border: 2px solid #2c2c2c;
+  background: #fff;
+  color: #2c2c2c;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  align-self: flex-start;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.hakkimizda__cta:hover {
+  background: #E0C097;
+  border-color: #E0C097;
+  color: #0d0d0d;
+}
+
+@media (max-width: 900px) {
+  .hakkimizda {
+    flex-direction: column;
+  }
+
+  .hakkimizda__images {
+    flex: none;
+    min-height: 320px;
+    padding: 2rem 1rem;
+  }
+
+  .hakkimizda__content {
+    max-width: none;
+    padding: 2rem 1.5rem;
+  }
+}

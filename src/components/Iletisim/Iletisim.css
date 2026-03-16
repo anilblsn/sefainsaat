@@ -1,0 +1,201 @@
+/* Iletisim – tüm stiller bu komponente aittir */
+
+.iletisim {
+  position: relative;
+  min-height: 0;
+  height: 75vh;
+  max-height: 620px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  padding: 2.5rem 2rem;
+  box-sizing: border-box;
+}
+
+.iletisim__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+}
+
+.iletisim__inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s ease-out, transform 0.75s ease-out;
+}
+
+.iletisim--in-view .iletisim__inner {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.iletisim__title {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+  font-weight: 600;
+  color: #E0C097;
+  letter-spacing: 0.02em;
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+.iletisim__description {
+  margin: 0 0 1.5rem;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.iletisim__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.iletisim__row {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-end;
+  
+}
+
+.iletisim__row--checkbox {
+  margin-top: 0.25rem;
+}
+
+.iletisim__field {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.iletisim__row .iletisim__field:nth-child(1),
+.iletisim__row .iletisim__field:nth-child(2) {
+  flex: 0 1 320px;
+  max-width: 400px;
+}
+
+.iletisim__field--proje {
+  flex: 0 1 160px;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.iletisim__field--checkbox {
+  flex: none;
+}
+
+.iletisim__label {
+  font-size: 0.85rem;
+  color: #fff;
+  margin-bottom: 0.35rem;
+  font-weight: 500;
+}
+
+.iletisim__input,
+.iletisim__select {
+  width: 100%;
+  padding: 0.5rem 0;
+  font-size: 1rem;
+  color: #fff;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  outline: none;
+  transition: border-color 0.2s ease;
+  font-family: inherit;
+}
+
+.iletisim__input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.iletisim__input:focus,
+.iletisim__select:focus {
+  border-bottom-color: #E0C097;
+}
+
+.iletisim__input--error {
+  border-bottom-color: #e74c3c;
+}
+
+.iletisim__select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23fff' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0 center;
+  padding-right: 1.5rem;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+.iletisim__error {
+  font-size: 0.8rem;
+  color: #e74c3c;
+  margin-top: 0.25rem;
+}
+
+.iletisim__submit {
+  padding: 0.85rem 2.25rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #fff;
+  background: #b8956e;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.iletisim__submit:hover {
+  background: #fff;
+  color: #0d0d0d;
+  transform: translateY(-1px);
+}
+
+.iletisim__checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  cursor: pointer;
+}
+
+.iletisim__checkbox {
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-top: 0.2rem;
+  accent-color: #E0C097;
+  flex-shrink: 0;
+}
+
+.iletisim__checkbox-text {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.4;
+}
+
+@media (max-width: 600px) {
+  .iletisim__row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .iletisim__row--submit {
+    flex-direction: column;
+  }
+
+  .iletisim__submit {
+    align-self: flex-start;
+  }
+}

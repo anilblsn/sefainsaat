@@ -1,0 +1,140 @@
+/* Navbar – tüm stiller bu komponente aittir */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1.25rem 2rem;
+  background-color: transparent;
+  box-sizing: border-box;
+  transition: background-color 0.25s ease;
+}
+
+.navbar--scrolled {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.navbar__logo-img {
+  display: block;
+  height: 48px;
+  width: auto;
+  max-width: 180px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.navbar__right {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 1.90rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar__link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: color 0.2s ease;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.navbar__link::after {
+  content: '';
+  position: absolute;
+  left: -6px;
+  right: -6px;
+  bottom: 0;
+  height: 3px;
+  background-color: #E0C097;
+  transform: scaleX(0);
+  transition: transform 0.2s ease;
+}
+
+.navbar__link:hover {
+  color: #E0C097;
+}
+
+.navbar__link:hover::after {
+  transform: scaleX(1);
+}
+
+.navbar__link--active {
+  color: #E0C097;
+}
+
+.navbar__link--active::after {
+  transform: scaleX(1);
+}
+
+.navbar__arrow {
+  font-size: 0.5rem;
+  opacity: 0.9;
+}
+
+.navbar__lang {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.navbar__lang-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  padding: 0.25rem 0.4rem;
+  border-radius: 2px;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.navbar__lang-link:hover {
+  color: #fff;
+}
+
+.navbar__lang-link--active {
+  color: #E0C097;
+}
+
+.navbar__lang-sep {
+  opacity: 0.5;
+  user-select: none;
+}
+
+.navbar__lang-flag {
+  font-size: 1rem;
+  line-height: 1;
+}

@@ -1,0 +1,357 @@
+/* ProjeDetay – iki sütun: galeri (sol) + bilgi (sağ) */
+
+.proje-detay {
+  padding: 3rem 2rem 4rem 5rem;
+  box-sizing: border-box;
+  background: #faf7f3;
+}
+
+.proje-detay + .proje-detay {
+  margin-top: 7rem;
+}
+
+.proje-detay__inner {
+  display: grid;
+  grid-template-columns: 1.35fr 0.65fr;
+  gap: 3rem;
+  max-width: 1400px;
+  margin: 0 auto 0 0;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .proje-detay__inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Sol: galeri */
+.proje-detay__gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.proje-detay__main-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 21/9;
+  background: #e8e8e8;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.proje-detay__main-hover {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  pointer-events: none;
+  z-index: 2;
+  transition: background 0.25s ease;
+}
+
+.proje-detay__main-wrap:hover .proje-detay__main-hover {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.proje-detay__main-strip {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.45s ease-out;
+}
+
+.proje-detay__main-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+}
+
+.proje-detay__main {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.proje-detay__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+
+.proje-detay__arrow:hover {
+  opacity: 0.85;
+}
+
+.proje-detay__arrow::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-left: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+}
+
+.proje-detay__arrow--prev {
+  left: 12px;
+}
+
+.proje-detay__arrow--prev::after {
+  margin-left: 4px;
+  transform: rotate(45deg);
+}
+
+.proje-detay__arrow--next {
+  right: 12px;
+}
+
+.proje-detay__arrow--next::after {
+  margin-right: 4px;
+  transform: rotate(-135deg);
+}
+
+.proje-detay__zoom-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 56px;
+  height: 56px;
+  border: none;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  z-index: 3;
+}
+
+.proje-detay__main-wrap:hover .proje-detay__zoom-btn {
+  opacity: 1;
+}
+
+.proje-detay__zoom-btn:hover {
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+}
+
+.proje-detay__thumbs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.proje-detay__thumb {
+  width: calc((100% - 4 * 0.5rem) / 5);
+  aspect-ratio: 16/9;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #e8e8e8;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.proje-detay__thumb:hover {
+  border-color: #d4b96a;
+}
+
+.proje-detay__thumb--active {
+  border-color: #E0C097;
+}
+
+.proje-detay__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Sağ: içerik */
+.proje-detay__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.proje-detay__developer {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #888;
+}
+
+.proje-detay__title {
+  margin: 0;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 700;
+  color: #2c2c2c;
+  line-height: 1.25;
+}
+
+.proje-detay__details {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.proje-detay__detail {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.proje-detay__detail-icon {
+  flex-shrink: 0;
+  color: #E0C097;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.proje-detay__detail strong {
+  color: #2c2c2c;
+  margin-right: 0.25rem;
+}
+
+.proje-detay__desc {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #555;
+}
+
+.proje-detay__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: #2c2c2c;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background 0.2s;
+  align-self: flex-start;
+  margin-top: 0.5rem;
+}
+
+.proje-detay__btn:hover {
+  background: #E0C097;
+  color: #fff;
+}
+
+/* Lightbox – büyütülmüş resim */
+.proje-detay__lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.proje-detay__lightbox-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 48px;
+  height: 48px;
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.proje-detay__lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.proje-detay__lightbox-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 56px;
+  height: 56px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+
+.proje-detay__lightbox-arrow:hover {
+  opacity: 0.85;
+}
+
+.proje-detay__lightbox-arrow::after {
+  content: '';
+  width: 14px;
+  height: 14px;
+  border-left: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+}
+
+.proje-detay__lightbox-arrow--prev {
+  left: 1.5rem;
+}
+
+.proje-detay__lightbox-arrow--prev::after {
+  margin-left: 4px;
+  transform: rotate(45deg);
+}
+
+.proje-detay__lightbox-arrow--next {
+  right: 1.5rem;
+}
+
+.proje-detay__lightbox-arrow--next::after {
+  margin-right: 4px;
+  transform: rotate(-135deg);
+}
+
+.proje-detay__lightbox-img {
+  max-width: 95vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  cursor: default;
+  position: relative;
+  z-index: 1;
+}

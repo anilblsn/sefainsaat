@@ -1,0 +1,171 @@
+/* Hizmetlerimiz – tüm stiller bu komponente aittir */
+
+.hizmetlerimiz {
+  background-color: #faf7f3;
+  padding: 4rem 2rem 5rem;
+  box-sizing: border-box;
+}
+
+.hizmetlerimiz__heading {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #E0C097;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.hizmetlerimiz__subheading {
+  margin: 0 0 3rem;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 700;
+  color: #2c2c2c;
+  text-align: center;
+  line-height: 1.3;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease-out 0.1s, transform 0.6s ease-out 0.1s;
+}
+
+.hizmetlerimiz--in-view .hizmetlerimiz__heading,
+.hizmetlerimiz--in-view .hizmetlerimiz__subheading {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hizmetlerimiz__cards {
+  display: flex;
+  gap: 1.25rem;
+  max-width: 1500px;
+  margin: 0 auto;
+  flex-wrap: nowrap;
+}
+
+.hizmetlerimiz__card {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  max-height: 320px;
+  padding: 2rem 1.5rem;
+  background: #fff;
+  border: 1px solid #d4b96a;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.65s ease-out, transform 0.65s ease-out;
+}
+
+.hizmetlerimiz__card:nth-child(1) { transition-delay: 0.2s; }
+.hizmetlerimiz__card:nth-child(2) { transition-delay: 0.3s; }
+.hizmetlerimiz__card:nth-child(3) { transition-delay: 0.4s; }
+.hizmetlerimiz__card:nth-child(4) { transition-delay: 0.5s; }
+
+.hizmetlerimiz--in-view .hizmetlerimiz__card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hizmetlerimiz__card--offset {
+  margin-top: 30px;
+  transition: margin-top 5s ease;
+}
+
+.hizmetlerimiz--scrolled .hizmetlerimiz__card--offset {
+  margin-top: 0;
+}
+
+.hizmetlerimiz__card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background-color: #E0C097;
+  z-index: 0;
+  transition: width 0.4s ease;
+}
+
+.hizmetlerimiz__card:hover::before {
+  width: 100%;
+}
+
+.hizmetlerimiz__card .hizmetlerimiz__header,
+.hizmetlerimiz__card .hizmetlerimiz__description {
+  position: relative;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+
+.hizmetlerimiz__card:hover .hizmetlerimiz__icon {
+  color: #fff;
+}
+
+.hizmetlerimiz__card:hover .hizmetlerimiz__title {
+  color: #fff;
+}
+
+.hizmetlerimiz__card:hover .hizmetlerimiz__description {
+  color: #fff;
+}
+
+.hizmetlerimiz__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+}
+
+.hizmetlerimiz__icon {
+  width: 48px;
+  height: 48px;
+  color: #E0C097;
+  flex-shrink: 0;
+}
+
+.hizmetlerimiz__icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.hizmetlerimiz__title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #2c2c2c;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
+.hizmetlerimiz__description {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: #5a5a5a;
+  text-align: left;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+}
+
+@media (max-width: 900px) {
+  .hizmetlerimiz__cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hizmetlerimiz__card {
+    max-width: 100%;
+  }
+}
