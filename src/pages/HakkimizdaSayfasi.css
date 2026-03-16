@@ -1,0 +1,99 @@
+/* Hakkımızda sayfası – Navbar + banner + içerik (diğer sayfalarla aynı yapı) */
+
+.hakkimizda-sayfasi-banner {
+  position: relative;
+  width: 100%;
+  min-height: 380px;
+  display: flex;
+  align-items: flex-end;
+  padding: 3rem 2rem 2.5rem 5rem;
+  box-sizing: border-box;
+  background-image: url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1600&q=80');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hakkimizda-sayfasi-banner__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.82);
+  pointer-events: none;
+}
+
+.hakkimizda-sayfasi-banner__title {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  font-size: clamp(2.25rem, 5.5vw, 3.25rem);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.02em;
+  padding-left: 0;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.hakkimizda-sayfasi-banner--ready .hakkimizda-sayfasi-banner__title {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hakkimizda-sayfasi {
+  min-height: 50vh;
+  padding: 3rem 2rem 4rem 10rem;
+  box-sizing: border-box;
+  background: #faf7f3;
+}
+
+.hakkimizda-sayfasi__content {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hakkimizda-sayfasi__logo {
+  display: block;
+  max-width: 220px;
+  height: auto;
+  margin: 0 auto 2rem;
+  object-fit: contain;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.hakkimizda-sayfasi--in-view .hakkimizda-sayfasi__logo {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hakkimizda-sayfasi__paragraf {
+  margin: 0 0 1.5rem;
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #2c2c2c;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s ease-out, transform 0.65s ease-out;
+}
+
+.hakkimizda-sayfasi__paragraf:nth-child(2) { transition-delay: 0.15s; }
+.hakkimizda-sayfasi__paragraf:nth-child(3) { transition-delay: 0.3s; }
+
+.hakkimizda-sayfasi--in-view .hakkimizda-sayfasi__paragraf {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hakkimizda-sayfasi__paragraf:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 900px) {
+  .hakkimizda-sayfasi {
+    padding: 2rem 1.5rem 3rem;
+  }
+}
