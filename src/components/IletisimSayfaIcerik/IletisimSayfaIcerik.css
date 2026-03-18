@@ -41,7 +41,7 @@
   font-weight: 700;
   color: #2c2c2c;
   padding-bottom: 0.5rem;
-  border-bottom: 3px solid #E0C097;
+  border-bottom: 3px solid #ef7f1a;
   display: inline-block;
 }
 
@@ -62,7 +62,7 @@
 
 .iletisim-sayfa-icerik__icon {
   flex-shrink: 0;
-  color: #E0C097;
+  color: #ef7f1a;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -113,7 +113,7 @@
   font-weight: 700;
   color: #2c2c2c;
   padding-bottom: 0.5rem;
-  border-bottom: 3px solid #E0C097;
+  border-bottom: 3px solid #ef7f1a;
   display: inline-block;
   line-height: 1.35;
 }
@@ -155,7 +155,7 @@
 
 .iletisim-sayfa-icerik__input:focus {
   outline: none;
-  border-color: #E0C097;
+  border-color: #ef7f1a;
 }
 
 .iletisim-sayfa-icerik__input--error {
@@ -213,7 +213,7 @@
 .iletisim-sayfa-icerik__submit {
   margin-top: 0.5rem;
   padding: 0.9rem 1.5rem;
-  background: #E0C097;
+  background: #ef7f1a;
   color: #fff;
   border: none;
   font-size: 0.9rem;

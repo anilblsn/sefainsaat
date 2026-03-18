@@ -12,7 +12,7 @@
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #E0C097;
+  color: #ef7f1a;
   text-align: center;
   opacity: 0;
   transform: translateY(24px);
@@ -52,7 +52,7 @@
   max-height: 320px;
   padding: 2rem 1.5rem;
   background: #fff;
-  border: 1px solid #d4b96a;
+  border: 1px solid #ef7f1a;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -128,7 +128,7 @@
 .hizmetlerimiz__icon {
   width: 48px;
   height: 48px;
-  color: #E0C097;
+  color: #ef7f1a;
   flex-shrink: 0;
 }
 

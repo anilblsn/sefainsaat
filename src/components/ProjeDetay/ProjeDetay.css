@@ -168,11 +168,11 @@
 }
 
 .proje-detay__thumb:hover {
-  border-color: #d4b96a;
+  border-color: #ef7f1a;
 }
 
 .proje-detay__thumb--active {
-  border-color: #E0C097;
+  border-color: #ef7f1a;
 }
 
 .proje-detay__thumb img {
@@ -227,7 +227,7 @@
 
 .proje-detay__detail-icon {
   flex-shrink: 0;
-  color: #E0C097;
+  color: #ef7f1a;
   display: flex;
   align-items: center;
   justify-content: center;

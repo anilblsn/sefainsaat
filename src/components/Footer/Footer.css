@@ -48,7 +48,7 @@
 
 .footer__logo-tagline {
   font-size: 0.95rem;
-  color: #E0C097;
+  color: #ef7f1a;
   letter-spacing: 0.02em;
   margin-top: 0.2rem;
   font-style: italic;
@@ -69,7 +69,7 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   padding-bottom: 0.5rem;
-  border-bottom: 2px solid #E0C097;
+  border-bottom: 2px solid #ef7f1a;
   display: inline-block;
 }
 
@@ -110,7 +110,7 @@
 }
 
 .footer__icon {
-  color: #E0C097;
+  color: #ef7f1a;
   flex-shrink: 0;
   display: flex;
   align-items: center;

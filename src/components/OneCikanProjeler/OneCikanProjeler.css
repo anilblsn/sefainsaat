@@ -12,7 +12,7 @@
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #E0C097;
+  color: #ef7f1a;
   text-align: center;
   opacity: 0;
   transform: translateY(20px);
@@ -118,7 +118,7 @@
   margin: 0;
   font-size: 0.85rem;
   font-weight: 500;
-  color: #E0C097;
+  color: #ef7f1a;
   letter-spacing: 0.02em;
 }
 
@@ -126,7 +126,7 @@
   display: block;
   width: 40px;
   height: 1px;
-  background-color: #E0C097;
+  background-color: #ef7f1a;
 }
 
 .onecikan-projeler__black-title {
