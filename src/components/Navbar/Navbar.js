@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
-import logoImg from '../../assets/logo/sefa-1.png';
+import logoImg from '../../assets/logo/logo2.png';
 import './Navbar.css';
 
 function Navbar() {

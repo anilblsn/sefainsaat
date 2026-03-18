@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar';
 import Iletisim from '../components/Iletisim';
 import Footer from '../components/Footer';
 import { useInView } from '../hooks/useInView';
-import logoImg from '../assets/logo/sefa-1.png';
+import logoImg from '../assets/logo/logo2.png';
 import './HakkimizdaSayfasi.css';
 
 const HAKKIMIZDA = {
