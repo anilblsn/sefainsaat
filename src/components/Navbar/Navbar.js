@@ -3,6 +3,28 @@ import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import logoImg from '../../assets/logo/logo2.png';
 import './Navbar.css';
 
+const FlagTR = (
+  <svg className="navbar__lang-flagSvg" viewBox="0 0 32 24" aria-hidden="true">
+    <rect width="32" height="24" rx="3" fill="#E30A17" />
+    <circle cx="13" cy="12" r="6" fill="#fff" />
+    <circle cx="14.7" cy="12" r="4.8" fill="#E30A17" />
+    <path
+      d="M20.6 12l3.1 1-1.9 2.6 0-3.2 1.9 2.6-3.1 1 1.9-2.6z"
+      fill="#fff"
+    />
+  </svg>
+);
+
+const FlagGB = (
+  <svg className="navbar__lang-flagSvg" viewBox="0 0 32 24" aria-hidden="true">
+    <rect width="32" height="24" rx="3" fill="#012169" />
+    <path d="M0 0l32 24M32 0L0 24" stroke="#fff" strokeWidth="5" />
+    <path d="M0 0l32 24M32 0L0 24" stroke="#C8102E" strokeWidth="3" />
+    <path d="M16 0v24M0 12h32" stroke="#fff" strokeWidth="7" />
+    <path d="M16 0v24M0 12h32" stroke="#C8102E" strokeWidth="4" />
+  </svg>
+);
+
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
@@ -96,11 +118,7 @@ function Navbar() {
             aria-expanded={langOpen}
             aria-label={lang === 'en' ? 'Language menu' : 'Dil menüsü'}
           >
-            {lang === 'en' ? (
-              <span className="navbar__lang-abbr" aria-hidden="true">EN</span>
-            ) : (
-              <span className="navbar__lang-flag" role="img">🇹🇷</span>
-            )}
+            {lang === 'en' ? FlagGB : FlagTR}
             <span>{lang === 'en' ? 'ENGLISH' : 'TÜRKÇE'}</span>
             <span className="navbar__lang-caret" aria-hidden="true">▾</span>
           </button>
@@ -114,7 +132,7 @@ function Navbar() {
                 onClick={() => setLangOpen(false)}
                 aria-label="Türkçe"
               >
-                <span className="navbar__lang-flag" role="img">🇹🇷</span>
+                {FlagTR}
                 <span>TÜRKÇE</span>
               </Link>
               <Link
@@ -124,7 +142,7 @@ function Navbar() {
                 onClick={() => setLangOpen(false)}
                 aria-label="English"
               >
-                <span className="navbar__lang-abbr" aria-hidden="true">EN</span>
+                {FlagGB}
                 <span>ENGLISH</span>
               </Link>
             </div>

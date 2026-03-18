@@ -142,18 +142,11 @@
   margin-left: 0.1rem;
 }
 
-.navbar__lang-flag {
-  font-size: 1rem;
-  line-height: 1;
-}
-
-.navbar__lang-abbr {
-  display: inline-block;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  line-height: 1;
-  color: #fff;
+.navbar__lang-flagSvg {
+  width: 1.5rem;
+  height: 1.1rem;
+  flex: 0 0 auto;
+  display: block;
 }
 
 .navbar__lang-menu {
