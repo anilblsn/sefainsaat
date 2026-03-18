@@ -213,6 +213,10 @@
   gap: 0.5rem;
 }
 
+.proje-detay__details-spacer {
+  min-height: 10rem;
+}
+
 .proje-detay__detail {
   display: flex;
   align-items: center;

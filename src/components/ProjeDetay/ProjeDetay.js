@@ -92,7 +92,7 @@ function ProjeDetay({ developer = 'Sefa İnşaat', title, details = [], descript
         <div className="proje-detay__content">
           {developer && <span className="proje-detay__developer">{developer}</span>}
           {title && <h2 className="proje-detay__title">{title}</h2>}
-          {details.length > 0 && (
+          {details.length > 0 ? (
             <ul className="proje-detay__details">
               {details.map((item, i) => (
                 <li key={i} className="proje-detay__detail">
@@ -101,6 +101,8 @@ function ProjeDetay({ developer = 'Sefa İnşaat', title, details = [], descript
                 </li>
               ))}
             </ul>
+          ) : (
+            <div className="proje-detay__details-spacer" aria-hidden="true" />
           )}
           {description && <p className="proje-detay__desc">{description}</p>}
           {websiteUrl && (

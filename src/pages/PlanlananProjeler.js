@@ -24,38 +24,17 @@ const CONTENT = {
     kartal: {
       title: 'EVİNPARK Kartal',
       description: 'EVİNPARK Kartal projesi; konumu ve yaşam alanlarıyla öne çıkan planlanan bir projedir.',
-      details: [
-        { icon: 'building', label: 'İnşaat Alanı', value: '—' },
-        { icon: 'ruler', label: 'Proje alanı', value: '—' },
-        { icon: 'calendar', label: 'Ruhsat Tarihi', value: '—' },
-        { icon: 'house', label: 'Konut sayısı', value: '—' },
-        { icon: 'house', label: 'Konut tipleri', value: '—' },
-        { icon: 'calendar', label: 'Planlanan teslim', value: '—' },
-      ],
+      details: [],
     },
     kasaba: {
       title: 'EVİNPARK Kasaba',
       description: 'EVİNPARK Kasaba projesi; planlama aşamasında olan projemizdir. Detaylar yakında güncellenecektir.',
-      details: [
-        { icon: 'building', label: 'İnşaat Alanı', value: '—' },
-        { icon: 'ruler', label: 'Proje alanı', value: '—' },
-        { icon: 'calendar', label: 'Ruhsat Tarihi', value: '—' },
-        { icon: 'house', label: 'Konut sayısı', value: '—' },
-        { icon: 'house', label: 'Konut tipleri', value: '—' },
-        { icon: 'calendar', label: 'Planlanan teslim', value: '—' },
-      ],
+      details: [],
     },
     omerli: {
       title: 'EVİNPARK Ömerli',
       description: 'EVİNPARK Ömerli projesi; planlama aşamasında olan projemizdir. Detaylar yakında güncellenecektir.',
-      details: [
-        { icon: 'building', label: 'İnşaat Alanı', value: '—' },
-        { icon: 'ruler', label: 'Proje alanı', value: '—' },
-        { icon: 'calendar', label: 'Ruhsat Tarihi', value: '—' },
-        { icon: 'house', label: 'Konut sayısı', value: '—' },
-        { icon: 'house', label: 'Konut tipleri', value: '—' },
-        { icon: 'calendar', label: 'Planlanan teslim', value: '—' },
-      ],
+      details: [],
     },
   },
   en: {
@@ -63,38 +42,17 @@ const CONTENT = {
     kartal: {
       title: 'EVİNPARK Kartal',
       description: 'EVİNPARK Kartal is a planned project that stands out with its location and living spaces.',
-      details: [
-        { icon: 'building', label: 'Construction Area', value: '—' },
-        { icon: 'ruler', label: 'Project Area', value: '—' },
-        { icon: 'calendar', label: 'Permit Date', value: '—' },
-        { icon: 'house', label: 'Number of Units', value: '—' },
-        { icon: 'house', label: 'Unit Types', value: '—' },
-        { icon: 'calendar', label: 'Planned Delivery', value: '—' },
-      ],
+      details: [],
     },
     kasaba: {
       title: 'EVİNPARK Kasaba',
       description: 'EVİNPARK Kasaba is a planned project. Details will be updated soon.',
-      details: [
-        { icon: 'building', label: 'Construction Area', value: '—' },
-        { icon: 'ruler', label: 'Project Area', value: '—' },
-        { icon: 'calendar', label: 'Permit Date', value: '—' },
-        { icon: 'house', label: 'Number of Units', value: '—' },
-        { icon: 'house', label: 'Unit Types', value: '—' },
-        { icon: 'calendar', label: 'Planned Delivery', value: '—' },
-      ],
+      details: [],
     },
     omerli: {
       title: 'EVİNPARK Ömerli',
       description: 'EVİNPARK Ömerli is a planned project. Details will be updated soon.',
-      details: [
-        { icon: 'building', label: 'Construction Area', value: '—' },
-        { icon: 'ruler', label: 'Project Area', value: '—' },
-        { icon: 'calendar', label: 'Permit Date', value: '—' },
-        { icon: 'house', label: 'Number of Units', value: '—' },
-        { icon: 'house', label: 'Unit Types', value: '—' },
-        { icon: 'calendar', label: 'Planned Delivery', value: '—' },
-      ],
+      details: [],
     },
   },
 };
