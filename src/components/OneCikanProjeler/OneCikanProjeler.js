@@ -67,7 +67,10 @@ function OneCikanProjeler() {
     all.forEach((p) => {
       if (!byNumber.has(p.number)) byNumber.set(p.number, p);
     });
-    return order.map((n) => byNumber.get(n)).filter(Boolean);
+    return order
+      .map((n) => byNumber.get(n))
+      .filter(Boolean)
+      .map((p) => (p.number === 14 ? { ...p, name: 'EVİNPARK ADATEPE' } : p));
   }, []);
 
   return (

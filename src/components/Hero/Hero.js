@@ -40,11 +40,11 @@ function getProjectsFromContext() {
 
 const CONTENT = {
   tr: {
-    badge: 'Tamamlanan Proje',
+    badge: '',
     ctaLabel: 'TÜMÜNÜ GÖR',
   },
   en: {
-    badge: 'Completed Project',
+    badge: '',
     ctaLabel: 'VIEW ALL',
   },
 };
@@ -102,7 +102,7 @@ function Hero() {
             style={{ backgroundImage: `url(${slide.image})` }}
           >
             <div className="hero__overlay" />
-            <span className="hero__badge">{slide.badge}</span>
+            {slide.badge ? <span className="hero__badge">{slide.badge}</span> : null}
             <div className="hero__content">
               <h1 className="hero__title">{slide.title}</h1>
               {slide.description ? <p className="hero__description">{slide.description}</p> : null}
