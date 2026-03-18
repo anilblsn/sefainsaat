@@ -25,6 +25,29 @@ const FlagGB = (
   </svg>
 );
 
+const CONTENT = {
+  tr: {
+    homeAria: 'Sefa İnşaat Ana Sayfa',
+    about: 'HAKKIMIZDA',
+    ongoing: 'SATIŞI DEVAM EDEN PROJELER',
+    completed: 'TAMAMLANAN PROJELER',
+    planned: 'PLANLANAN PROJELER',
+    contact: 'İLETİŞİM',
+    langMenu: 'Dil menüsü',
+    langOptions: 'Dil seçenekleri',
+  },
+  en: {
+    homeAria: 'Sefa Construction Home',
+    about: 'ABOUT US',
+    ongoing: 'ONGOING SALES PROJECTS',
+    completed: 'COMPLETED PROJECTS',
+    planned: 'PLANNED PROJECTS',
+    contact: 'CONTACT',
+    langMenu: 'Language menu',
+    langOptions: 'Language options',
+  },
+};
+
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
@@ -33,6 +56,7 @@ function Navbar() {
   const pathWithLang = (l) => `${location.pathname}${l === 'tr' ? '' : '?lang=en'}`;
   const [langOpen, setLangOpen] = useState(false);
   const langRef = useRef(null);
+  const t = lang === 'en' ? CONTENT.en : CONTENT.tr;
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 0);
@@ -61,7 +85,7 @@ function Navbar() {
 
   return (
     <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
-      <Link to="/" className="navbar__logo" aria-label="Sefa İnşaat Ana Sayfa">
+      <Link to="/" className="navbar__logo" aria-label={t.homeAria}>
         <img src={logoImg} alt="Sefa İnşaat" className="navbar__logo-img" />
       </Link>
 
@@ -72,7 +96,7 @@ function Navbar() {
               to="/hakkimizda"
               className={`navbar__link ${location.pathname === '/hakkimizda' ? 'navbar__link--active' : ''}`}
             >
-              HAKKIMIZDA
+              {t.about}
             </Link>
           </li>
           <li>
@@ -80,7 +104,7 @@ function Navbar() {
               to="/satisi-devam-eden-projeler"
               className={`navbar__link ${location.pathname === '/satisi-devam-eden-projeler' ? 'navbar__link--active' : ''}`}
             >
-              SATIŞI DEVAM EDEN PROJELER
+              {t.ongoing}
             </Link>
           </li>
           <li>
@@ -88,7 +112,7 @@ function Navbar() {
               to="/tamamlanan-projeler"
               className={`navbar__link ${location.pathname === '/tamamlanan-projeler' ? 'navbar__link--active' : ''}`}
             >
-              TAMAMLANAN PROJELER
+              {t.completed}
             </Link>
           </li>
           <li>
@@ -96,7 +120,7 @@ function Navbar() {
               to="/planlanan-projeler"
               className={`navbar__link ${location.pathname === '/planlanan-projeler' ? 'navbar__link--active' : ''}`}
             >
-              PLANLANAN PROJELER
+              {t.planned}
             </Link>
           </li>
           <li>
@@ -104,7 +128,7 @@ function Navbar() {
               to="/iletisim"
               className={`navbar__link ${location.pathname === '/iletisim' ? 'navbar__link--active' : ''}`}
             >
-              İLETİŞİM
+              {t.contact}
             </Link>
           </li>
         </ul>
@@ -116,7 +140,7 @@ function Navbar() {
             onClick={() => setLangOpen((v) => !v)}
             aria-haspopup="menu"
             aria-expanded={langOpen}
-            aria-label={lang === 'en' ? 'Language menu' : 'Dil menüsü'}
+            aria-label={t.langMenu}
           >
             {lang === 'en' ? FlagGB : FlagTR}
             <span>{lang === 'en' ? 'ENGLISH' : 'TÜRKÇE'}</span>
@@ -124,7 +148,7 @@ function Navbar() {
           </button>
 
           {langOpen && (
-            <div className="navbar__lang-menu" role="menu" aria-label={lang === 'en' ? 'Language options' : 'Dil seçenekleri'}>
+            <div className="navbar__lang-menu" role="menu" aria-label={t.langOptions}>
               <Link
                 to={pathWithLang('tr')}
                 className={`navbar__lang-option ${lang !== 'en' ? 'navbar__lang-option--active' : ''}`}
