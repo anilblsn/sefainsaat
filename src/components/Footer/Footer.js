@@ -23,13 +23,13 @@ const QUICK_LINKS_EN = [
 const CONTENT = {
   tr: {
     tagline: '',
-    about: 'Sefa İnşaat 2005 yılından bu yana dürüstlük ilkesini prensip edinerek, marka olmanın bilinci ve sorumluluğu ile sağlam adımlarla yürümektedir.',
+    about: '1977 yılında kurulan Sefa İnşaat, dürüstlük ilkesini prensip edinerek marka olmanın bilinci ve sorumluluğu ile sağlam adımlarla yürümektedir.',
     quickMenu: 'HIZLI MENÜ',
     headOffice: 'MERKEZ OFİS',
   },
   en: {
     tagline: '',
-    about: 'Since 2005, Sefa Construction has been moving forward with steady steps, adopting integrity as a principle and with the awareness and responsibility of being a brand.',
+    about: 'Founded in 1977, Sefa Construction moves forward with steady steps, adopting integrity as a principle and with the awareness and responsibility of being a brand.',
     quickMenu: 'QUICK MENU',
     headOffice: 'HEAD OFFICE',
   },
