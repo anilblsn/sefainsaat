@@ -34,15 +34,21 @@
 
 .tamamlanan-projeler {
   min-height: 50vh;
-  padding: 3rem 2rem 4rem 10rem;
+  padding: 3rem 2rem 4rem 5rem;
   box-sizing: border-box;
   background: #faf7f3;
+}
+
+@media (max-width: 900px) {
+  .tamamlanan-projeler {
+    padding-left: 2rem;
+  }
 }
 
 .tamamlanan-projeler__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
+  gap: 2rem;
   max-width: 1600px;
   margin: 0 auto 0 0;
 }
