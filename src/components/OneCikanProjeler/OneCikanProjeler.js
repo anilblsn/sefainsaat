@@ -86,11 +86,32 @@ function OneCikanProjeler() {
                 alt={project.name}
                 className="onecikan-projeler__image"
               />
-            </div>
-            <div className="onecikan-projeler__black">
-              <p className="onecikan-projeler__black-category">{c.category}</p>
-              <span className="onecikan-projeler__black-line" aria-hidden="true" />
-              <h3 className="onecikan-projeler__black-title">{project.name}</h3>
+              <h3 className="onecikan-projeler__caption">
+                {(() => {
+                  const toTitle = (s) =>
+                    s
+                      .toLocaleLowerCase('tr-TR')
+                      .split(' ')
+                      .map((w) => (w ? w.charAt(0).toLocaleUpperCase('tr-TR') + w.slice(1) : w))
+                      .join(' ');
+                  const parts = project.name.split(' ');
+                  const first = parts[0];
+                  const rest = parts.slice(1).join(' ');
+                  const isEvinpark = first.toLocaleUpperCase('tr-TR') === 'EVİNPARK';
+                  return (
+                    <>
+                      <span
+                        className={`onecikan-projeler__caption-line ${isEvinpark ? 'onecikan-projeler__caption-line--evinpark' : ''}`}
+                      >
+                        {isEvinpark ? first.toLocaleLowerCase('tr-TR') : toTitle(first)}
+                      </span>
+                      {rest && (
+                        <span className="onecikan-projeler__caption-line">{toTitle(rest)}</span>
+                      )}
+                    </>
+                  );
+                })()}
+              </h3>
             </div>
           </article>
         ))}

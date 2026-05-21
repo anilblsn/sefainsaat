@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useInView } from '../../hooks/useInView';
 import './Iletisim.css';
-import bgImage from '../../assets/tamamlananprojects/3-EVİNPARK KADIKÖY REZİDANS/0.jpg';
+import bgImage from '../../assets/tamamlananprojects/1-EVİNPARK GÖKTÜRK/0.jpg';
 
 const PROJE_OPTIONS_TR = [
   { value: '', label: 'Proje Seçiniz' },
