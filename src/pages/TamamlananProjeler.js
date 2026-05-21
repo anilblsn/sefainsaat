@@ -10,7 +10,6 @@ const PER_PAGE = 8;
 const CONTENT = {
   tr: {
     bannerTitle: 'Tamamlanan Projeler',
-    cardLabel: 'TAMAMLANAN PROJE',
     ariaZoom: ' – resmi büyüt',
     paginationLabel: 'Proje sayfaları',
     prevPage: 'Önceki sayfa',
@@ -23,7 +22,6 @@ const CONTENT = {
   },
   en: {
     bannerTitle: 'Completed Projects',
-    cardLabel: 'COMPLETED PROJECT',
     ariaZoom: ' – enlarge image',
     paginationLabel: 'Project pages',
     prevPage: 'Previous page',
@@ -35,6 +33,34 @@ const CONTENT = {
     nextImage: 'Next image',
   },
 };
+
+const toTitle = (s) =>
+  s
+    .toLocaleLowerCase('tr-TR')
+    .split(' ')
+    .map((w) => (w ? w.charAt(0).toLocaleUpperCase('tr-TR') + w.slice(1) : w))
+    .join(' ');
+
+function renderProjectCaption(name) {
+  const parts = name.split(' ');
+  const first = parts[0];
+  const rest = parts.slice(1).join(' ');
+  const isEvinpark = first.toLocaleUpperCase('tr-TR') === 'EVİNPARK';
+  return (
+    <>
+      <span
+        className={`tamamlanan-projeler__caption-line ${
+          isEvinpark ? 'tamamlanan-projeler__caption-line--evinpark' : ''
+        }`}
+      >
+        {isEvinpark ? first.toLocaleLowerCase('tr-TR') : toTitle(first)}
+      </span>
+      {rest && (
+        <span className="tamamlanan-projeler__caption-line">{toTitle(rest)}</span>
+      )}
+    </>
+  );
+}
 
 const imageContext = require.context(
   '../assets/tamamlananprojects',
@@ -151,10 +177,6 @@ function TamamlananProjeler() {
         <div className="tamamlanan-projeler__grid">
           {pageProjects.map((proje) => (
             <article key={proje.id} className="tamamlanan-projeler__card">
-              <div className="tamamlanan-projeler__card-header">
-                <span className="tamamlanan-projeler__card-label">{t.cardLabel}</span>
-                <h2 className="tamamlanan-projeler__card-title">{proje.name}</h2>
-              </div>
               <button
                 type="button"
                 className="tamamlanan-projeler__card-image-wrap"
@@ -162,6 +184,9 @@ function TamamlananProjeler() {
                 aria-label={`${proje.name}${t.ariaZoom}`}
               >
                 <img src={proje.image} alt={proje.name} className="tamamlanan-projeler__card-image" />
+                <h2 className="tamamlanan-projeler__caption">
+                  {renderProjectCaption(proje.name)}
+                </h2>
                 <span className="tamamlanan-projeler__card-zoom">
                   <ZoomIcon />
                 </span>
