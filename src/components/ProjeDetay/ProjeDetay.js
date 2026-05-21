@@ -21,6 +21,31 @@ const ICON_ZOOM = (
   </svg>
 );
 
+const toTitle = (s) =>
+  s
+    .toLocaleLowerCase('tr-TR')
+    .split(' ')
+    .map((w) => (w ? w.charAt(0).toLocaleUpperCase('tr-TR') + w.slice(1) : w))
+    .join(' ');
+
+function ProjectTitle({ title }) {
+  if (!title) return null;
+  const parts = title.split(' ');
+  const first = parts[0];
+  const rest = parts.slice(1).join(' ');
+  const isEvinpark = first.toLocaleUpperCase('tr-TR') === 'EVİNPARK';
+  return (
+    <h2 className="proje-detay__title">
+      <span
+        className={`proje-detay__title-line ${isEvinpark ? 'proje-detay__title-line--evinpark' : ''}`}
+      >
+        {isEvinpark ? first.toLocaleLowerCase('tr-TR') : toTitle(first)}
+      </span>
+      {rest && <span className="proje-detay__title-line">{toTitle(rest)}</span>}
+    </h2>
+  );
+}
+
 function ProjeDetay({ developer = 'Sefa İnşaat', title, details = [], description, websiteUrl, images = [] }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -91,7 +116,7 @@ function ProjeDetay({ developer = 'Sefa İnşaat', title, details = [], descript
         </div>
         <div className="proje-detay__content">
           {developer && <span className="proje-detay__developer">{developer}</span>}
-          {title && <h2 className="proje-detay__title">{title}</h2>}
+          <ProjectTitle title={title} />
           {details.length > 0 ? (
             <ul className="proje-detay__details">
               {details.map((item, i) => (
