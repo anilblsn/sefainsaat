@@ -1,10 +1,28 @@
 /* Hakkimizda – tüm stiller bu komponente aittir */
 
 .hakkimizda {
+  position: relative;
   display: flex;
   min-height: 60vh;
-  background-color: #f5f3ef;
+  background: linear-gradient(to bottom, #2a2b31 0%, #2f3037 100%);
   box-sizing: border-box;
+  color: #f5efe6;
+  overflow: hidden;
+}
+
+.hakkimizda::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 180px;
+  background: linear-gradient(to bottom, #1e1f24 0%, rgba(42, 43, 49, 0) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hakkimizda > * {
+  position: relative;
+  z-index: 2;
 }
 
 .hakkimizda__images {
@@ -20,7 +38,8 @@
   flex: 1 1 0;
   min-width: 0;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   opacity: 0;
   transform: translateY(36px);
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
@@ -82,7 +101,7 @@
   margin: 0 0 1.5rem;
   font-size: clamp(1.75rem, 3vw, 2.5rem);
   font-weight: 700;
-  color: #2c2c2c;
+  color: #f5efe6;
   line-height: 1.25;
 }
 
@@ -95,16 +114,16 @@
   margin: 0 0 2rem;
   font-size: 0.95rem;
   line-height: 1.7;
-  color: #5a5a5a;
+  color: rgba(245, 239, 230, 0.7);
   max-width: 520px;
 }
 
 .hakkimizda__cta {
   display: inline-block;
   padding: 0.85rem 2.25rem;
-  border: 2px solid #2c2c2c;
-  background: #fff;
-  color: #2c2c2c;
+  border: 2px solid rgba(245, 239, 230, 0.85);
+  background: transparent;
+  color: #f5efe6;
   font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.05em;

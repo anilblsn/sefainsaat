@@ -50,9 +50,55 @@ const DEDEDEN_IMAGES = [dededen0, dededen1];
 const HARPUT_IMAGES = [harput0, harput1, harput2, harput3, harput4];
 const CEKMEKOY_IMAGES = [cekmekoy0];
 
+const plansContext = require.context(
+  '../assets/katplanları',
+  true,
+  /\.(jpe?g|png|pdf)$/i
+);
+
+const PLANS_BY_FOLDER = (() => {
+  const map = {};
+  plansContext.keys().forEach((key) => {
+    const rel = key.replace(/^\.\//, '');
+    const parts = rel.split('/');
+    const folder = parts[0];
+    const fileName = parts[parts.length - 1];
+    if (/^thumbs\.db$/i.test(fileName)) return;
+    const ext = (fileName.split('.').pop() || '').toLowerCase();
+    const type = ext === 'pdf' ? 'pdf' : 'image';
+    const src = plansContext(key);
+    const name = fileName.replace(/\.[^.]+$/, '');
+    if (!map[folder]) map[folder] = [];
+    map[folder].push({ type, src, name });
+  });
+  Object.keys(map).forEach((k) => {
+    map[k].sort((a, b) => {
+      if (a.type !== b.type) return a.type === 'image' ? -1 : 1;
+      return a.name.localeCompare(b.name, 'tr', { numeric: true });
+    });
+  });
+  return map;
+})();
+
+const PLAN_FOLDER_BY_KEY = {
+  gokturk: '1-Evinpark Göktürk',
+  kemer: '2-Evinpark Kemer',
+  orman: '3-Evinpark Orman',
+  cinar: '4- Evinpark Çınar',
+  dededen: '5- Dededen Apartmanı',
+  cekmekoy: '6-Evinpark Çekmeköy',
+  harput: '7-Evinpark Harput',
+};
+
+const getPlans = (key) => PLANS_BY_FOLDER[PLAN_FOLDER_BY_KEY[key]] || [];
+
 const CONTENT = {
   tr: {
     bannerTitle: 'Satışı Devam Eden Projeler',
+    floorPlansLabel: 'Kat Planları',
+    closeLabel: 'Kapat',
+    prevLabel: 'Önceki',
+    nextLabel: 'Sonraki',
     projects: [
       {
         key: 'gokturk',
@@ -100,6 +146,10 @@ const CONTENT = {
   },
   en: {
     bannerTitle: 'Ongoing Sales Projects',
+    floorPlansLabel: 'Floor Plans',
+    closeLabel: 'Close',
+    prevLabel: 'Previous',
+    nextLabel: 'Next',
     projects: [
       {
         key: 'gokturk',
@@ -168,7 +218,11 @@ function SatisiDevamEdenProjeler() {
             images={proje.images}
             details={[]}
             description={proje.description}
-            websiteUrl="#"
+            floorPlans={getPlans(proje.key)}
+            floorPlansLabel={c.floorPlansLabel}
+            closeLabel={c.closeLabel}
+            prevLabel={c.prevLabel}
+            nextLabel={c.nextLabel}
           />
         ))}
       </main>

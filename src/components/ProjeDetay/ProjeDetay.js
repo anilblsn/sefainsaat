@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './ProjeDetay.css';
+import PdfThumbnail from './PdfThumbnail';
 
 const ICON_BUILDING = (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4M9 9v.01M9 12v.01M9 15v.01M9 18v.01" /></svg>
@@ -46,10 +47,52 @@ function ProjectTitle({ title }) {
   );
 }
 
-function ProjeDetay({ developer = 'Sefa İnşaat', title, details = [], description, websiteUrl, images = [] }) {
+const ICON_PLAN = (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <rect x="3" y="3" width="18" height="18" rx="1" />
+    <line x1="3" y1="9" x2="21" y2="9" />
+    <line x1="9" y1="3" x2="9" y2="21" />
+    <line x1="15" y1="14" x2="21" y2="14" />
+    <line x1="15" y1="19" x2="21" y2="19" />
+  </svg>
+);
+
+const ICON_PDF_BADGE = (
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+    <polyline points="14 2 14 8 20 8" />
+    <text x="12" y="17" textAnchor="middle" fontSize="6" fontWeight="700" fill="currentColor" stroke="none">PDF</text>
+  </svg>
+);
+
+const ICON_OPEN_EXT = (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+    <polyline points="15 3 21 3 21 9" />
+    <line x1="10" y1="14" x2="21" y2="3" />
+  </svg>
+);
+
+function ProjeDetay({
+  developer = 'Sefa İnşaat',
+  title,
+  details = [],
+  description,
+  websiteUrl,
+  images = [],
+  floorPlans = [],
+  floorPlansLabel = 'Kat Planları',
+  closeLabel = 'Kapat',
+  prevLabel = 'Önceki',
+  nextLabel = 'Sonraki',
+}) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [plansOpen, setPlansOpen] = useState(false);
+  const [planPreviewIndex, setPlanPreviewIndex] = useState(-1);
   const safeImages = Array.isArray(images) && images.length ? images : [];
+  const safePlans = Array.isArray(floorPlans) ? floorPlans : [];
+  const currentPlan = planPreviewIndex >= 0 ? safePlans[planPreviewIndex] : null;
 
   const goPrev = () => setCurrentIndex((i) => (i === 0 ? safeImages.length - 1 : i - 1));
   const goNext = () => setCurrentIndex((i) => (i === safeImages.length - 1 ? 0 : i + 1));
@@ -61,6 +104,46 @@ function ProjeDetay({ developer = 'Sefa İnşaat', title, details = [], descript
     }, 3000);
     return () => clearInterval(id);
   }, [safeImages.length]);
+
+  useEffect(() => {
+    if (!plansOpen && planPreviewIndex < 0) return;
+    const onKey = (e) => {
+      if (e.key === 'Escape') {
+        if (planPreviewIndex >= 0) setPlanPreviewIndex(-1);
+        else setPlansOpen(false);
+      }
+      if (planPreviewIndex >= 0 && safePlans.length > 1) {
+        if (e.key === 'ArrowLeft') {
+          setPlanPreviewIndex((i) => (i - 1 + safePlans.length) % safePlans.length);
+        }
+        if (e.key === 'ArrowRight') {
+          setPlanPreviewIndex((i) => (i + 1) % safePlans.length);
+        }
+      }
+    };
+    document.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+  }, [plansOpen, planPreviewIndex, safePlans.length]);
+
+  const openPlanPreview = (plan) => {
+    const idx = safePlans.indexOf(plan);
+    if (idx >= 0) setPlanPreviewIndex(idx);
+  };
+  const closePlanPreview = () => setPlanPreviewIndex(-1);
+  const goPrevPlan = (e) => {
+    e?.stopPropagation();
+    if (!safePlans.length) return;
+    setPlanPreviewIndex((i) => (i - 1 + safePlans.length) % safePlans.length);
+  };
+  const goNextPlan = (e) => {
+    e?.stopPropagation();
+    if (!safePlans.length) return;
+    setPlanPreviewIndex((i) => (i + 1) % safePlans.length);
+  };
 
   const iconMap = { building: ICON_BUILDING, ruler: ICON_RULER, calendar: ICON_CALENDAR, house: ICON_HOUSE };
 
@@ -130,12 +213,24 @@ function ProjeDetay({ developer = 'Sefa İnşaat', title, details = [], descript
             <div className="proje-detay__details-spacer" aria-hidden="true" />
           )}
           {description && <p className="proje-detay__desc">{description}</p>}
-          {websiteUrl && (
-            <a href={websiteUrl} target="_blank" rel="noopener noreferrer" className="proje-detay__btn">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-              Websitesi
-            </a>
-          )}
+          <div className="proje-detay__actions">
+            {safePlans.length > 0 && (
+              <button
+                type="button"
+                className="proje-detay__btn proje-detay__btn--plans"
+                onClick={() => setPlansOpen(true)}
+              >
+                {ICON_PLAN}
+                {floorPlansLabel}
+              </button>
+            )}
+            {websiteUrl && websiteUrl !== '#' && (
+              <a href={websiteUrl} target="_blank" rel="noopener noreferrer" className="proje-detay__btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                Websitesi
+              </a>
+            )}
+          </div>
         </div>
       </div>
 
@@ -177,6 +272,126 @@ function ProjeDetay({ developer = 'Sefa İnşaat', title, details = [], descript
             className="proje-detay__lightbox-img"
             onClick={(e) => e.stopPropagation()}
           />
+        </div>
+      )}
+
+      {plansOpen && (
+        <div
+          className="proje-detay__plans-modal"
+          onClick={() => setPlansOpen(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={floorPlansLabel}
+        >
+          <div
+            className="proje-detay__plans-modal-inner"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <header className="proje-detay__plans-header">
+              <h3 className="proje-detay__plans-title">
+                {floorPlansLabel}
+                {title && <span className="proje-detay__plans-subtitle"> – {title}</span>}
+              </h3>
+              <button
+                type="button"
+                className="proje-detay__plans-close"
+                onClick={() => setPlansOpen(false)}
+                aria-label={closeLabel}
+              >
+                ×
+              </button>
+            </header>
+            <div className="proje-detay__plans-grid">
+              {safePlans.map((plan, i) => (
+                <button
+                  type="button"
+                  key={i}
+                  className={`proje-detay__plan-card${plan.type === 'pdf' ? ' proje-detay__plan-card--pdf' : ''}`}
+                  onClick={() => openPlanPreview(plan)}
+                >
+                  <div className={`proje-detay__plan-thumb${plan.type === 'pdf' ? ' proje-detay__plan-thumb--pdf' : ''}`}>
+                    {plan.type === 'image' ? (
+                      <img src={plan.src} alt={plan.name} loading="lazy" />
+                    ) : (
+                      <>
+                        <PdfThumbnail src={plan.src} alt={plan.name} />
+                        <span className="proje-detay__plan-badge" aria-hidden="true">{ICON_PDF_BADGE}</span>
+                      </>
+                    )}
+                  </div>
+                  <span className="proje-detay__plan-name">{plan.name}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {currentPlan && (
+        <div
+          className="proje-detay__lightbox proje-detay__lightbox--plan"
+          onClick={closePlanPreview}
+          role="dialog"
+          aria-modal="true"
+          aria-label={floorPlansLabel}
+        >
+          <button
+            type="button"
+            className="proje-detay__lightbox-close"
+            onClick={closePlanPreview}
+            aria-label={closeLabel}
+          >
+            <span aria-hidden="true">×</span>
+          </button>
+          {safePlans.length > 1 && (
+            <>
+              <button
+                type="button"
+                className="proje-detay__lightbox-arrow proje-detay__lightbox-arrow--prev"
+                onClick={goPrevPlan}
+                aria-label={prevLabel}
+              />
+              <button
+                type="button"
+                className="proje-detay__lightbox-arrow proje-detay__lightbox-arrow--next"
+                onClick={goNextPlan}
+                aria-label={nextLabel}
+              />
+            </>
+          )}
+          <div
+            className={`proje-detay__plan-viewer${currentPlan.type === 'pdf' ? ' proje-detay__plan-viewer--pdf' : ''}`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {currentPlan.type === 'image' ? (
+              <img
+                src={currentPlan.src}
+                alt={currentPlan.name}
+                className="proje-detay__lightbox-img"
+              />
+            ) : (
+              <iframe
+                key={currentPlan.src}
+                src={currentPlan.src}
+                title={currentPlan.name}
+                className="proje-detay__plan-pdf-frame"
+              />
+            )}
+            <div className="proje-detay__plan-caption">
+              <span className="proje-detay__plan-caption-name">{currentPlan.name}</span>
+              {currentPlan.type === 'pdf' && (
+                <a
+                  href={currentPlan.src}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="proje-detay__plan-caption-link"
+                >
+                  {ICON_OPEN_EXT}
+                  Yeni sekmede aç
+                </a>
+              )}
+            </div>
+          </div>
         </div>
       )}
     </section>

@@ -25,8 +25,9 @@
   position: relative;
   z-index: 2;
   margin: 0;
+  font-family: 'Century Gothic', 'Jost', 'Futura', 'Apple SD Gothic Neo', 'Avenir Next', 'Avenir', sans-serif;
   font-size: clamp(2.25rem, 5.5vw, 3.25rem);
-  font-weight: 700;
+  font-weight: 400;
   color: #fff;
   letter-spacing: 0.02em;
   padding-left: 0;

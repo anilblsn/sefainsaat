@@ -265,6 +265,13 @@
   color: #555;
 }
 
+.proje-detay__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+}
+
 .proje-detay__btn {
   display: inline-flex;
   align-items: center;
@@ -275,15 +282,232 @@
   font-size: 0.9rem;
   font-weight: 600;
   text-decoration: none;
+  border: none;
   border-radius: 4px;
-  transition: background 0.2s;
-  align-self: flex-start;
-  margin-top: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+  font-family: inherit;
 }
 
 .proje-detay__btn:hover {
   background: #ef7f1a;
   color: #fff;
+}
+
+.proje-detay__btn--plans {
+  background: #ef7f1a;
+}
+
+.proje-detay__btn--plans:hover {
+  background: #2c2c2c;
+}
+
+/* Kat planları modal */
+.proje-detay__plans-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+.proje-detay__plans-modal-inner {
+  background: #fff;
+  width: 100%;
+  max-width: 1100px;
+  max-height: 90vh;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+}
+
+.proje-detay__plans-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #eee;
+  background: #faf7f3;
+}
+
+.proje-detay__plans-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #2c2c2c;
+}
+
+.proje-detay__plans-subtitle {
+  font-weight: 500;
+  color: #777;
+  margin-left: 0.25rem;
+}
+
+.proje-detay__plans-close {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #2c2c2c;
+  border-radius: 50%;
+  transition: background 0.15s ease;
+}
+
+.proje-detay__plans-close:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.proje-detay__plans-grid {
+  padding: 1.25rem;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.85rem;
+}
+
+@media (max-width: 900px) {
+  .proje-detay__plans-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .proje-detay__plans-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.proje-detay__plan-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  color: #2c2c2c;
+  overflow: hidden;
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  font-family: inherit;
+}
+
+.proje-detay__plan-card:hover {
+  border-color: #ef7f1a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.proje-detay__plan-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: #f0ece6;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.proje-detay__plan-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.proje-detay__plan-thumb--pdf {
+  background: #ffffff;
+  color: #ef7f1a;
+}
+
+.proje-detay__plan-badge {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ef7f1a;
+  color: #fff;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.proje-detay__plan-badge svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* PDF thumbnail (canvas rendered) */
+.proje-detay__pdf-thumb-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+}
+
+.proje-detay__pdf-thumb-canvas {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  display: block;
+  background: #fff;
+}
+
+.proje-detay__pdf-thumb-state {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ef7f1a;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  background: #fdecdb;
+}
+
+.proje-detay__pdf-thumb-state--error {
+  background: #fdecdb;
+}
+
+.proje-detay__pdf-thumb-spinner {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid rgba(239, 127, 26, 0.25);
+  border-top-color: #ef7f1a;
+  animation: proje-detay-spin 0.8s linear infinite;
+}
+
+@keyframes proje-detay-spin {
+  to { transform: rotate(360deg); }
+}
+
+.proje-detay__plan-name {
+  padding: 0.5rem 0.65rem 0.7rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: left;
+  word-break: break-word;
 }
 
 /* Lightbox – büyütülmüş resim */
@@ -378,4 +602,65 @@
   cursor: default;
   position: relative;
   z-index: 1;
+}
+
+.proje-detay__plan-viewer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: default;
+  max-width: 95vw;
+  max-height: 92vh;
+}
+
+.proje-detay__plan-viewer--pdf {
+  width: min(95vw, 1100px);
+  height: 92vh;
+}
+
+.proje-detay__plan-pdf-frame {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+.proje-detay__plan-caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 1rem;
+  padding: 0.4rem 0.2rem 0;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+.proje-detay__plan-caption-name {
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.proje-detay__plan-caption-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.35rem 0.75rem;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+  font-weight: 600;
+  transition: background 0.15s ease;
+  white-space: nowrap;
+}
+
+.proje-detay__plan-caption-link:hover {
+  background: #ef7f1a;
 }
