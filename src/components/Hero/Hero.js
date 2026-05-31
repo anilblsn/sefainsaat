@@ -94,6 +94,17 @@ function Hero() {
   const [remoteSlides, setRemoteSlides] = useState(null);
 
   useEffect(() => {
+    const link = document.createElement('link');
+    link.rel = 'preconnect';
+    link.href = API_BASE;
+    link.crossOrigin = 'anonymous';
+    document.head.appendChild(link);
+    return () => {
+      if (link.parentNode) link.parentNode.removeChild(link);
+    };
+  }, []);
+
+  useEffect(() => {
     let cancelled = false;
     fetch(VIDEOS_URL)
       .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
@@ -131,13 +142,17 @@ function Hero() {
     if (currentSlide >= slides.length) setCurrentSlide(0);
   }, [slides.length, currentSlide]);
 
+  const slideDistance = (i, current, total) => {
+    if (!total) return 0;
+    const d = Math.abs(i - current);
+    return Math.min(d, total - d);
+  };
+
   useEffect(() => {
     videoRefs.current.forEach((v, i) => {
       if (!v) return;
-      if (i === currentSlide) {
-        try {
-          v.currentTime = 0;
-        } catch (e) {}
+      const dist = slideDistance(i, currentSlide, slides.length);
+      if (dist === 0) {
         const p = v.play();
         if (p && typeof p.catch === 'function') p.catch(() => {});
       } else {
@@ -179,6 +194,8 @@ function Hero() {
           const first = parts[0] || '';
           const rest = parts.slice(1).join(' ');
           const isEvinpark = first.toLocaleUpperCase('tr-TR') === 'EVİNPARK';
+          const dist = slideDistance(i, currentSlide, slides.length);
+          const preload = dist <= 1 ? 'auto' : 'none';
           return (
             <div
               key={i}
@@ -195,7 +212,8 @@ function Hero() {
                   muted
                   loop
                   playsInline
-                  preload="metadata"
+                  preload={preload}
+                  disablePictureInPicture
                 />
               )}
               <div className="hero__overlay" />
