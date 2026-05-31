@@ -1,45 +1,7 @@
-import React, { useMemo, useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { API_BASE, VIDEOS_URL, normalizeBackendUrl } from '../../config/api';
 import './Hero.css';
-
-const API_BASE = process.env.REACT_APP_API_BASE || 'http://87.248.157.140:3131';
-const VIDEOS_URL = `${API_BASE}/api/v1/getIntroVideos`;
-
-const imageContext = require.context(
-  '../../assets/tamamlananprojects',
-  true,
-  /\.(jpe?g|png|JPE?G|PNG)$/
-);
-
-function getProjectsFromContext() {
-  const keys = imageContext.keys();
-  const byFolder = {};
-  keys.forEach((key) => {
-    const path = key.slice(2);
-    const folder = path.split('/')[0];
-    if (!byFolder[folder]) byFolder[folder] = [];
-    byFolder[folder].push({ path: key, fullPath: path });
-  });
-
-  const folders = Object.keys(byFolder).sort((a, b) => {
-    const nA = parseInt(a.match(/^(\d+)/)?.[1] || '0', 10);
-    const nB = parseInt(b.match(/^(\d+)/)?.[1] || '0', 10);
-    return nA - nB;
-  });
-
-  return folders.map((folder) => {
-    const files = byFolder[folder].sort((a, b) => a.fullPath.localeCompare(b.fullPath));
-    const preferred = files.find((f) => /[/\\]0\.(jpg|jpeg|png)$/i.test(f.fullPath));
-    const imageKey = preferred ? preferred.path : files[0].path;
-    const name = folder.replace(/^\d+\s*-\s*/, '').trim();
-    return {
-      id: folder,
-      number: parseInt(folder.match(/^(\d+)/)?.[1] || '0', 10),
-      name,
-      image: imageContext(imageKey),
-    };
-  });
-}
 
 const ARIA = { tr: { prev: 'Önceki', next: 'Sonraki' }, en: { prev: 'Previous', next: 'Next' } };
 
@@ -75,25 +37,12 @@ function Hero() {
   const lang = searchParams.get('lang') === 'en' ? 'en' : 'tr';
   const aria = ARIA[lang];
 
-  const fallbackSlides = useMemo(() => {
-    const all = getProjectsFromContext();
-    const order = [1, 3, 14, 2, 7, 12];
-    const byNumber = new Map();
-    all.forEach((p) => {
-      if (!byNumber.has(p.number)) byNumber.set(p.number, p);
-    });
-    return order
-      .map((n) => byNumber.get(n))
-      .filter(Boolean)
-      .map((p) => ({
-        image: p.image,
-        title: p.number === 14 ? 'EVİNPARK ADATEPE' : p.name,
-      }));
-  }, []);
-
-  const [remoteSlides, setRemoteSlides] = useState(null);
+  const [slides, setSlides] = useState([]);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const videoRefs = useRef([]);
 
   useEffect(() => {
+    if (!API_BASE || !/^https?:\/\//i.test(API_BASE)) return undefined;
     const link = document.createElement('link');
     link.rel = 'preconnect';
     link.href = API_BASE;
@@ -112,7 +61,7 @@ function Hero() {
         if (cancelled || !data?.success || !Array.isArray(data.data)) return;
         const items = data.data
           .map((v) => {
-            const url = (v.url || '').replace(/^https?:\/\/[^/]+/, API_BASE);
+            const url = normalizeBackendUrl(v.url);
             const rawName = v.name || '';
             const numberMatch = rawName.match(/^(\d+)/);
             const number = numberMatch ? parseInt(numberMatch[1], 10) : 0;
@@ -122,21 +71,13 @@ function Hero() {
           .filter((x) => x.src && x.title)
           .sort((a, b) => a.number - b.number);
         if (!items.length) return;
-        setRemoteSlides(items);
+        setSlides(items);
       })
       .catch(() => {});
     return () => {
       cancelled = true;
     };
   }, []);
-
-  const slides = useMemo(
-    () => (remoteSlides && remoteSlides.length ? remoteSlides : fallbackSlides),
-    [remoteSlides, fallbackSlides]
-  );
-
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const videoRefs = useRef([]);
 
   useEffect(() => {
     if (currentSlide >= slides.length) setCurrentSlide(0);
@@ -183,6 +124,10 @@ function Hero() {
       .map((w) => (w ? w.charAt(0).toLocaleUpperCase('tr-TR') + w.slice(1) : w))
       .join(' ');
 
+  if (!slides.length) {
+    return <section className="hero hero--loading" aria-busy="true" />;
+  }
+
   return (
     <section className="hero">
       <div
@@ -198,24 +143,21 @@ function Hero() {
           const preload = dist <= 1 ? 'auto' : 'none';
           return (
             <div
-              key={i}
+              key={slide.src}
               className={`hero__slide ${i === currentSlide ? 'hero__slide--active' : ''}`}
-              style={slide.image ? { backgroundImage: `url(${slide.image})` } : undefined}
             >
-              {slide.src && (
-                <video
-                  ref={(el) => {
-                    videoRefs.current[i] = el;
-                  }}
-                  src={slide.src}
-                  className="hero__video"
-                  muted
-                  loop
-                  playsInline
-                  preload={preload}
-                  disablePictureInPicture
-                />
-              )}
+              <video
+                ref={(el) => {
+                  videoRefs.current[i] = el;
+                }}
+                src={slide.src}
+                className="hero__video"
+                muted
+                loop
+                playsInline
+                preload={preload}
+                disablePictureInPicture
+              />
               <div className="hero__overlay" />
               <div className="hero__content">
                 <h1 className="hero__title">

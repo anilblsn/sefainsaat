@@ -10,6 +10,10 @@
   box-sizing: border-box;
 }
 
+.hero--loading {
+  background: #1a1b20;
+}
+
 .hero__track {
   position: absolute;
   inset: 0;
