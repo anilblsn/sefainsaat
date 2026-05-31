@@ -55,6 +55,33 @@
   pointer-events: none;
 }
 
+.hero__buffer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.hero__buffer-spinner {
+  display: block;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.25);
+  border-top-color: #ef7f1a;
+  animation: hero-buffer-spin 0.9s linear infinite;
+}
+
+@keyframes hero-buffer-spin {
+  to { transform: rotate(360deg); }
+}
+
+.hero__slider-progress-fill--paused {
+  animation-play-state: paused;
+}
+
 .hero__overlay {
   position: absolute;
   inset: 0;

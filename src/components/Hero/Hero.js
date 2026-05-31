@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { API_BASE, VIDEOS_URL, normalizeBackendUrl } from '../../config/api';
 import './Hero.css';
@@ -6,6 +6,7 @@ import './Hero.css';
 const ARIA = { tr: { prev: 'Önceki', next: 'Sonraki' }, en: { prev: 'Previous', next: 'Next' } };
 
 const SLIDE_DURATION_MS = 6000;
+const VIDEO_WINDOW = 1;
 
 const ArrowIcon = ({ direction }) => (
   <svg
@@ -39,6 +40,7 @@ function Hero() {
 
   const [slides, setSlides] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isBuffering, setIsBuffering] = useState(false);
   const videoRefs = useRef([]);
 
   useEffect(() => {
@@ -83,11 +85,11 @@ function Hero() {
     if (currentSlide >= slides.length) setCurrentSlide(0);
   }, [slides.length, currentSlide]);
 
-  const slideDistance = (i, current, total) => {
+  const slideDistance = useCallback((i, current, total) => {
     if (!total) return 0;
     const d = Math.abs(i - current);
     return Math.min(d, total - d);
-  };
+  }, []);
 
   useEffect(() => {
     videoRefs.current.forEach((v, i) => {
@@ -102,9 +104,36 @@ function Hero() {
         } catch (e) {}
       }
     });
-  }, [currentSlide, slides]);
+  }, [currentSlide, slides, slideDistance]);
 
-  const VIDEO_WINDOW = 1;
+  useEffect(() => {
+    const v = videoRefs.current[currentSlide];
+    if (!v) return undefined;
+
+    const ready = () =>
+      v.readyState >= 3 || (v.buffered.length > 0 && v.buffered.end(0) - v.currentTime > 0.5);
+
+    setIsBuffering(!ready());
+
+    const onPlaying = () => setIsBuffering(false);
+    const onCanPlay = () => setIsBuffering(false);
+    const onWaiting = () => setIsBuffering(true);
+    const onStalled = () => setIsBuffering(true);
+
+    v.addEventListener('playing', onPlaying);
+    v.addEventListener('canplay', onCanPlay);
+    v.addEventListener('canplaythrough', onCanPlay);
+    v.addEventListener('waiting', onWaiting);
+    v.addEventListener('stalled', onStalled);
+
+    return () => {
+      v.removeEventListener('playing', onPlaying);
+      v.removeEventListener('canplay', onCanPlay);
+      v.removeEventListener('canplaythrough', onCanPlay);
+      v.removeEventListener('waiting', onWaiting);
+      v.removeEventListener('stalled', onStalled);
+    };
+  }, [currentSlide, slides]);
 
   const goToSlide = (index) => {
     if (!slides.length) return;
@@ -112,12 +141,13 @@ function Hero() {
   };
 
   useEffect(() => {
-    if (slides.length <= 1) return;
-    const timer = setInterval(() => {
-      setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
+    if (slides.length <= 1) return undefined;
+    if (isBuffering) return undefined;
+    const timer = setTimeout(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, SLIDE_DURATION_MS);
-    return () => clearInterval(timer);
-  }, [slides.length]);
+    return () => clearTimeout(timer);
+  }, [slides.length, currentSlide, isBuffering]);
 
   const toTitle = (s) =>
     s
@@ -181,6 +211,12 @@ function Hero() {
         })}
       </div>
 
+      {isBuffering && (
+        <div className="hero__buffer" aria-hidden="true">
+          <span className="hero__buffer-spinner" />
+        </div>
+      )}
+
       <div className="hero__slider-nav">
         <button
           type="button"
@@ -192,8 +228,8 @@ function Hero() {
         </button>
         <div className="hero__slider-progress" aria-hidden="true">
           <span
-            key={currentSlide}
-            className="hero__slider-progress-fill"
+            key={`${currentSlide}-${isBuffering ? 'pause' : 'play'}`}
+            className={`hero__slider-progress-fill ${isBuffering ? 'hero__slider-progress-fill--paused' : ''}`}
             style={{ animationDuration: `${SLIDE_DURATION_MS}ms` }}
           />
         </div>
