@@ -1,6 +1,6 @@
 /** Cloudflare Tunnel (HTTPS) – production & varsayılan */
 export const API_BASE =
-  process.env.REACT_APP_API_BASE || 'https://okay-wax-attempt-publication.trycloudflare.com';
+  process.env.REACT_APP_API_BASE || 'https://noticed-jail-james-aerial.trycloudflare.com';
 
 export const VIDEOS_URL = `${API_BASE}/api/v1/getIntroVideos`;
 
