@@ -104,6 +104,8 @@ function Hero() {
     });
   }, [currentSlide, slides]);
 
+  const VIDEO_WINDOW = 1;
+
   const goToSlide = (index) => {
     if (!slides.length) return;
     setCurrentSlide((index + slides.length) % slides.length);
@@ -140,24 +142,29 @@ function Hero() {
           const rest = parts.slice(1).join(' ');
           const isEvinpark = first.toLocaleUpperCase('tr-TR') === 'EVİNPARK';
           const dist = slideDistance(i, currentSlide, slides.length);
-          const preload = dist <= 1 ? 'auto' : 'none';
+          const shouldRenderVideo = dist <= VIDEO_WINDOW;
+          const preload = dist === 0 ? 'auto' : 'metadata';
           return (
             <div
               key={slide.src}
               className={`hero__slide ${i === currentSlide ? 'hero__slide--active' : ''}`}
             >
-              <video
-                ref={(el) => {
-                  videoRefs.current[i] = el;
-                }}
-                src={slide.src}
-                className="hero__video"
-                muted
-                loop
-                playsInline
-                preload={preload}
-                disablePictureInPicture
-              />
+              {shouldRenderVideo ? (
+                <video
+                  ref={(el) => {
+                    videoRefs.current[i] = el;
+                  }}
+                  src={slide.src}
+                  className="hero__video"
+                  muted
+                  loop
+                  playsInline
+                  preload={preload}
+                  disablePictureInPicture
+                />
+              ) : (
+                <div className="hero__video-placeholder" aria-hidden="true" />
+              )}
               <div className="hero__overlay" />
               <div className="hero__content">
                 <h1 className="hero__title">

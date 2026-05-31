@@ -47,6 +47,14 @@
   background: #000;
 }
 
+.hero__video-placeholder {
+  position: absolute;
+  inset: 0;
+  background: #0e0f12;
+  z-index: 0;
+  pointer-events: none;
+}
+
 .hero__overlay {
   position: absolute;
   inset: 0;
