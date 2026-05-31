@@ -1,6 +1,9 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import './Hero.css';
+
+const API_BASE = process.env.REACT_APP_API_BASE || 'http://87.248.157.140:3131';
+const VIDEOS_URL = `${API_BASE}/api/v1/getIntroVideos`;
 
 const imageContext = require.context(
   '../../assets/tamamlananprojects',
@@ -40,7 +43,7 @@ function getProjectsFromContext() {
 
 const ARIA = { tr: { prev: 'Önceki', next: 'Sonraki' }, en: { prev: 'Previous', next: 'Next' } };
 
-const SLIDE_DURATION_MS = 4000;
+const SLIDE_DURATION_MS = 6000;
 
 const ArrowIcon = ({ direction }) => (
   <svg
@@ -72,7 +75,7 @@ function Hero() {
   const lang = searchParams.get('lang') === 'en' ? 'en' : 'tr';
   const aria = ARIA[lang];
 
-  const slides = useMemo(() => {
+  const fallbackSlides = useMemo(() => {
     const all = getProjectsFromContext();
     const order = [1, 3, 14, 2, 7, 12];
     const byNumber = new Map();
@@ -88,18 +91,82 @@ function Hero() {
       }));
   }, []);
 
+  const [remoteSlides, setRemoteSlides] = useState(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch(VIDEOS_URL)
+      .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+      .then((data) => {
+        if (cancelled || !data?.success || !Array.isArray(data.data)) return;
+        const items = data.data
+          .map((v) => {
+            const url = (v.url || '').replace(/^https?:\/\/[^/]+/, API_BASE);
+            const rawName = v.name || '';
+            const numberMatch = rawName.match(/^(\d+)/);
+            const number = numberMatch ? parseInt(numberMatch[1], 10) : 0;
+            const title = rawName.replace(/^\d+\s*-\s*/, '').trim();
+            return { src: url, title, number };
+          })
+          .filter((x) => x.src && x.title)
+          .sort((a, b) => a.number - b.number);
+        if (!items.length) return;
+        setRemoteSlides(items);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const slides = useMemo(
+    () => (remoteSlides && remoteSlides.length ? remoteSlides : fallbackSlides),
+    [remoteSlides, fallbackSlides]
+  );
+
   const [currentSlide, setCurrentSlide] = useState(0);
+  const videoRefs = useRef([]);
+
+  useEffect(() => {
+    if (currentSlide >= slides.length) setCurrentSlide(0);
+  }, [slides.length, currentSlide]);
+
+  useEffect(() => {
+    videoRefs.current.forEach((v, i) => {
+      if (!v) return;
+      if (i === currentSlide) {
+        try {
+          v.currentTime = 0;
+        } catch (e) {}
+        const p = v.play();
+        if (p && typeof p.catch === 'function') p.catch(() => {});
+      } else {
+        try {
+          v.pause();
+        } catch (e) {}
+      }
+    });
+  }, [currentSlide, slides]);
 
   const goToSlide = (index) => {
+    if (!slides.length) return;
     setCurrentSlide((index + slides.length) % slides.length);
   };
 
   useEffect(() => {
+    if (slides.length <= 1) return;
     const timer = setInterval(() => {
       setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
     }, SLIDE_DURATION_MS);
     return () => clearInterval(timer);
   }, [slides.length]);
+
+  const toTitle = (s) =>
+    s
+      .toLocaleLowerCase('tr-TR')
+      .split(' ')
+      .map((w) => (w ? w.charAt(0).toLocaleUpperCase('tr-TR') + w.slice(1) : w))
+      .join(' ');
 
   return (
     <section className="hero">
@@ -108,22 +175,29 @@ function Hero() {
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}
       >
         {slides.map((slide, i) => {
-          const toTitle = (s) =>
-            s
-              .toLocaleLowerCase('tr-TR')
-              .split(' ')
-              .map((w) => (w ? w.charAt(0).toLocaleUpperCase('tr-TR') + w.slice(1) : w))
-              .join(' ');
-          const parts = slide.title.split(' ');
-          const first = parts[0];
+          const parts = (slide.title || '').split(' ');
+          const first = parts[0] || '';
           const rest = parts.slice(1).join(' ');
           const isEvinpark = first.toLocaleUpperCase('tr-TR') === 'EVİNPARK';
           return (
             <div
               key={i}
               className={`hero__slide ${i === currentSlide ? 'hero__slide--active' : ''}`}
-              style={{ backgroundImage: `url(${slide.image})` }}
+              style={slide.image ? { backgroundImage: `url(${slide.image})` } : undefined}
             >
+              {slide.src && (
+                <video
+                  ref={(el) => {
+                    videoRefs.current[i] = el;
+                  }}
+                  src={slide.src}
+                  className="hero__video"
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                />
+              )}
               <div className="hero__overlay" />
               <div className="hero__content">
                 <h1 className="hero__title">
@@ -149,10 +223,7 @@ function Hero() {
         >
           <ArrowIcon direction="prev" />
         </button>
-        <div
-          className="hero__slider-progress"
-          aria-hidden="true"
-        >
+        <div className="hero__slider-progress" aria-hidden="true">
           <span
             key={currentSlide}
             className="hero__slider-progress-fill"
