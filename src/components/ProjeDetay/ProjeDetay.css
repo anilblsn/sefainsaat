@@ -3,7 +3,7 @@
 .proje-detay {
   padding: 3rem 2rem 4rem 5rem;
   box-sizing: border-box;
-  background: #faf7f3;
+  background: #2a2b31;
 }
 
 .proje-detay + .proje-detay {
@@ -193,14 +193,14 @@
   font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.04em;
-  color: #888;
+  color: rgba(245, 239, 230, 0.55);
 }
 
 .proje-detay__title {
   margin: 0;
   font-size: clamp(1.5rem, 2.5vw, 2rem);
   font-weight: 700;
-  color: #2c2c2c;
+  color: #f5efe6;
   line-height: 1.15;
   display: flex;
   flex-direction: column;
@@ -221,7 +221,7 @@
   letter-spacing: 0.04em;
   font-size: 1.25em;
   line-height: 1;
-  color: #2c2c2c;
+  color: #f5efe6;
 }
 
 .proje-detay__details {
@@ -242,7 +242,7 @@
   align-items: center;
   gap: 0.5rem;
   font-size: 0.95rem;
-  color: #444;
+  color: rgba(245, 239, 230, 0.75);
 }
 
 .proje-detay__detail-icon {
@@ -254,7 +254,7 @@
 }
 
 .proje-detay__detail strong {
-  color: #2c2c2c;
+  color: #f5efe6;
   margin-right: 0.25rem;
 }
 
@@ -262,7 +262,7 @@
   margin: 0;
   font-size: 0.95rem;
   line-height: 1.6;
-  color: #555;
+  color: rgba(245, 239, 230, 0.7);
 }
 
 .proje-detay__actions {
@@ -277,29 +277,34 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
-  background: #2c2c2c;
-  color: #fff;
+  background: transparent;
+  color: #f5efe6;
   font-size: 0.9rem;
   font-weight: 600;
   text-decoration: none;
-  border: none;
+  border: 2px solid rgba(245, 239, 230, 0.85);
   border-radius: 4px;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
   font-family: inherit;
 }
 
 .proje-detay__btn:hover {
   background: #ef7f1a;
-  color: #fff;
+  border-color: #ef7f1a;
+  color: #0d0d0d;
 }
 
 .proje-detay__btn--plans {
   background: #ef7f1a;
+  border-color: #ef7f1a;
+  color: #fff;
 }
 
 .proje-detay__btn--plans:hover {
-  background: #2c2c2c;
+  background: transparent;
+  border-color: rgba(245, 239, 230, 0.85);
+  color: #f5efe6;
 }
 
 /* Kat planları modal */
@@ -449,6 +454,23 @@
 .proje-detay__plan-badge svg {
   width: 18px;
   height: 18px;
+}
+
+.proje-detay__unit-type {
+  position: absolute;
+  top: 0.4rem;
+  left: 0.4rem;
+  z-index: 2;
+  padding: 0.25rem 0.55rem;
+  background: #ef7f1a;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
 /* PDF thumbnail (canvas rendered) */
@@ -645,6 +667,18 @@
 .proje-detay__plan-caption-name {
   font-weight: 600;
   word-break: break-word;
+}
+
+.proje-detay__plan-caption-type {
+  display: inline-block;
+  margin-right: 0.55rem;
+  padding: 0.2rem 0.5rem;
+  background: #ef7f1a;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  border-radius: 4px;
+  vertical-align: middle;
 }
 
 .proje-detay__plan-caption-link {

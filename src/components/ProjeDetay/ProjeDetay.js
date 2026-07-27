@@ -311,15 +311,15 @@ function ProjeDetay({
                 >
                   <div className={`proje-detay__plan-thumb${plan.type === 'pdf' ? ' proje-detay__plan-thumb--pdf' : ''}`}>
                     {plan.type === 'image' ? (
-                      <img src={plan.src} alt={plan.name} loading="lazy" />
+                      <img src={plan.src} alt={plan.unitLabel || plan.name} loading="lazy" />
                     ) : (
                       <>
-                        <PdfThumbnail src={plan.src} alt={plan.name} />
+                        <PdfThumbnail src={plan.src} alt={plan.unitLabel || plan.name} />
                         <span className="proje-detay__plan-badge" aria-hidden="true">{ICON_PDF_BADGE}</span>
                       </>
                     )}
                   </div>
-                  <span className="proje-detay__plan-name">{plan.name}</span>
+                  <span className="proje-detay__plan-name">{plan.unitLabel || plan.name}</span>
                 </button>
               ))}
             </div>
@@ -366,19 +366,21 @@ function ProjeDetay({
             {currentPlan.type === 'image' ? (
               <img
                 src={currentPlan.src}
-                alt={currentPlan.name}
+                alt={currentPlan.unitLabel || currentPlan.name}
                 className="proje-detay__lightbox-img"
               />
             ) : (
               <iframe
                 key={currentPlan.src}
                 src={currentPlan.src}
-                title={currentPlan.name}
+                title={currentPlan.unitLabel || currentPlan.name}
                 className="proje-detay__plan-pdf-frame"
               />
             )}
             <div className="proje-detay__plan-caption">
-              <span className="proje-detay__plan-caption-name">{currentPlan.name}</span>
+              <span className="proje-detay__plan-caption-name">
+                {currentPlan.unitLabel || currentPlan.name}
+              </span>
               {currentPlan.type === 'pdf' && (
                 <a
                   href={currentPlan.src}

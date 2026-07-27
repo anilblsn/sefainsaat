@@ -45,7 +45,7 @@
   min-height: 50vh;
   padding: 3rem 2rem 4rem 10rem;
   box-sizing: border-box;
-  background: #faf7f3;
+  background: #2a2b31;
 }
 
 .hakkimizda-sayfasi__content {
@@ -74,7 +74,7 @@
   margin: 0 0 1.5rem;
   font-size: 1.15rem;
   line-height: 1.8;
-  color: #2c2c2c;
+  color: rgba(245, 239, 230, 0.85);
   text-align: center;
   opacity: 0;
   transform: translateY(24px);

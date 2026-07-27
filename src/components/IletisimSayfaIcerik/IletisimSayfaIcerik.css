@@ -3,7 +3,7 @@
 .iletisim-sayfa-icerik {
   padding: 3rem 2rem 4rem 5rem;
   box-sizing: border-box;
-  background: #fff;
+  background: #2a2b31;
   position: relative;
   z-index: 2;
   margin-top: -180px;
@@ -39,7 +39,7 @@
   margin: 0 0 1.5rem;
   font-size: 1.25rem;
   font-weight: 700;
-  color: #2c2c2c;
+  color: #f5efe6;
   padding-bottom: 0.5rem;
   border-bottom: 3px solid #ef7f1a;
   display: inline-block;
@@ -72,19 +72,19 @@
   display: block;
   font-size: 0.9rem;
   font-weight: 700;
-  color: #2c2c2c;
+  color: #f5efe6;
   margin-bottom: 0.2rem;
 }
 
 .iletisim-sayfa-icerik__value {
   margin: 0;
   font-size: 0.95rem;
-  color: #555;
+  color: rgba(245, 239, 230, 0.7);
   line-height: 1.4;
 }
 
 .iletisim-sayfa-icerik__value a.iletisim-sayfa-icerik__link {
-  color: #2c2c2c;
+  color: #f5efe6;
   text-decoration: none;
 }
 
@@ -95,10 +95,10 @@
 
 /* Sağ: Form */
 .iletisim-sayfa-icerik__form-wrap {
-  background: #faf7f3;
+  background: #32343a;
   padding: 2rem;
   border-radius: 4px;
-  border: 1px solid #eee;
+  border: 1px solid rgba(245, 239, 230, 0.12);
   box-sizing: border-box;
 }
 
@@ -111,7 +111,7 @@
   margin: 0;
   font-size: 1.75rem;
   font-weight: 700;
-  color: #2c2c2c;
+  color: #f5efe6;
   padding-bottom: 0.5rem;
   border-bottom: 3px solid #ef7f1a;
   display: inline-block;
@@ -196,7 +196,7 @@
   gap: 0.5rem;
   cursor: pointer;
   font-size: 0.9rem;
-  color: #555;
+  color: rgba(245, 239, 230, 0.75);
   line-height: 1.4;
 }
 
@@ -207,7 +207,7 @@
 
 .iletisim-sayfa-icerik__checkbox-link {
   text-decoration: underline;
-  color: #2c2c2c;
+  color: #f5efe6;
 }
 
 .iletisim-sayfa-icerik__submit {

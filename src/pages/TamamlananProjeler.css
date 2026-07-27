@@ -37,7 +37,7 @@
   min-height: 50vh;
   padding: 3rem 2rem 4rem 5rem;
   box-sizing: border-box;
-  background: #faf7f3;
+  background: #2a2b31;
 }
 
 @media (max-width: 900px) {
@@ -69,7 +69,7 @@
 .tamamlanan-projeler__card {
   display: flex;
   flex-direction: column;
-  background: #fff;
+  background: transparent;
   overflow: hidden;
   border-radius: 0;
 }
@@ -289,9 +289,9 @@
   min-width: 2.5rem;
   height: 2.5rem;
   padding: 0 0.5rem;
-  border: 1px solid #ccc;
-  background: #fff;
-  color: #222;
+  border: 1px solid rgba(245, 239, 230, 0.35);
+  background: #32343a;
+  color: #f5efe6;
   font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
@@ -300,9 +300,9 @@
 }
 
 .tamamlanan-projeler__pagination-btn:hover:not(:disabled) {
-  background: #222;
-  color: #fff;
-  border-color: #222;
+  background: #ef7f1a;
+  color: #0d0d0d;
+  border-color: #ef7f1a;
 }
 
 .tamamlanan-projeler__pagination-btn:disabled {
@@ -311,7 +311,7 @@
 }
 
 .tamamlanan-projeler__pagination-btn--active {
-  background: #222;
-  color: #fff;
-  border-color: #222;
+  background: #ef7f1a;
+  color: #0d0d0d;
+  border-color: #ef7f1a;
 }

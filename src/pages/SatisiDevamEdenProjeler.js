@@ -51,10 +51,37 @@ const HARPUT_IMAGES = [harput0, harput1, harput2, harput3, harput4];
 const CEKMEKOY_IMAGES = [cekmekoy0];
 
 const plansContext = require.context(
-  '../assets/katplanları',
+  '../assets/daireler',
   true,
   /\.(jpe?g|png|pdf)$/i
 );
+
+const UNIT_TYPE_RE = /^\d+(?:[.,]\d+)?\+\d+$/;
+
+function unitSortValue(unitType) {
+  const m = String(unitType || '').match(/^(\d+)(?:[.,](\d+))?\+(\d+)$/);
+  if (!m) return 9000;
+  const main = parseInt(m[1], 10);
+  const frac = m[2] ? parseInt(m[2], 10) : 0;
+  const plus = parseInt(m[3], 10);
+  return main * 1000 + frac * 10 + plus;
+}
+
+function parseUnitInfo(parts) {
+  const dirs = parts.slice(1, -1).filter((p) => !/^daireler$/i.test(p));
+  let unitType = '';
+  let layout = '';
+  dirs.forEach((dir) => {
+    const upper = dir.toLocaleUpperCase('tr-TR');
+    if (upper === 'DUBLEKS') layout = 'Dubleks';
+    else if (upper === 'FOURLEX') layout = 'Fourlex';
+    else if (UNIT_TYPE_RE.test(dir)) unitType = dir.replace('.', ',');
+  });
+  const unitLabel = [unitType, layout].filter(Boolean).join(' · ');
+  const layoutOrder = layout === 'Fourlex' ? 2 : layout === 'Dubleks' ? 1 : 0;
+  const sortKey = layoutOrder * 10000 + unitSortValue(unitType);
+  return { unitType, layout, unitLabel, sortKey };
+}
 
 const PLANS_BY_FOLDER = (() => {
   const map = {};
@@ -68,11 +95,13 @@ const PLANS_BY_FOLDER = (() => {
     const type = ext === 'pdf' ? 'pdf' : 'image';
     const src = plansContext(key);
     const name = fileName.replace(/\.[^.]+$/, '');
+    const unit = parseUnitInfo(parts);
     if (!map[folder]) map[folder] = [];
-    map[folder].push({ type, src, name });
+    map[folder].push({ type, src, name, ...unit });
   });
   Object.keys(map).forEach((k) => {
     map[k].sort((a, b) => {
+      if (a.sortKey !== b.sortKey) return a.sortKey - b.sortKey;
       if (a.type !== b.type) return a.type === 'image' ? -1 : 1;
       return a.name.localeCompare(b.name, 'tr', { numeric: true });
     });
@@ -95,7 +124,7 @@ const getPlans = (key) => PLANS_BY_FOLDER[PLAN_FOLDER_BY_KEY[key]] || [];
 const CONTENT = {
   tr: {
     bannerTitle: 'Satışı Devam Eden Projeler',
-    floorPlansLabel: 'Kat Planları',
+    floorPlansLabel: 'Daireler',
     closeLabel: 'Kapat',
     prevLabel: 'Önceki',
     nextLabel: 'Sonraki',
@@ -146,7 +175,7 @@ const CONTENT = {
   },
   en: {
     bannerTitle: 'Ongoing Sales Projects',
-    floorPlansLabel: 'Floor Plans',
+    floorPlansLabel: 'Apartments',
     closeLabel: 'Close',
     prevLabel: 'Previous',
     nextLabel: 'Next',
