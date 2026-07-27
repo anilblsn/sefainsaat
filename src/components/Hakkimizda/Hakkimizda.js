@@ -1,6 +1,6 @@
 import React from 'react';
-import { useSearchParams } from 'react-router-dom';
 import { useInView } from '../../hooks/useInView';
+import { pickContent, useLang, withLang } from '../../utils/lang';
 import './Hakkimizda.css';
 
 const HAKKIMIZDA_IMAGES = [
@@ -29,13 +29,22 @@ const CONTENT = {
     alt1: 'Construction team',
     alt2: 'Project team',
   },
+  ar: {
+    brand: 'سيفا للإنشاءات',
+    headingLine1: 'النزاهة مبدأنا،',
+    headingLine2: 'والتميز هدفنا',
+    paragraph:
+      'تأسست سيفا للإنشاءات عام 2005 بهدف إنشاء مشاريع تضيف قيمة لحياة الناس. حققت شركتنا نجاحات مهمة في وقت قصير وتفخر بتسليم أعمال البناء عالية الجودة في الموعد المحدد. نواصل الإسهام في الابتكار والنمو والقطاع.',
+    ctaLabel: 'المزيد من المعلومات',
+    alt1: 'فريق البناء',
+    alt2: 'فريق المشروع',
+  },
 };
 
 function Hakkimizda() {
-  const [searchParams] = useSearchParams();
-  const lang = searchParams.get('lang') === 'en' ? 'en' : 'tr';
-  const c = CONTENT[lang];
-  const ctaHref = lang === 'en' ? '/hakkimizda?lang=en' : '#daha-fazla';
+  const lang = useLang();
+  const c = pickContent(CONTENT, lang);
+  const ctaHref = lang === 'tr' ? '#daha-fazla' : withLang('/hakkimizda', lang);
   const [ref, inView] = useInView({ threshold: 0.12 });
 
   return (

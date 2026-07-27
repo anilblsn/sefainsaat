@@ -1,9 +1,13 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import { API_BASE, VIDEOS_URL, normalizeBackendUrl } from '../../config/api';
+import { pickContent, useLang } from '../../utils/lang';
 import './Hero.css';
 
-const ARIA = { tr: { prev: 'Önceki', next: 'Sonraki' }, en: { prev: 'Previous', next: 'Next' } };
+const ARIA = {
+  tr: { prev: 'Önceki', next: 'Sonraki' },
+  en: { prev: 'Previous', next: 'Next' },
+  ar: { prev: 'السابق', next: 'التالي' },
+};
 
 const SLIDE_DURATION_MS = 6000;
 const VIDEO_WINDOW = 1;
@@ -34,9 +38,8 @@ const ArrowIcon = ({ direction }) => (
 );
 
 function Hero() {
-  const [searchParams] = useSearchParams();
-  const lang = searchParams.get('lang') === 'en' ? 'en' : 'tr';
-  const aria = ARIA[lang];
+  const lang = useLang();
+  const aria = pickContent(ARIA, lang);
 
   const [slides, setSlides] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);

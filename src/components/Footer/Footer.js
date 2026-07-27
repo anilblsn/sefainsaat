@@ -1,25 +1,34 @@
 import React from 'react';
-import { useSearchParams } from 'react-router-dom';
 import logoImg from '../../assets/logo/logo2.png';
+import { pickContent, useLang, withLang } from '../../utils/lang';
 import './Footer.css';
 
-const QUICK_LINKS_TR = [
-  { label: 'Hakkımızda', path: '/hakkimizda' },
-  { label: 'Bizden Haberler', path: '#haberler' },
-  { label: 'Satışı Devam Eden Projeler', path: '/satisi-devam-eden-projeler' },
-  { label: 'Tamamlanan Projeler', path: '/tamamlanan-projeler' },
-  { label: 'Planlanan Projeler', path: '/planlanan-projeler' },
-  { label: 'İletişim', path: '/iletisim' },
-];
-
-const QUICK_LINKS_EN = [
-  { label: 'About Us', path: '/hakkimizda' },
-  { label: 'News', path: '#haberler' },
-  { label: 'Ongoing Sales Projects', path: '/satisi-devam-eden-projeler' },
-  { label: 'Completed Projects', path: '/tamamlanan-projeler' },
-  { label: 'Planned Projects', path: '/planlanan-projeler' },
-  { label: 'Contact', path: '/iletisim' },
-];
+const QUICK_LINKS = {
+  tr: [
+    { label: 'Hakkımızda', path: '/hakkimizda' },
+    { label: 'Bizden Haberler', path: '#haberler' },
+    { label: 'Satışı Devam Eden Projeler', path: '/satisi-devam-eden-projeler' },
+    { label: 'Tamamlanan Projeler', path: '/tamamlanan-projeler' },
+    { label: 'Planlanan Projeler', path: '/planlanan-projeler' },
+    { label: 'İletişim', path: '/iletisim' },
+  ],
+  en: [
+    { label: 'About Us', path: '/hakkimizda' },
+    { label: 'News', path: '#haberler' },
+    { label: 'Ongoing Sales Projects', path: '/satisi-devam-eden-projeler' },
+    { label: 'Completed Projects', path: '/tamamlanan-projeler' },
+    { label: 'Planned Projects', path: '/planlanan-projeler' },
+    { label: 'Contact', path: '/iletisim' },
+  ],
+  ar: [
+    { label: 'من نحن', path: '/hakkimizda' },
+    { label: 'أخبارنا', path: '#haberler' },
+    { label: 'مشاريع قيد البيع', path: '/satisi-devam-eden-projeler' },
+    { label: 'المشاريع المكتملة', path: '/tamamlanan-projeler' },
+    { label: 'المشاريع المخططة', path: '/planlanan-projeler' },
+    { label: 'اتصل بنا', path: '/iletisim' },
+  ],
+};
 
 const CONTENT = {
   tr: {
@@ -34,14 +43,18 @@ const CONTENT = {
     quickMenu: 'QUICK MENU',
     headOffice: 'HEAD OFFICE',
   },
+  ar: {
+    tagline: '',
+    about: 'تأسست شركة سيفا للإنشاءات عام 1977، وتمضي بخطوات راسخة متخذة النزاهة مبدأً لها، وبوعي ومسؤولية بناء العلامة التجارية.',
+    quickMenu: 'قائمة سريعة',
+    headOffice: 'المكتب الرئيسي',
+  },
 };
 
 function Footer() {
-  const [searchParams] = useSearchParams();
-  const lang = searchParams.get('lang') === 'en' ? 'en' : 'tr';
-  const t = CONTENT[lang];
-  const quickLinks = lang === 'en' ? QUICK_LINKS_EN : QUICK_LINKS_TR;
-  const pathWithLang = (path) => (path.startsWith('/') && !path.includes('#')) ? `${path}${lang === 'en' ? '?lang=en' : ''}` : path;
+  const lang = useLang();
+  const t = pickContent(CONTENT, lang);
+  const quickLinks = pickContent(QUICK_LINKS, lang);
 
   return (
     <footer className="footer">
@@ -60,7 +73,7 @@ function Footer() {
           <ul className="footer__links">
             {quickLinks.map((item) => (
               <li key={item.path}>
-                <a href={pathWithLang(item.path)} className="footer__link">
+                <a href={withLang(item.path, lang)} className="footer__link">
                   {item.label}
                 </a>
               </li>

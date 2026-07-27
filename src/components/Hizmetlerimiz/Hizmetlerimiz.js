@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import { useInView } from '../../hooks/useInView';
+import { pickContent, useLang } from '../../utils/lang';
 import './Hizmetlerimiz.css';
 
 const SERVICE_ICONS = [
@@ -31,12 +31,21 @@ const CONTENT = {
       { title: 'URBAN TRANSFORMATION', description: 'A pioneer in urban transformation projects by designing and building new buildings that meet the requirements of the time and are earthquake-resistant, Sefa Construction offers economic and practical solutions when existing structures need to be renewed. We build safe and modern structures in line with the needs of flat owners.' },
     ],
   },
+  ar: {
+    heading: 'خدماتنا',
+    subheading: 'نعمل دائماً من أجل الأفضل',
+    services: [
+      { title: 'المقاولات', description: 'بفضل شهادة المقاولات من الفئة أ، تنسق شركتنا وتشرف وتدير كل مرحلة من مراحل البناء مع فريق متمرس لضمان تنفيذ المشاريع بسلاسة. نقدم نتائج عالية الجودة بنهج متعدد التخصصات في المشاريع المعقدة.' },
+      { title: 'التصميم الهندسي', description: 'تقدم سيفا للإنشاءات دعماً هندسياً واستشارياً في كل مرحلة من البداية إلى النهاية عبر خدمات تصميم مشاريع البناء الشاملة. بنهجنا الموجه نحو الحلول بزاوية 360 درجة، ننتج تصاميم مفصلة وعملية.' },
+      { title: 'تطوير العقارات', description: 'بمعرفة عميقة بقطاع العقارات، تجري سيفا للإنشاءات تحليلات السوق ودراسات الجدوى المسبقة للمشاريع الجديدة وتسرّع عمليات التطوير العقاري عبر استراتيجيات مالية. نضيف قيمة للمستثمرين بهذه الخدمات الشاملة.' },
+      { title: 'التحول الحضري', description: 'رائدة في مشاريع التحول الحضري عبر تصميم وبناء مبانٍ جديدة تلبي متطلبات العصر ومقاومة للزلازل، تقدم سيفا للإنشاءات حلولاً اقتصادية وعملية عند الحاجة لتجديد المباني القائمة. نبني هياكل آمنة وحديثة وفق احتياجات ملاك الشقق.' },
+    ],
+  },
 };
 
 function Hizmetlerimiz() {
-  const [searchParams] = useSearchParams();
-  const lang = searchParams.get('lang') === 'en' ? 'en' : 'tr';
-  const c = CONTENT[lang];
+  const lang = useLang();
+  const c = pickContent(CONTENT, lang);
 
   const [scrolled, setScrolled] = useState(false);
   const sectionRef = useRef(null);

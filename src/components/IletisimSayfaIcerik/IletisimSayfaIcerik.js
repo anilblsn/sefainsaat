@@ -1,23 +1,33 @@
 import React, { useState } from 'react';
+import { pickContent, resolveLang } from '../../utils/lang';
 import './IletisimSayfaIcerik.css';
 
-const PROJE_OPTIONS_TR = [
-  { value: '', label: 'Proje Seçiniz' },
-  { value: 'evinpark-orman', label: 'EVİNPARK Orman' },
-  { value: 'evinpark-harput', label: 'EVİNPARK Harput' },
-  { value: 'evinpark-kartal', label: 'EVİNPARK Kartal' },
-  { value: 'evinpark-cekmekoy', label: 'EVİNPARK Çekmeköy' },
-  { value: 'diger', label: 'Diğer' },
-];
-
-const PROJE_OPTIONS_EN = [
-  { value: '', label: 'Select Project' },
-  { value: 'evinpark-orman', label: 'EVİNPARK Orman' },
-  { value: 'evinpark-harput', label: 'EVİNPARK Harput' },
-  { value: 'evinpark-kartal', label: 'EVİNPARK Kartal' },
-  { value: 'evinpark-cekmekoy', label: 'EVİNPARK Çekmeköy' },
-  { value: 'diger', label: 'Other' },
-];
+const PROJE_OPTIONS = {
+  tr: [
+    { value: '', label: 'Proje Seçiniz' },
+    { value: 'evinpark-orman', label: 'EVİNPARK Orman' },
+    { value: 'evinpark-harput', label: 'EVİNPARK Harput' },
+    { value: 'evinpark-kartal', label: 'EVİNPARK Kartal' },
+    { value: 'evinpark-cekmekoy', label: 'EVİNPARK Çekmeköy' },
+    { value: 'diger', label: 'Diğer' },
+  ],
+  en: [
+    { value: '', label: 'Select Project' },
+    { value: 'evinpark-orman', label: 'EVİNPARK Orman' },
+    { value: 'evinpark-harput', label: 'EVİNPARK Harput' },
+    { value: 'evinpark-kartal', label: 'EVİNPARK Kartal' },
+    { value: 'evinpark-cekmekoy', label: 'EVİNPARK Çekmeköy' },
+    { value: 'diger', label: 'Other' },
+  ],
+  ar: [
+    { value: '', label: 'اختر المشروع' },
+    { value: 'evinpark-orman', label: 'EVİNPARK Orman' },
+    { value: 'evinpark-harput', label: 'EVİNPARK Harput' },
+    { value: 'evinpark-kartal', label: 'EVİNPARK Kartal' },
+    { value: 'evinpark-cekmekoy', label: 'EVİNPARK Çekmeköy' },
+    { value: 'diger', label: 'أخرى' },
+  ],
+};
 
 const CONTENT = {
   tr: {
@@ -51,6 +61,22 @@ const CONTENT = {
     kvkkText: <>I have read and accept the Personal Data Protection Law.</>,
     submit: 'SEND FORM',
     mapTitle: 'Sefa İnşaat location',
+  },
+  ar: {
+    officeHeading: 'مكتب إسطنبول',
+    address: 'العنوان',
+    phone: 'الهاتف',
+    email: 'البريد الإلكتروني',
+    web: 'الموقع',
+    formHeading: <>املأ النموذج،<br />وسنتصل بك</>,
+    placeholderName: 'الاسم الكامل *',
+    placeholderPhone: 'الهاتف *',
+    placeholderEmail: 'البريد الإلكتروني *',
+    placeholderMessage: 'رسالتك',
+    errorRequired: 'هذا الحقل مطلوب.',
+    kvkkText: <>لقد قرأتُ وأوافق على قانون حماية البيانات الشخصية.</>,
+    submit: 'إرسال النموذج',
+    mapTitle: 'موقع سيفا للإنشاءات',
   },
 };
 
@@ -100,8 +126,9 @@ const ICON_YOUTUBE = (
 );
 
 function IletisimSayfaIcerik({ lang = 'tr' }) {
-  const t = CONTENT[lang];
-  const projeOptions = lang === 'en' ? PROJE_OPTIONS_EN : PROJE_OPTIONS_TR;
+  const resolved = resolveLang(lang);
+  const t = pickContent(CONTENT, resolved);
+  const projeOptions = pickContent(PROJE_OPTIONS, resolved);
 
   const [form, setForm] = useState({
     adSoyad: '',

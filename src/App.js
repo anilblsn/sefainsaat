@@ -7,6 +7,7 @@ import TamamlananProjeler from './pages/TamamlananProjeler';
 import PlanlananProjeler from './pages/PlanlananProjeler';
 import IletisimSayfasi from './pages/IletisimSayfasi';
 import HakkimizdaSayfasi from './pages/HakkimizdaSayfasi';
+import ProjeWebsitesi from './pages/ProjeWebsitesi';
 import './App.css';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="/tamamlanan-projeler" element={<TamamlananProjeler />} />
           <Route path="/planlanan-projeler" element={<PlanlananProjeler />} />
           <Route path="/iletisim" element={<IletisimSayfasi />} />
+          <Route path="/proje/:slug" element={<ProjeWebsitesi />} />
         </Routes>
       </BrowserRouter>
     </div>

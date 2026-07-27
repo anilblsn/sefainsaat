@@ -8,6 +8,35 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Arabic: text direction only — layout (navbar, grids, flex) stays LTR */
+html.lang-ar body {
+  font-family: 'Segoe UI', Tahoma, 'Noto Naskh Arabic', 'Arabic Typesetting',
+    'Traditional Arabic', sans-serif;
+}
+
+html.lang-ar p,
+html.lang-ar h1,
+html.lang-ar h2,
+html.lang-ar h3,
+html.lang-ar h4,
+html.lang-ar label,
+html.lang-ar li,
+html.lang-ar input,
+html.lang-ar textarea,
+html.lang-ar select {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+html.lang-ar p,
+html.lang-ar li,
+html.lang-ar label,
+html.lang-ar input,
+html.lang-ar textarea,
+html.lang-ar select {
+  text-align: right;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

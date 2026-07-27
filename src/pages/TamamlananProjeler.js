@@ -1,8 +1,8 @@
 import React, { useMemo, useState, useCallback, useEffect, useRef } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Iletisim from '../components/Iletisim';
 import Footer from '../components/Footer';
+import { pickContent, useLang } from '../utils/lang';
 import './TamamlananProjeler.css';
 
 const PER_PAGE = 8;
@@ -31,6 +31,18 @@ const CONTENT = {
     close: 'Close',
     prevImage: 'Previous image',
     nextImage: 'Next image',
+  },
+  ar: {
+    bannerTitle: 'المشاريع المكتملة',
+    ariaZoom: ' – تكبير الصورة',
+    paginationLabel: 'صفحات المشاريع',
+    prevPage: 'الصفحة السابقة',
+    nextPage: 'الصفحة التالية',
+    page: 'صفحة',
+    lightboxLabel: 'صورة مكبرة',
+    close: 'إغلاق',
+    prevImage: 'الصورة السابقة',
+    nextImage: 'الصورة التالية',
   },
 };
 
@@ -105,9 +117,8 @@ const ZoomIcon = () => (
 );
 
 function TamamlananProjeler() {
-  const [searchParams] = useSearchParams();
-  const lang = searchParams.get('lang') === 'en' ? 'en' : 'tr';
-  const t = CONTENT[lang];
+  const lang = useLang();
+  const t = pickContent(CONTENT, lang);
 
   const projects = useMemo(() => getProjectsFromContext(), []);
   const [currentPage, setCurrentPage] = useState(1);

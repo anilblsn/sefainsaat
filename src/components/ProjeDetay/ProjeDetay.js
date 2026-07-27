@@ -79,12 +79,17 @@ function ProjeDetay({
   details = [],
   description,
   websiteUrl,
+  websiteLabel = 'Websitesi',
   images = [],
   floorPlans = [],
   floorPlansLabel = 'Kat Planları',
   closeLabel = 'Kapat',
   prevLabel = 'Önceki',
   nextLabel = 'Sonraki',
+  zoomLabel = 'Resmi büyüt',
+  lightboxLabel = 'Büyütülmüş resim',
+  prevImageLabel,
+  nextImageLabel,
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -93,6 +98,8 @@ function ProjeDetay({
   const safeImages = Array.isArray(images) && images.length ? images : [];
   const safePlans = Array.isArray(floorPlans) ? floorPlans : [];
   const currentPlan = planPreviewIndex >= 0 ? safePlans[planPreviewIndex] : null;
+  const ariaPrevImage = prevImageLabel || prevLabel;
+  const ariaNextImage = nextImageLabel || nextLabel;
 
   const goPrev = () => setCurrentIndex((i) => (i === 0 ? safeImages.length - 1 : i - 1));
   const goNext = () => setCurrentIndex((i) => (i === safeImages.length - 1 ? 0 : i + 1));
@@ -167,15 +174,15 @@ function ProjeDetay({
                 </div>
                 {safeImages.length > 1 && (
                   <>
-                    <button type="button" className="proje-detay__arrow proje-detay__arrow--prev" onClick={goPrev} aria-label="Önceki" />
-                    <button type="button" className="proje-detay__arrow proje-detay__arrow--next" onClick={goNext} aria-label="Sonraki" />
+                    <button type="button" className="proje-detay__arrow proje-detay__arrow--prev" onClick={goPrev} aria-label={prevLabel} />
+                    <button type="button" className="proje-detay__arrow proje-detay__arrow--next" onClick={goNext} aria-label={nextLabel} />
                   </>
                 )}
                 <button
                   type="button"
                   className="proje-detay__zoom-btn"
                   onClick={() => setLightboxOpen(true)}
-                  aria-label="Resmi büyüt"
+                  aria-label={zoomLabel}
                 >
                   {ICON_ZOOM}
                 </button>
@@ -227,7 +234,7 @@ function ProjeDetay({
             {websiteUrl && websiteUrl !== '#' && (
               <a href={websiteUrl} target="_blank" rel="noopener noreferrer" className="proje-detay__btn">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                Websitesi
+                {websiteLabel}
               </a>
             )}
           </div>
@@ -240,13 +247,13 @@ function ProjeDetay({
           onClick={() => setLightboxOpen(false)}
           role="dialog"
           aria-modal="true"
-          aria-label="Büyütülmüş resim"
+          aria-label={lightboxLabel}
         >
           <button
             type="button"
             className="proje-detay__lightbox-close"
             onClick={() => setLightboxOpen(false)}
-            aria-label="Kapat"
+            aria-label={closeLabel}
           >
             <span aria-hidden="true">×</span>
           </button>
@@ -256,13 +263,13 @@ function ProjeDetay({
                 type="button"
                 className="proje-detay__lightbox-arrow proje-detay__lightbox-arrow--prev"
                 onClick={(e) => { e.stopPropagation(); goPrev(); }}
-                aria-label="Önceki resim"
+                aria-label={ariaPrevImage}
               />
               <button
                 type="button"
                 className="proje-detay__lightbox-arrow proje-detay__lightbox-arrow--next"
                 onClick={(e) => { e.stopPropagation(); goNext(); }}
-                aria-label="Sonraki resim"
+                aria-label={ariaNextImage}
               />
             </>
           )}

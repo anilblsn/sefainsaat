@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import logoImg from '../../assets/logo/logo2.png';
+import { pathWithLang, pickContent, useLang, withLang } from '../../utils/lang';
 import './Navbar.css';
 
 const FlagTR = (
@@ -25,6 +26,31 @@ const FlagGB = (
   </svg>
 );
 
+const FlagSA = (
+  <svg className="navbar__lang-flagSvg" viewBox="0 0 32 24" aria-hidden="true">
+    <rect width="32" height="24" rx="3" fill="#006C35" />
+    <text
+      x="16"
+      y="11"
+      textAnchor="middle"
+      fill="#fff"
+      fontSize="5.5"
+      fontFamily="Arial, sans-serif"
+      fontWeight="700"
+    >
+      لا إله إلا الله
+    </text>
+    <path d="M10 15h12M11 17h10" stroke="#fff" strokeWidth="1.2" strokeLinecap="round" />
+    <path d="M22 14.5l2.5 1.5-2.5 1.5z" fill="#fff" />
+  </svg>
+);
+
+const LANG_META = {
+  tr: { flag: FlagTR, label: 'TÜRKÇE', aria: 'Türkçe' },
+  en: { flag: FlagGB, label: 'ENGLISH', aria: 'English' },
+  ar: { flag: FlagSA, label: 'العربية', aria: 'العربية' },
+};
+
 const CONTENT = {
   tr: {
     homeAria: 'Sefa İnşaat Ana Sayfa',
@@ -46,17 +72,26 @@ const CONTENT = {
     langMenu: 'Language menu',
     langOptions: 'Language options',
   },
+  ar: {
+    homeAria: 'الصفحة الرئيسية لسيفا للإنشاءات',
+    about: 'من نحن',
+    ongoing: 'مشاريع قيد البيع',
+    completed: 'المشاريع المكتملة',
+    planned: 'المشاريع المخططة',
+    contact: 'اتصل بنا',
+    langMenu: 'قائمة اللغة',
+    langOptions: 'خيارات اللغة',
+  },
 };
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
-  const [searchParams] = useSearchParams();
-  const lang = searchParams.get('lang') || 'tr';
-  const pathWithLang = (l) => `${location.pathname}${l === 'tr' ? '' : '?lang=en'}`;
+  const lang = useLang();
+  const t = pickContent(CONTENT, lang);
+  const currentLang = LANG_META[lang] || LANG_META.tr;
   const [langOpen, setLangOpen] = useState(false);
   const langRef = useRef(null);
-  const t = lang === 'en' ? CONTENT.en : CONTENT.tr;
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 0);
@@ -83,9 +118,11 @@ function Navbar() {
     };
   }, [langOpen]);
 
+  const navTo = (path) => withLang(path, lang);
+
   return (
     <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
-      <Link to="/" className="navbar__logo" aria-label={t.homeAria}>
+      <Link to={navTo('/')} className="navbar__logo" aria-label={t.homeAria}>
         <img src={logoImg} alt="Sefa İnşaat" className="navbar__logo-img" />
       </Link>
 
@@ -93,7 +130,7 @@ function Navbar() {
         <ul className="navbar__links">
           <li>
             <Link
-              to="/hakkimizda"
+              to={navTo('/hakkimizda')}
               className={`navbar__link ${location.pathname === '/hakkimizda' ? 'navbar__link--active' : ''}`}
             >
               {t.about}
@@ -101,7 +138,7 @@ function Navbar() {
           </li>
           <li>
             <Link
-              to="/satisi-devam-eden-projeler"
+              to={navTo('/satisi-devam-eden-projeler')}
               className={`navbar__link ${location.pathname === '/satisi-devam-eden-projeler' ? 'navbar__link--active' : ''}`}
             >
               {t.ongoing}
@@ -109,7 +146,7 @@ function Navbar() {
           </li>
           <li>
             <Link
-              to="/tamamlanan-projeler"
+              to={navTo('/tamamlanan-projeler')}
               className={`navbar__link ${location.pathname === '/tamamlanan-projeler' ? 'navbar__link--active' : ''}`}
             >
               {t.completed}
@@ -117,7 +154,7 @@ function Navbar() {
           </li>
           <li>
             <Link
-              to="/planlanan-projeler"
+              to={navTo('/planlanan-projeler')}
               className={`navbar__link ${location.pathname === '/planlanan-projeler' ? 'navbar__link--active' : ''}`}
             >
               {t.planned}
@@ -125,7 +162,7 @@ function Navbar() {
           </li>
           <li>
             <Link
-              to="/iletisim"
+              to={navTo('/iletisim')}
               className={`navbar__link ${location.pathname === '/iletisim' ? 'navbar__link--active' : ''}`}
             >
               {t.contact}
@@ -142,33 +179,26 @@ function Navbar() {
             aria-expanded={langOpen}
             aria-label={t.langMenu}
           >
-            {lang === 'en' ? FlagGB : FlagTR}
-            <span>{lang === 'en' ? 'ENGLISH' : 'TÜRKÇE'}</span>
+            {currentLang.flag}
+            <span>{currentLang.label}</span>
             <span className="navbar__lang-caret" aria-hidden="true">▾</span>
           </button>
 
           {langOpen && (
             <div className="navbar__lang-menu" role="menu" aria-label={t.langOptions}>
-              <Link
-                to={pathWithLang('tr')}
-                className={`navbar__lang-option ${lang !== 'en' ? 'navbar__lang-option--active' : ''}`}
-                role="menuitem"
-                onClick={() => setLangOpen(false)}
-                aria-label="Türkçe"
-              >
-                {FlagTR}
-                <span>TÜRKÇE</span>
-              </Link>
-              <Link
-                to={pathWithLang('en')}
-                className={`navbar__lang-option ${lang === 'en' ? 'navbar__lang-option--active' : ''}`}
-                role="menuitem"
-                onClick={() => setLangOpen(false)}
-                aria-label="English"
-              >
-                {FlagGB}
-                <span>ENGLISH</span>
-              </Link>
+              {(['tr', 'en', 'ar']).map((code) => (
+                <Link
+                  key={code}
+                  to={pathWithLang(location.pathname, code)}
+                  className={`navbar__lang-option ${lang === code ? 'navbar__lang-option--active' : ''}`}
+                  role="menuitem"
+                  onClick={() => setLangOpen(false)}
+                  aria-label={LANG_META[code].aria}
+                >
+                  {LANG_META[code].flag}
+                  <span>{LANG_META[code].label}</span>
+                </Link>
+              ))}
             </div>
           )}
         </div>

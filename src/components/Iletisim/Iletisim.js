@@ -1,22 +1,29 @@
 import React, { useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import { useInView } from '../../hooks/useInView';
+import { pickContent, useLang } from '../../utils/lang';
 import './Iletisim.css';
 import bgImage from '../../assets/tamamlananprojects/1-EVİNPARK GÖKTÜRK/0.jpg';
 
-const PROJE_OPTIONS_TR = [
-  { value: '', label: 'Proje Seçiniz' },
-  { value: 'proje1', label: 'Proje 1' },
-  { value: 'proje2', label: 'Proje 2' },
-  { value: 'diger', label: 'Diğer' },
-];
-
-const PROJE_OPTIONS_EN = [
-  { value: '', label: 'Select Project' },
-  { value: 'proje1', label: 'Project 1' },
-  { value: 'proje2', label: 'Project 2' },
-  { value: 'diger', label: 'Other' },
-];
+const PROJE_OPTIONS = {
+  tr: [
+    { value: '', label: 'Proje Seçiniz' },
+    { value: 'proje1', label: 'Proje 1' },
+    { value: 'proje2', label: 'Proje 2' },
+    { value: 'diger', label: 'Diğer' },
+  ],
+  en: [
+    { value: '', label: 'Select Project' },
+    { value: 'proje1', label: 'Project 1' },
+    { value: 'proje2', label: 'Project 2' },
+    { value: 'diger', label: 'Other' },
+  ],
+  ar: [
+    { value: '', label: 'اختر المشروع' },
+    { value: 'proje1', label: 'المشروع 1' },
+    { value: 'proje2', label: 'المشروع 2' },
+    { value: 'diger', label: 'أخرى' },
+  ],
+};
 
 const CONTENT = {
   tr: {
@@ -39,13 +46,22 @@ const CONTENT = {
     submit: 'SEND',
     kvkk: "I have read and accept the Personal Data Protection Law.",
   },
+  ar: {
+    title: '| اتصل بنا',
+    description: 'يمكنكم التواصل معنا عبر تعبئة النموذج أدناه. سيتواصل معكم مستشار العملاء في أقرب وقت ممكن.',
+    labelName: 'الاسم الكامل *',
+    labelPhone: 'الهاتف *',
+    labelProject: 'اختر المشروع',
+    errorRequired: 'هذا الحقل مطلوب.',
+    submit: 'إرسال',
+    kvkk: 'لقد قرأتُ وأوافق على قانون حماية البيانات الشخصية.',
+  },
 };
 
 function Iletisim() {
-  const [searchParams] = useSearchParams();
-  const lang = searchParams.get('lang') === 'en' ? 'en' : 'tr';
-  const t = CONTENT[lang];
-  const projeOptions = lang === 'en' ? PROJE_OPTIONS_EN : PROJE_OPTIONS_TR;
+  const lang = useLang();
+  const t = pickContent(CONTENT, lang);
+  const projeOptions = pickContent(PROJE_OPTIONS, lang);
 
   const [ref, inView] = useInView({ threshold: 0.12 });
 

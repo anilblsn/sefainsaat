@@ -1,9 +1,9 @@
 import React from 'react';
-import { useSearchParams } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import ProjeDetay from '../components/ProjeDetay';
 import Iletisim from '../components/Iletisim';
 import Footer from '../components/Footer';
+import { pickContent, useLang } from '../utils/lang';
 import './PlanlananProjeler.css';
 
 import kartal0 from '../assets/planlananprojects/1-EVİNPARK KARTAL/0.jpg';
@@ -21,6 +21,7 @@ const OMERLI_IMAGES = [omerli0, omerli1];
 const CONTENT = {
   tr: {
     bannerTitle: 'Planlanan Projeler',
+    websiteLabel: 'Websitesi',
     kartal: {
       title: 'EVİNPARK Kartal',
       description: 'EVİNPARK Kartal projesi; konumu ve yaşam alanlarıyla öne çıkan planlanan bir projedir.',
@@ -39,6 +40,7 @@ const CONTENT = {
   },
   en: {
     bannerTitle: 'Planned Projects',
+    websiteLabel: 'Website',
     kartal: {
       title: 'EVİNPARK Kartal',
       description: 'EVİNPARK Kartal is a planned project that stands out with its location and living spaces.',
@@ -55,12 +57,30 @@ const CONTENT = {
       details: [],
     },
   },
+  ar: {
+    bannerTitle: 'المشاريع المخططة',
+    websiteLabel: 'الموقع',
+    kartal: {
+      title: 'EVİNPARK Kartal',
+      description: 'مشروع EVİNPARK Kartal مخطط ويتميز بموقعه ومساحاته المعيشية.',
+      details: [],
+    },
+    kasaba: {
+      title: 'EVİNPARK Kasaba',
+      description: 'مشروع EVİNPARK Kasaba في مرحلة التخطيط. سيتم تحديث التفاصيل قريباً.',
+      details: [],
+    },
+    omerli: {
+      title: 'EVİNPARK Ömerli',
+      description: 'مشروع EVİNPARK Ömerli في مرحلة التخطيط. سيتم تحديث التفاصيل قريباً.',
+      details: [],
+    },
+  },
 };
 
 function PlanlananProjeler() {
-  const [searchParams] = useSearchParams();
-  const lang = searchParams.get('lang') === 'en' ? 'en' : 'tr';
-  const c = CONTENT[lang];
+  const lang = useLang();
+  const c = pickContent(CONTENT, lang);
 
   return (
     <>
@@ -77,6 +97,7 @@ function PlanlananProjeler() {
           details={c.kartal.details}
           description={c.kartal.description}
           websiteUrl="#"
+          websiteLabel={c.websiteLabel}
         />
         <ProjeDetay
           developer="Sefa İnşaat"
@@ -85,6 +106,7 @@ function PlanlananProjeler() {
           details={c.kasaba.details}
           description={c.kasaba.description}
           websiteUrl="#"
+          websiteLabel={c.websiteLabel}
         />
         <ProjeDetay
           developer="Sefa İnşaat"
@@ -93,6 +115,7 @@ function PlanlananProjeler() {
           details={c.omerli.details}
           description={c.omerli.description}
           websiteUrl="#"
+          websiteLabel={c.websiteLabel}
         />
       </main>
       <Iletisim />

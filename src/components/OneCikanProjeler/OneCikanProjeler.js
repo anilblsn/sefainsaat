@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import { useInView } from '../../hooks/useInView';
+import { pickContent, useLang, withLang } from '../../utils/lang';
 import './OneCikanProjeler.css';
 
 const imageContext = require.context(
@@ -53,12 +53,17 @@ const CONTENT = {
     category: 'Completed Projects',
     btn: 'OTHER PROJECTS',
   },
+  ar: {
+    subtitle: 'مشاريعنا',
+    title: 'المشاريع المميزة',
+    category: 'المشاريع المكتملة',
+    btn: 'مشاريع أخرى',
+  },
 };
 
 function OneCikanProjeler() {
-  const [searchParams] = useSearchParams();
-  const lang = searchParams.get('lang') === 'en' ? 'en' : 'tr';
-  const c = CONTENT[lang];
+  const lang = useLang();
+  const c = pickContent(CONTENT, lang);
   const [ref, inView] = useInView({ threshold: 0.1 });
   const projects = useMemo(() => {
     const all = getProjectsFromContext();
@@ -117,7 +122,7 @@ function OneCikanProjeler() {
         ))}
       </div>
       <div className="onecikan-projeler__actions">
-        <a href={lang === 'en' ? '/tamamlanan-projeler?lang=en' : '/tamamlanan-projeler'} className="onecikan-projeler__btn">
+        <a href={withLang('/tamamlanan-projeler', lang)} className="onecikan-projeler__btn">
           {c.btn}
         </a>
       </div>

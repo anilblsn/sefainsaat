@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Iletisim from '../components/Iletisim';
 import Footer from '../components/Footer';
 import { useInView } from '../hooks/useInView';
+import { pickContent, useLang } from '../utils/lang';
 import logoImg from '../assets/logo/logo2.png';
 import './HakkimizdaSayfasi.css';
 
@@ -22,12 +22,18 @@ const HAKKIMIZDA = {
       'Our company addresses the demands of rapidly changing technology and socio-cultural environment with the most innovative and original style and designs, contributing to healthy urban transformation through contemporary structures. With its professional management, agile organization and experienced technical staff, it is a construction company that has become a brand in its field. Sefa Construction approaches each project with distinct enthusiasm and a quality-oriented vision, always striving for better. Aware of its responsibilities as a construction company, our company emphasizes that the buildings it delivers meet standards in functionality, durability and aesthetics. With a focus on integrity, customer satisfaction, continuity, innovation and superior quality, our company aims for smooth, secure and mutually beneficial relations with all clients and business partners.',
     ],
   },
+  ar: {
+    bannerTitle: 'من نحن',
+    paragraphs: [
+      'سيفا للإنشاءات شركة عائلية تأسست عام 1977، ومنذ تأسيسها نفّذت استثمارات عقارية ومقاولات في أنحاء عديدة من البلاد. يتركز نشاط شركتنا بشكل أساسي على إنتاج المساكن الفاخرة في أحياء راقية بأسلوب البناء والبيع، كما تنفّذ وتواصل تنفيذ عقود بناء خاصة ومراكز أعمال.',
+      'تتعامل شركتنا مع متطلبات التكنولوجيا والبيئة الاجتماعية والثقافية سريعة التغير بأحدث الأساليب والتصاميم الأصيلة، وتسهم في التحول الحضري الصحي عبر مبانٍ معاصرة. بفضل إدارتها المهنية وتنظيمها السريع وكوادرها الفنية ذات الخبرة، أصبحت شركة بناء ذات علامة مميزة في مجالها. تتعامل سيفا للإنشاءات مع كل التزام بحماس ورؤية جودة منفصلة، وتواصل السعي نحو الأفضل. وإدراكاً لمسؤولياتها كشركة بناء، تولي أهمية لأن تلبي المباني معايير الوظائف والمتانة والجماليات. وبفهم النزاهة ورضا العملاء والاستمرارية والابتكار والجودة الفائقة، تهدف شركتنا إلى علاقات سلسة وآمنة ومفيدة مع جميع العملاء وشركاء العمل.',
+    ],
+  },
 };
 
 function HakkimizdaSayfasi() {
-  const [searchParams] = useSearchParams();
-  const lang = searchParams.get('lang') === 'en' ? 'en' : 'tr';
-  const content = HAKKIMIZDA[lang];
+  const lang = useLang();
+  const content = pickContent(HAKKIMIZDA, lang);
   const [bannerReady, setBannerReady] = useState(false);
   const [contentRef, contentInView] = useInView({ threshold: 0.12 });
 
