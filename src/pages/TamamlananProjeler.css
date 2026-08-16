@@ -6,7 +6,8 @@
   min-height: 380px;
   display: flex;
   align-items: flex-end;
-  padding: 3rem 2rem 2.5rem 5rem;
+  justify-content: center;
+  padding: 3rem 2rem 2.5rem;
   box-sizing: border-box;
   background-image: url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1600&q=80');
   background-size: cover;
@@ -30,31 +31,31 @@
   font-weight: 400;
   color: #fff;
   letter-spacing: 0.02em;
-  padding-left: 0;
+  text-align: center;
 }
 
 .tamamlanan-projeler {
   min-height: 50vh;
-  padding: 3rem 2rem 4rem 5rem;
+  padding: 3rem 2rem 4rem;
   box-sizing: border-box;
   background: #2a2b31;
 }
 
 @media (max-width: 900px) {
   .tamamlanan-projeler {
-    padding-left: 2rem;
+    padding: 3rem 1.5rem 4rem;
   }
 }
 
 .tamamlanan-projeler__grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 3rem;
-  max-width: 1600px;
-  margin: 0 auto 0 0;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem 1.75rem;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1000px) {
   .tamamlanan-projeler__grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -102,9 +103,10 @@
 
 .tamamlanan-projeler__caption {
   position: absolute;
-  left: 1.1rem;
+  left: 0;
   bottom: 0.9rem;
   margin: 0;
+  padding: 0;
   z-index: 3;
   display: flex;
   flex-direction: column;
@@ -122,15 +124,24 @@
   font-family: 'Century Gothic', 'Jost', 'Futura', 'Apple SD Gothic Neo', 'Avenir Next', 'Avenir', sans-serif;
   font-weight: 400;
   font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+  text-align: left;
 }
 
 .tamamlanan-projeler__caption-line--evinpark {
   font-family: 'Poor Richard', 'Lora', 'Bookman Old Style', 'Georgia', serif;
-  font-weight: 500;
+  font-weight: 700;
   text-transform: lowercase;
   letter-spacing: 0.04em;
-  font-size: clamp(1.3rem, 1.8vw, 1.65rem);
+  font-size: clamp(1.75rem, 2.5vw, 2.2rem);
   line-height: 1;
+}
+
+.tamamlanan-projeler__caption-line--project {
+  font-family: 'Poor Richard', 'Lora', 'Bookman Old Style', 'Georgia', serif;
+  font-weight: 300;
+  text-transform: lowercase;
+  letter-spacing: 0.02em;
+  font-size: clamp(0.9rem, 1.2vw, 1.1rem);
 }
 
 .tamamlanan-projeler__card-image-wrap:hover .tamamlanan-projeler__card-zoom,
@@ -263,15 +274,24 @@
 .tamamlanan-projeler__lightbox-title {
   margin: 0;
   color: #fff;
-  font-size: 1.1rem;
-  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  text-align: center;
+}
+
+.tamamlanan-projeler__lightbox-title .tamamlanan-projeler__caption-line {
   text-align: center;
 }
 
 .tamamlanan-projeler__lightbox-counter {
+  font-family: 'Century Gothic', 'Jost', 'Futura', sans-serif;
   font-weight: 400;
   opacity: 0.85;
   font-size: 0.95rem;
+  margin-top: 0.35rem;
+  text-transform: none;
 }
 
 /* Sayfalama */

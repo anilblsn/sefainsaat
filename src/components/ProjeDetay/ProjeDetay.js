@@ -42,7 +42,13 @@ function ProjectTitle({ title }) {
       >
         {isEvinpark ? first.toLocaleLowerCase('tr-TR') : toTitle(first)}
       </span>
-      {rest && <span className="proje-detay__title-line">{toTitle(rest)}</span>}
+      {rest && (
+        <span
+          className={`proje-detay__title-line ${isEvinpark ? 'proje-detay__title-line--project' : ''}`}
+        >
+          {isEvinpark ? rest.toLocaleLowerCase('tr-TR') : toTitle(rest)}
+        </span>
+      )}
     </h2>
   );
 }

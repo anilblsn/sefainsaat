@@ -5,12 +5,14 @@ import gokturk3 from '../assets/tamamlananprojects/1-EVİNPARK GÖKTÜRK/3.jpg';
 import gokturk4 from '../assets/tamamlananprojects/1-EVİNPARK GÖKTÜRK/4.jpg';
 import gokturk5 from '../assets/tamamlananprojects/1-EVİNPARK GÖKTÜRK/5.jpg';
 import gokturk6 from '../assets/tamamlananprojects/1-EVİNPARK GÖKTÜRK/6.jpg';
+import gokturkCover from '../assets/tamamlananprojects/1-EVİNPARK GÖKTÜRK/Evinpark Göktürk.jpg';
 
 import kemer0 from '../assets/tamamlananprojects/2-EVİNPARK KEMER/0.jpg';
 import kemer1 from '../assets/tamamlananprojects/2-EVİNPARK KEMER/1.jpg';
 import kemer2 from '../assets/tamamlananprojects/2-EVİNPARK KEMER/2.jpg';
 import kemer3 from '../assets/tamamlananprojects/2-EVİNPARK KEMER/3.jpg';
 import kemer4 from '../assets/tamamlananprojects/2-EVİNPARK KEMER/4.jpg';
+import kemerCover from '../assets/tamamlananprojects/2-EVİNPARK KEMER/Evinpark Kemer.jpg';
 
 import orman0 from '../assets/devamedenprojects/1-EVİNPARK ORMAN/0.JPG';
 import orman1 from '../assets/devamedenprojects/1-EVİNPARK ORMAN/1.JPG';
@@ -22,6 +24,7 @@ import cinar0 from '../assets/tamamlananprojects/4-EVİNPARK ÇINAR/0.png';
 import cinar1 from '../assets/tamamlananprojects/4-EVİNPARK ÇINAR/1.png';
 import cinar2 from '../assets/tamamlananprojects/4-EVİNPARK ÇINAR/2.png';
 import cinar3 from '../assets/tamamlananprojects/4-EVİNPARK ÇINAR/3.png';
+import cinarCover from '../assets/tamamlananprojects/4-EVİNPARK ÇINAR/Evinpark Çınar.jpg';
 
 import dededen0 from '../assets/tamamlananprojects/5-DEDEDEN APT/0.png';
 import dededen1 from '../assets/tamamlananprojects/5-DEDEDEN APT/1.jpg';
@@ -47,10 +50,10 @@ export const ONGOING_PROJECT_KEYS = [
 ];
 
 export const PROJECT_IMAGES = {
-  gokturk: [gokturk0, gokturk1, gokturk2, gokturk3, gokturk4, gokturk5, gokturk6],
-  kemer: [kemer0, kemer1, kemer2, kemer3, kemer4],
+  gokturk: [gokturkCover, gokturk0, gokturk1, gokturk2, gokturk3, gokturk4, gokturk5, gokturk6],
+  kemer: [kemerCover, kemer0, kemer1, kemer2, kemer3, kemer4],
   orman: [orman0, orman1, orman2, orman3, orman4],
-  cinar: [cinar0, cinar1, cinar2, cinar3],
+  cinar: [cinarCover, cinar0, cinar1, cinar2, cinar3],
   dededen: [dededen0, dededen1],
   harput: [harput0, harput1, harput2, harput3, harput4],
   cekmekoy: [cekmekoy0],

@@ -3,9 +3,10 @@ import Navbar from '../components/Navbar';
 import Iletisim from '../components/Iletisim';
 import Footer from '../components/Footer';
 import { pickContent, useLang } from '../utils/lang';
+import { pickCoverFile } from '../utils/projectImages';
 import './TamamlananProjeler.css';
 
-const PER_PAGE = 8;
+const PER_PAGE = 9;
 
 const CONTENT = {
   tr: {
@@ -68,7 +69,13 @@ function renderProjectCaption(name) {
         {isEvinpark ? first.toLocaleLowerCase('tr-TR') : toTitle(first)}
       </span>
       {rest && (
-        <span className="tamamlanan-projeler__caption-line">{toTitle(rest)}</span>
+        <span
+          className={`tamamlanan-projeler__caption-line ${
+            isEvinpark ? 'tamamlanan-projeler__caption-line--project' : ''
+          }`}
+        >
+          {isEvinpark ? rest.toLocaleLowerCase('tr-TR') : toTitle(rest)}
+        </span>
       )}
     </>
   );
@@ -96,9 +103,9 @@ function getProjectsFromContext() {
   });
   return folders.map((folder) => {
     const files = byFolder[folder].sort((a, b) => a.fullPath.localeCompare(b.fullPath));
-    const preferred = files.find((f) => /[/\\]0\.(jpg|jpeg|png)$/i.test(f.fullPath));
-    const imageKey = preferred ? preferred.path : files[0].path;
     const name = folder.replace(/^\d+\s*-\s*/, '').trim();
+    const cover = pickCoverFile(files, name);
+    const imageKey = cover ? cover.path : files[0].path;
     const images = files.map((f) => imageContext(f.path));
     return {
       id: folder,
@@ -282,14 +289,14 @@ function TamamlananProjeler() {
               alt={`${lightbox.name} – ${lightboxImageIndex + 1} / ${lightboxTotal}`}
               className="tamamlanan-projeler__lightbox-image"
             />
-            <p className="tamamlanan-projeler__lightbox-title">
-              {lightbox.name}
+            <div className="tamamlanan-projeler__lightbox-title">
+              {renderProjectCaption(lightbox.name)}
               {lightboxTotal > 1 && (
                 <span className="tamamlanan-projeler__lightbox-counter">
-                  {' '}{lightboxImageIndex + 1} / {lightboxTotal}
+                  {lightboxImageIndex + 1} / {lightboxTotal}
                 </span>
               )}
-            </p>
+            </div>
           </div>
         </div>
       )}

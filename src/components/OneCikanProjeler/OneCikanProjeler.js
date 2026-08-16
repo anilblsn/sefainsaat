@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { useInView } from '../../hooks/useInView';
 import { pickContent, useLang, withLang } from '../../utils/lang';
+import { pickCoverFile } from '../../utils/projectImages';
 import './OneCikanProjeler.css';
 
 const imageContext = require.context(
@@ -8,6 +9,28 @@ const imageContext = require.context(
   true,
   /\.(jpe?g|png|JPE?G|PNG)$/
 );
+
+const FEATURED_PROJECTS = [
+  { display: 'EVİNPARK GÖKTÜRK', match: ['evinpark göktürk'] },
+  { display: 'EVİNPARK KADIKÖY REZİDANS', match: ['evinpark kadıköy'] },
+  { display: 'EVİNPARK KEMER', match: ['evinpark kemer'] },
+  { display: 'EVİNPARK ÇINAR', match: ['evinpark çınar'] },
+  { display: 'EVİNPARK ADA', match: ['evinpark ada'] },
+  { display: 'EVİNPARK TEPE', match: ['evinpark tepe'] },
+  { display: 'EVİNPARK DOĞA (HALİMAĞA)', match: ['halimağa', 'evinpark doğa'] },
+  { display: 'EVİNPARK ATAŞEHİR', match: ['evinpark ataşehir'] },
+  { display: 'EVİNPARK ÇAMLICA', match: ['evinpark çamlıca'] },
+  { display: 'DEDEDEN REZİDANS', match: ['dededen'] },
+  { display: 'BİRLİK REZİDANS', match: ['birlik rezidans', 'birlik'] },
+  { display: 'KORU REZİDANS', match: ['koru rezidans', 'koru'] },
+];
+
+function normalize(value) {
+  return String(value || '')
+    .toLocaleLowerCase('tr-TR')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
 
 function getProjectsFromContext() {
   const keys = imageContext.keys();
@@ -19,25 +42,28 @@ function getProjectsFromContext() {
     byFolder[folder].push({ path: key, fullPath: path });
   });
 
-  const folders = Object.keys(byFolder).sort((a, b) => {
-    const nA = parseInt(a.match(/^(\d+)/)?.[1] || '0', 10);
-    const nB = parseInt(b.match(/^(\d+)/)?.[1] || '0', 10);
-    return nA - nB;
-  });
-
-  return folders.map((folder) => {
+  return Object.keys(byFolder).map((folder) => {
     const files = byFolder[folder].sort((a, b) => a.fullPath.localeCompare(b.fullPath));
-    const preferred = files.find((f) => /[/\\]0\.(jpg|jpeg|png)$/i.test(f.fullPath));
-    const imageKey = preferred ? preferred.path : files[0].path;
     const name = folder.replace(/^\d+\s*-\s*/, '').trim();
+    const cover = pickCoverFile(files, name);
+    const imageKey = cover ? cover.path : files[0].path;
     return {
       id: folder,
       folder,
-      number: parseInt(folder.match(/^(\d+)/)?.[1] || '0', 10),
       name,
+      search: `${normalize(folder)} ${normalize(name)}`,
       image: imageContext(imageKey),
     };
   });
+}
+
+function findFeaturedProject(all, matchKeys) {
+  for (const key of matchKeys) {
+    const needle = normalize(key);
+    const found = all.find((p) => p.search.includes(needle));
+    if (found) return found;
+  }
+  return null;
 }
 
 const CONTENT = {
@@ -67,15 +93,14 @@ function OneCikanProjeler() {
   const [ref, inView] = useInView({ threshold: 0.1 });
   const projects = useMemo(() => {
     const all = getProjectsFromContext();
-    const order = [1, 3, 14, 2, 7, 12];
-    const byNumber = new Map();
-    all.forEach((p) => {
-      if (!byNumber.has(p.number)) byNumber.set(p.number, p);
-    });
-    return order
-      .map((n) => byNumber.get(n))
-      .filter(Boolean)
-      .map((p) => (p.number === 14 ? { ...p, name: 'EVİNPARK ADATEPE' } : p));
+    return FEATURED_PROJECTS.map((item) => {
+      const matched = findFeaturedProject(all, item.match);
+      if (!matched) return null;
+      return {
+        ...matched,
+        name: item.display,
+      };
+    }).filter(Boolean);
   }, []);
 
   return (
@@ -111,7 +136,11 @@ function OneCikanProjeler() {
                         {isEvinpark ? first.toLocaleLowerCase('tr-TR') : toTitle(first)}
                       </span>
                       {rest && (
-                        <span className="onecikan-projeler__caption-line">{toTitle(rest)}</span>
+                        <span
+                          className={`onecikan-projeler__caption-line ${isEvinpark ? 'onecikan-projeler__caption-line--project' : ''}`}
+                        >
+                          {isEvinpark ? rest.toLocaleLowerCase('tr-TR') : toTitle(rest)}
+                        </span>
                       )}
                     </>
                   );

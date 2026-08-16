@@ -117,8 +117,10 @@
   margin: 0 0 0.85rem;
   display: flex;
   flex-direction: column;
-  gap: 0.1rem;
+  align-items: flex-start;
+  gap: 0.15rem;
   line-height: 1.05;
+  text-align: left;
 }
 
 .proje-site__brand-line {
@@ -127,12 +129,23 @@
   font-weight: 600;
   letter-spacing: 0.02em;
   color: #fff;
+  text-align: left;
 }
 
 .proje-site__brand-line--evinpark {
   font-family: 'Poor Richard', 'Lora', 'Bookman Old Style', 'Georgia', serif;
-  font-weight: 400;
+  font-weight: 700;
   letter-spacing: 0.04em;
+  text-transform: lowercase;
+  font-size: clamp(2.8rem, 7vw, 4.4rem);
+}
+
+.proje-site__brand-line--project {
+  font-family: 'Poor Richard', 'Lora', 'Bookman Old Style', 'Georgia', serif;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+  font-size: clamp(1.35rem, 3.5vw, 2.1rem);
 }
 
 .proje-site__tagline {
@@ -285,10 +298,219 @@
   align-items: center;
   padding: 0.55rem 0.9rem;
   border: 1px solid rgba(239, 127, 26, 0.45);
+  background: transparent;
   color: #fff;
   font-family: 'Century Gothic', 'Jost', 'Futura', sans-serif;
   font-size: 0.85rem;
   letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.proje-site__unit-chip:hover {
+  border-color: var(--proje-accent);
+  color: var(--proje-accent);
+}
+
+.proje-site__unit-chip--active {
+  background: var(--proje-accent);
+  border-color: var(--proje-accent);
+  color: #1a1a1a;
+}
+
+.proje-site__unit-chip--active:hover {
+  color: #1a1a1a;
+}
+
+.proje-site__plans-panel {
+  margin-top: 1.5rem;
+}
+
+.proje-site__plans-heading {
+  margin: 0 0 1rem;
+  font-family: 'Century Gothic', 'Jost', 'Futura', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--proje-accent);
+}
+
+.proje-site__plans-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
+}
+
+@media (min-width: 700px) {
+  .proje-site__plans-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+
+.proje-site__plan-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.proje-site__plan-card:hover {
+  border-color: rgba(239, 127, 26, 0.65);
+}
+
+.proje-site__plan-thumb {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #1a1b1f;
+}
+
+.proje-site__plan-thumb img,
+.proje-site__plan-thumb canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.proje-site__plan-thumb--pdf {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.proje-site__plan-badge {
+  position: absolute;
+  right: 0.4rem;
+  bottom: 0.4rem;
+  color: var(--proje-accent);
+  pointer-events: none;
+}
+
+.proje-site__plan-name {
+  padding: 0 0.55rem 0.65rem;
+  font-size: 0.78rem;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.proje-site__lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  background: rgba(10, 10, 12, 0.92);
+}
+
+.proje-site__lightbox-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.proje-site__lightbox-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  width: 2.75rem;
+  height: 2.75rem;
+  transform: translateY(-50%);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  cursor: pointer;
+}
+
+.proje-site__lightbox-arrow::before {
+  content: '';
+  display: block;
+  width: 0.55rem;
+  height: 0.55rem;
+  margin: 0 auto;
+  border-top: 2px solid #fff;
+  border-right: 2px solid #fff;
+}
+
+.proje-site__lightbox-arrow--prev {
+  left: 1rem;
+}
+
+.proje-site__lightbox-arrow--prev::before {
+  transform: rotate(-135deg);
+}
+
+.proje-site__lightbox-arrow--next {
+  right: 1rem;
+}
+
+.proje-site__lightbox-arrow--next::before {
+  transform: rotate(45deg);
+}
+
+.proje-site__plan-viewer {
+  max-width: min(92vw, 960px);
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.proje-site__plan-viewer--pdf {
+  width: min(92vw, 960px);
+  height: min(88vh, 720px);
+}
+
+.proje-site__lightbox-img {
+  display: block;
+  max-width: 100%;
+  max-height: calc(88vh - 3rem);
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+.proje-site__plan-pdf-frame {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #fff;
+}
+
+.proje-site__plan-caption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.9rem;
+}
+
+.proje-site__plan-caption-link {
+  color: var(--proje-accent);
+  text-decoration: none;
+}
+
+.proje-site__plan-caption-link:hover {
+  text-decoration: underline;
 }
 
 .proje-site__gallery-strip {

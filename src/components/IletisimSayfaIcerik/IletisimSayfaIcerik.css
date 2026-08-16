@@ -1,7 +1,7 @@
 /* IletisimSayfaIcerik – iki sütun: sol iletişim bilgileri, sağ form */
 
 .iletisim-sayfa-icerik {
-  padding: 3rem 2rem 4rem 5rem;
+  padding: 3rem 2rem 4rem;
   box-sizing: border-box;
   background: #2a2b31;
   position: relative;
@@ -15,7 +15,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 3rem;
   max-width: 1200px;
-  margin: 0 auto 0 0;
+  margin: 0 auto;
   align-items: start;
 }
 
@@ -232,8 +232,8 @@
 
 /* Harita – formun hemen altı, üst padding’i iptal edip tam genişlik */
 .iletisim-sayfa-icerik__map-wrap {
-  width: calc(100% + 5rem + 2rem);
-  margin-left: -5rem;
+  width: calc(100% + 4rem);
+  margin-left: -2rem;
   margin-top: 3rem;
   overflow: hidden;
   box-sizing: border-box;

@@ -1,5 +1,6 @@
 import React from 'react';
 import logoImg from '../../assets/logo/logo2.png';
+import evinparkLogo from '../../assets/logo/evinparklogo.png';
 import { pickContent, useLang, withLang } from '../../utils/lang';
 import './Footer.css';
 
@@ -32,20 +33,14 @@ const QUICK_LINKS = {
 
 const CONTENT = {
   tr: {
-    tagline: '',
-    about: '1977 yılında kurulan Sefa İnşaat, dürüstlük ilkesini prensip edinerek marka olmanın bilinci ve sorumluluğu ile sağlam adımlarla yürümektedir.',
     quickMenu: 'HIZLI MENÜ',
     headOffice: 'MERKEZ OFİS',
   },
   en: {
-    tagline: '',
-    about: 'Founded in 1977, Sefa Construction moves forward with steady steps, adopting integrity as a principle and with the awareness and responsibility of being a brand.',
     quickMenu: 'QUICK MENU',
     headOffice: 'HEAD OFFICE',
   },
   ar: {
-    tagline: '',
-    about: 'تأسست شركة سيفا للإنشاءات عام 1977، وتمضي بخطوات راسخة متخذة النزاهة مبدأً لها، وبوعي ومسؤولية بناء العلامة التجارية.',
     quickMenu: 'قائمة سريعة',
     headOffice: 'المكتب الرئيسي',
   },
@@ -59,15 +54,6 @@ function Footer() {
   return (
     <footer className="footer">
       <div className="footer__inner">
-        <div className="footer__col footer__col--brand">
-          <div className="footer__logo">
-            <img src={logoImg} alt="Sefa İnşaat" className="footer__logo-img" />
-            {t.tagline ? <span className="footer__logo-tagline">{t.tagline}</span> : null}
-          </div>
-          <p className="footer__about">
-            {t.about}
-          </p>
-        </div>
         <div className="footer__col footer__col--menu">
           <h3 className="footer__heading">{t.quickMenu}</h3>
           <ul className="footer__links">
@@ -79,6 +65,12 @@ function Footer() {
               </li>
             ))}
           </ul>
+        </div>
+        <div className="footer__col footer__col--brand">
+          <div className="footer__logo">
+            <img src={logoImg} alt="Sefa İnşaat" className="footer__logo-img" />
+            <img src={evinparkLogo} alt="evinpark" className="footer__evinpark-img" />
+          </div>
         </div>
         <div className="footer__col footer__col--contact">
           <h3 className="footer__heading">{t.headOffice}</h3>

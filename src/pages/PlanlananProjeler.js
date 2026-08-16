@@ -24,7 +24,7 @@ const CONTENT = {
     websiteLabel: 'Websitesi',
     kartal: {
       title: 'EVİNPARK Kartal',
-      description: 'EVİNPARK Kartal projesi; konumu ve yaşam alanlarıyla öne çıkan planlanan bir projedir.',
+      description: 'EVİNPARK Kartal projesi; planlama aşamasında olan projemizdir. Detaylar yakında güncellenecektir.',
       details: [],
     },
     kasaba: {
@@ -43,7 +43,7 @@ const CONTENT = {
     websiteLabel: 'Website',
     kartal: {
       title: 'EVİNPARK Kartal',
-      description: 'EVİNPARK Kartal is a planned project that stands out with its location and living spaces.',
+      description: 'EVİNPARK Kartal is a planned project. Details will be updated soon.',
       details: [],
     },
     kasaba: {
@@ -62,7 +62,7 @@ const CONTENT = {
     websiteLabel: 'الموقع',
     kartal: {
       title: 'EVİNPARK Kartal',
-      description: 'مشروع EVİNPARK Kartal مخطط ويتميز بموقعه ومساحاته المعيشية.',
+      description: 'مشروع EVİNPARK Kartal في مرحلة التخطيط. سيتم تحديث التفاصيل قريباً.',
       details: [],
     },
     kasaba: {

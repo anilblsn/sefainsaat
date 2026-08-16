@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useInView } from '../../hooks/useInView';
 import { pickContent, useLang } from '../../utils/lang';
 import './Iletisim.css';
-import bgImage from '../../assets/tamamlananprojects/1-EVİNPARK GÖKTÜRK/0.jpg';
+import bgImage from '../../assets/covers/iletisim-bg.jpg';
 
 const PROJE_OPTIONS = {
   tr: [
@@ -96,8 +96,8 @@ function Iletisim() {
     <section
       ref={ref}
       className={`iletisim ${inView ? 'iletisim--in-view' : ''}`}
-      style={{ backgroundImage: `url(${bgImage})` }}
     >
+      <img src={bgImage} alt="" className="iletisim__bg" />
       <div className="iletisim__overlay" />
       <div className="iletisim__inner">
         <h2 className="iletisim__title">{t.title}</h2>

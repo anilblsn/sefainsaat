@@ -206,7 +206,13 @@ function Hero() {
                   >
                     {isEvinpark ? first.toLocaleLowerCase('tr-TR') : toTitle(first)}
                   </span>
-                  {rest && <span className="hero__title-line">{toTitle(rest)}</span>}
+                  {rest && (
+                    <span
+                      className={`hero__title-line ${isEvinpark ? 'hero__title-line--project' : ''}`}
+                    >
+                      {isEvinpark ? rest.toLocaleLowerCase('tr-TR') : toTitle(rest)}
+                    </span>
+                  )}
                 </h1>
               </div>
             </div>
