@@ -98,7 +98,7 @@
 }
 
 .iletisim__field--proje {
-  flex: 0 1 160px;
+  flex: 0 1 220px;
   margin-top: 0;
   padding-top: 0;
 }
@@ -150,6 +150,11 @@
   padding-right: 1.5rem;
   line-height: 1.5;
   box-sizing: border-box;
+}
+
+.iletisim__select option {
+  color: #1a1a1a;
+  background-color: #fff;
 }
 
 .iletisim__error {

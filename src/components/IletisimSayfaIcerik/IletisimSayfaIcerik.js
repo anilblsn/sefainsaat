@@ -1,33 +1,7 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
+import { getOngoingProjects } from '../../data/ongoingProjects';
 import { pickContent, resolveLang } from '../../utils/lang';
 import './IletisimSayfaIcerik.css';
-
-const PROJE_OPTIONS = {
-  tr: [
-    { value: '', label: 'Proje Seçiniz' },
-    { value: 'evinpark-orman', label: 'EVİNPARK Orman' },
-    { value: 'evinpark-harput', label: 'EVİNPARK Harput' },
-    { value: 'evinpark-kartal', label: 'EVİNPARK Kartal' },
-    { value: 'evinpark-cekmekoy', label: 'EVİNPARK Çekmeköy' },
-    { value: 'diger', label: 'Diğer' },
-  ],
-  en: [
-    { value: '', label: 'Select Project' },
-    { value: 'evinpark-orman', label: 'EVİNPARK Orman' },
-    { value: 'evinpark-harput', label: 'EVİNPARK Harput' },
-    { value: 'evinpark-kartal', label: 'EVİNPARK Kartal' },
-    { value: 'evinpark-cekmekoy', label: 'EVİNPARK Çekmeköy' },
-    { value: 'diger', label: 'Other' },
-  ],
-  ar: [
-    { value: '', label: 'اختر المشروع' },
-    { value: 'evinpark-orman', label: 'EVİNPARK Orman' },
-    { value: 'evinpark-harput', label: 'EVİNPARK Harput' },
-    { value: 'evinpark-kartal', label: 'EVİNPARK Kartal' },
-    { value: 'evinpark-cekmekoy', label: 'EVİNPARK Çekmeköy' },
-    { value: 'diger', label: 'أخرى' },
-  ],
-};
 
 const CONTENT = {
   tr: {
@@ -40,6 +14,8 @@ const CONTENT = {
     placeholderName: 'Ad Soyad *',
     placeholderPhone: 'Telefon *',
     placeholderEmail: 'E-posta Adresi *',
+    selectProject: 'Proje Seçiniz',
+    otherProject: 'Diğer',
     placeholderMessage: 'Mesajınız',
     errorRequired: 'Bu alan zorunludur.',
     kvkkText: <><span className="iletisim-sayfa-icerik__checkbox-link">Kişisel Verilerin Korunması Kanunu&apos;nu</span> okudum, onaylıyorum.</>,
@@ -56,6 +32,8 @@ const CONTENT = {
     placeholderName: 'Full Name *',
     placeholderPhone: 'Phone *',
     placeholderEmail: 'E-mail Address *',
+    selectProject: 'Select Project',
+    otherProject: 'Other',
     placeholderMessage: 'Your message',
     errorRequired: 'This field is required.',
     kvkkText: <>I have read and accept the Personal Data Protection Law.</>,
@@ -72,6 +50,8 @@ const CONTENT = {
     placeholderName: 'الاسم الكامل *',
     placeholderPhone: 'الهاتف *',
     placeholderEmail: 'البريد الإلكتروني *',
+    selectProject: 'اختر المشروع',
+    otherProject: 'أخرى',
     placeholderMessage: 'رسالتك',
     errorRequired: 'هذا الحقل مطلوب.',
     kvkkText: <>لقد قرأتُ وأوافق على قانون حماية البيانات الشخصية.</>,
@@ -128,7 +108,17 @@ const ICON_YOUTUBE = (
 function IletisimSayfaIcerik({ lang = 'tr' }) {
   const resolved = resolveLang(lang);
   const t = pickContent(CONTENT, resolved);
-  const projeOptions = pickContent(PROJE_OPTIONS, resolved);
+  const projeOptions = useMemo(() => {
+    const projects = getOngoingProjects(resolved).map((p) => ({
+      value: p.key,
+      label: p.title,
+    }));
+    return [
+      { value: '', label: t.selectProject },
+      ...projects,
+      { value: 'diger', label: t.otherProject },
+    ];
+  }, [resolved, t.otherProject, t.selectProject]);
 
   const [form, setForm] = useState({
     adSoyad: '',
@@ -187,7 +177,7 @@ function IletisimSayfaIcerik({ lang = 'tr' }) {
               <div>
                 <strong className="iletisim-sayfa-icerik__label">WhatsApp</strong>
                 <p className="iletisim-sayfa-icerik__value">
-                  <a href="https://wa.me/902164451549" target="_blank" rel="noopener noreferrer" className="iletisim-sayfa-icerik__link">0216 445 15 49</a>
+                  <a href="https://wa.me/905394548728" target="_blank" rel="noopener noreferrer" className="iletisim-sayfa-icerik__link">+90 539 454 87 28</a>
                 </p>
               </div>
             </li>

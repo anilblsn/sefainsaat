@@ -1,6 +1,6 @@
 import React from 'react';
 import { useInView } from '../../hooks/useInView';
-import { pickContent, useLang, withLang } from '../../utils/lang';
+import { pickContent, useLang } from '../../utils/lang';
 import hakkimizdaImg2 from '../../assets/logo/3.jpg';
 import './Hakkimizda.css';
 
@@ -16,7 +16,6 @@ const CONTENT = {
     headingLine2: 'Mükemmellik Hedefimizdir',
     paragraph:
       'Sefa İnşaat, 2005 yılında insanların hayatına değer katan projeler üretmek amacıyla kurulmuştur. Kısa sürede önemli başarılara imza atan firmamız, kaliteli inşaatı zamanında teslim etmenin gururunu yaşamaktadır. Yeniliğe, büyümeye ve sektöre katkı sunmaya devam etmektedir.',
-    ctaLabel: 'DAHA FAZLA BİLGİ',
     alt1: 'İnşaat ekibi',
     alt2: 'Proje ekibi',
   },
@@ -26,7 +25,6 @@ const CONTENT = {
     headingLine2: 'Excellence is Our Goal',
     paragraph:
       'Sefa Construction was founded in 2005 with the aim of creating projects that add value to people\'s lives. Our company has achieved significant success in a short time and takes pride in delivering quality construction on time. We continue to contribute to innovation, growth and the industry.',
-    ctaLabel: 'MORE INFO',
     alt1: 'Construction team',
     alt2: 'Project team',
   },
@@ -36,7 +34,6 @@ const CONTENT = {
     headingLine2: 'والتميز هدفنا',
     paragraph:
       'تأسست سيفا للإنشاءات عام 2005 بهدف إنشاء مشاريع تضيف قيمة لحياة الناس. حققت شركتنا نجاحات مهمة في وقت قصير وتفخر بتسليم أعمال البناء عالية الجودة في الموعد المحدد. نواصل الإسهام في الابتكار والنمو والقطاع.',
-    ctaLabel: 'المزيد من المعلومات',
     alt1: 'فريق البناء',
     alt2: 'فريق المشروع',
   },
@@ -45,7 +42,6 @@ const CONTENT = {
 function Hakkimizda() {
   const lang = useLang();
   const c = pickContent(CONTENT, lang);
-  const ctaHref = lang === 'tr' ? '#daha-fazla' : withLang('/hakkimizda', lang);
   const [ref, inView] = useInView({ threshold: 0.12 });
 
   return (
@@ -65,9 +61,6 @@ function Hakkimizda() {
           <span className="hakkimizda__heading-line2">{c.headingLine2}</span>
         </h2>
         <p className="hakkimizda__paragraph">{c.paragraph}</p>
-        <a href={ctaHref} className="hakkimizda__cta">
-          {c.ctaLabel}
-        </a>
       </div>
     </section>
   );

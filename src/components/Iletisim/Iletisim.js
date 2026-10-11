@@ -1,29 +1,9 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useInView } from '../../hooks/useInView';
+import { getOngoingProjects } from '../../data/ongoingProjects';
 import { pickContent, useLang } from '../../utils/lang';
 import './Iletisim.css';
 import bgImage from '../../assets/covers/iletisim-bg.jpg';
-
-const PROJE_OPTIONS = {
-  tr: [
-    { value: '', label: 'Proje Seçiniz' },
-    { value: 'proje1', label: 'Proje 1' },
-    { value: 'proje2', label: 'Proje 2' },
-    { value: 'diger', label: 'Diğer' },
-  ],
-  en: [
-    { value: '', label: 'Select Project' },
-    { value: 'proje1', label: 'Project 1' },
-    { value: 'proje2', label: 'Project 2' },
-    { value: 'diger', label: 'Other' },
-  ],
-  ar: [
-    { value: '', label: 'اختر المشروع' },
-    { value: 'proje1', label: 'المشروع 1' },
-    { value: 'proje2', label: 'المشروع 2' },
-    { value: 'diger', label: 'أخرى' },
-  ],
-};
 
 const CONTENT = {
   tr: {
@@ -32,6 +12,8 @@ const CONTENT = {
     labelName: 'Ad Soyad *',
     labelPhone: 'Telefon *',
     labelProject: 'Proje Seçiniz',
+    selectProject: 'Proje Seçiniz',
+    otherProject: 'Diğer',
     errorRequired: 'Bu alan zorunludur.',
     submit: 'GÖNDER',
     kvkk: "Kişisel Verilerin Korunması Kanunu'nu okudum, onaylıyorum.",
@@ -42,6 +24,8 @@ const CONTENT = {
     labelName: 'Full Name *',
     labelPhone: 'Phone *',
     labelProject: 'Select Project',
+    selectProject: 'Select Project',
+    otherProject: 'Other',
     errorRequired: 'This field is required.',
     submit: 'SEND',
     kvkk: "I have read and accept the Personal Data Protection Law.",
@@ -52,6 +36,8 @@ const CONTENT = {
     labelName: 'الاسم الكامل *',
     labelPhone: 'الهاتف *',
     labelProject: 'اختر المشروع',
+    selectProject: 'اختر المشروع',
+    otherProject: 'أخرى',
     errorRequired: 'هذا الحقل مطلوب.',
     submit: 'إرسال',
     kvkk: 'لقد قرأتُ وأوافق على قانون حماية البيانات الشخصية.',
@@ -61,7 +47,17 @@ const CONTENT = {
 function Iletisim() {
   const lang = useLang();
   const t = pickContent(CONTENT, lang);
-  const projeOptions = pickContent(PROJE_OPTIONS, lang);
+  const projeOptions = useMemo(() => {
+    const projects = getOngoingProjects(lang).map((p) => ({
+      value: p.key,
+      label: p.title,
+    }));
+    return [
+      { value: '', label: t.selectProject },
+      ...projects,
+      { value: 'diger', label: t.otherProject },
+    ];
+  }, [lang, t.otherProject, t.selectProject]);
 
   const [ref, inView] = useInView({ threshold: 0.12 });
 
