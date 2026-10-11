@@ -2,6 +2,7 @@ import React, { useMemo, useState, useCallback, useEffect, useRef } from 'react'
 import Navbar from '../components/Navbar';
 import Iletisim from '../components/Iletisim';
 import Footer from '../components/Footer';
+import { COMPLETED_PROJECT_ORDER } from '../data/completedProjectOrder';
 import { pickContent, useLang } from '../utils/lang';
 import { pickCoverFile } from '../utils/projectImages';
 import './TamamlananProjeler.css';
@@ -109,17 +110,18 @@ const imageContext = require.context(
   /\.(jpe?g|png|JPE?G|PNG)$/
 );
 
-/** Folder-name → display-name overrides for completed projects. */
-const PROJECT_NAME_OVERRIDES = {
-  'HALİMAĞA': 'EVİNPARK Doğa',
-  HALIMAGA: 'EVİNPARK Doğa',
-};
-
 function displayProjectName(folderName) {
-  const raw = folderName.replace(/^\d+\s*-\s*/, '').trim();
-  const key = raw.toLocaleUpperCase('tr-TR');
-  const asciiKey = key.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-  return PROJECT_NAME_OVERRIDES[key] || PROJECT_NAME_OVERRIDES[asciiKey] || raw;
+  return folderName.replace(/^\d+\s*-\s*/, '').trim();
+}
+
+function folderSortIndex(folder) {
+  const exact = COMPLETED_PROJECT_ORDER.indexOf(folder);
+  if (exact >= 0) return exact;
+  const n = parseInt((folder.match(/^(\d+)/) || [])[1] || '9999', 10);
+  const byNum = COMPLETED_PROJECT_ORDER.findIndex(
+    (f) => parseInt((f.match(/^(\d+)/) || [])[1] || '-1', 10) === n
+  );
+  return byNum >= 0 ? byNum : 1000 + n;
 }
 
 function dedupeGalleryFiles(files) {
@@ -161,11 +163,7 @@ function getProjectsFromContext() {
     if (!byFolder[folder]) byFolder[folder] = [];
     byFolder[folder].push({ path: key, fullPath: path });
   });
-  const folders = Object.keys(byFolder).sort((a, b) => {
-    const nA = parseInt(a.match(/^(\d+)/)?.[1] || '0', 10);
-    const nB = parseInt(b.match(/^(\d+)/)?.[1] || '0', 10);
-    return nA - nB;
-  });
+  const folders = Object.keys(byFolder).sort((a, b) => folderSortIndex(a) - folderSortIndex(b));
   return folders.map((folder) => {
     const files = byFolder[folder];
     const name = displayProjectName(folder);
