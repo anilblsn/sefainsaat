@@ -143,14 +143,27 @@
 }
 
 @media (max-width: 900px) {
+  .footer {
+    padding: 2.75rem 1.25rem 0;
+    overflow-x: hidden;
+  }
+
   .footer__inner {
     grid-template-columns: 1fr;
     justify-items: center;
     text-align: center;
+    gap: 2rem;
+    width: 100%;
+  }
+
+  .footer__col {
+    width: 100%;
+    max-width: 22rem;
   }
 
   .footer__col--brand {
     order: -1;
+    max-width: none;
   }
 
   .footer__col--menu,
@@ -160,13 +173,68 @@
     margin-right: 0;
   }
 
+  .footer__logo-img {
+    height: 52px;
+    max-width: min(220px, 70vw);
+  }
+
+  .footer__evinpark-img {
+    height: 58px;
+    max-width: min(180px, 60vw);
+    margin-top: 0.85rem;
+  }
+
+  .footer__heading {
+    display: inline-block;
+  }
+
   .footer__links,
   .footer__contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+  }
+
+  .footer__links li,
+  .footer__contact li {
+    width: 100%;
+  }
+
+  .footer__link {
     display: inline-block;
-    text-align: left;
+    word-break: break-word;
   }
 
   .footer__contact li {
-    justify-content: flex-start;
+    justify-content: center;
+    text-align: center;
+    gap: 0.45rem;
+  }
+
+  .footer__contact li span:last-child,
+  .footer__contact li a {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    max-width: 100%;
+  }
+
+  .footer__bottom {
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 2.25rem 1rem 0;
+  }
+
+  .footer__contact {
+    font-size: 0.95rem;
+  }
+
+  .footer__link {
+    font-size: 0.95rem;
   }
 }
