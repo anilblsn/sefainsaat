@@ -37,6 +37,17 @@ import harput4 from '../assets/devamedenprojects/2- EVİNPARK HARPUT/4.jpg';
 
 import cekmekoy0 from '../assets/planlananprojects/2-EVİNPARK ÇEKMEKÖY/0.jpg';
 
+import kadikoy0 from '../assets/devamedenprojects/2-EVİNPARK KADIKÖY REZİDANS/0.jpg';
+import kadikoy1 from '../assets/devamedenprojects/2-EVİNPARK KADIKÖY REZİDANS/1.jpg';
+import kadikoy2 from '../assets/devamedenprojects/2-EVİNPARK KADIKÖY REZİDANS/2.jpg';
+import kadikoy3 from '../assets/devamedenprojects/2-EVİNPARK KADIKÖY REZİDANS/3.jpg';
+import kadikoy4 from '../assets/devamedenprojects/2-EVİNPARK KADIKÖY REZİDANS/4.jpg';
+import kadikoy5 from '../assets/devamedenprojects/2-EVİNPARK KADIKÖY REZİDANS/5.jpg';
+
+import korupark0 from '../assets/devamedenprojects/4-KORU REZİDANS/0.jpg';
+import korupark1 from '../assets/devamedenprojects/4-KORU REZİDANS/1.jpg';
+import korupark2 from '../assets/devamedenprojects/4-KORU REZİDANS/2.jpg';
+
 import { resolveLang } from '../utils/lang';
 
 export const ONGOING_PROJECT_KEYS = [
@@ -47,6 +58,8 @@ export const ONGOING_PROJECT_KEYS = [
   'dededen',
   'harput',
   'cekmekoy',
+  'kadikoy',
+  'korupark',
 ];
 
 export const PROJECT_IMAGES = {
@@ -57,6 +70,8 @@ export const PROJECT_IMAGES = {
   dededen: [dededen0, dededen1],
   harput: [harput0, harput1, harput2, harput3, harput4],
   cekmekoy: [cekmekoy0],
+  kadikoy: [kadikoy0, kadikoy1, kadikoy2, kadikoy3, kadikoy4, kadikoy5],
+  korupark: [korupark0, korupark1, korupark2],
 };
 
 const PROJECT_COPY = {
@@ -186,6 +201,44 @@ const PROJECT_COPY = {
         'EVİNPARK marka yaşamı',
         'Satışı devam eden proje',
         'Satış ve bilgilendirme desteği',
+      ],
+    },
+    kadikoy: {
+      title: 'EVİNPARK Kadıköy Rezidans',
+      tagline: 'Fikirtepe’de EVİNPARK yaşamı.',
+      description:
+        'EVİNPARK Kadıköy Rezidans; Fikirtepe Mahallesi, Kadıköy’de satışı devam eden projemizdir.',
+      location: 'Fikirtepe, Kadıköy / İstanbul',
+      status: 'Satışı devam ediyor',
+      type: 'Rezidans',
+      paragraphs: [
+        'EVİNPARK Kadıköy Rezidans, Fikirtepe Mahallesi’nde konumlanan ve satışı devam eden bir EVİNPARK projesidir. Yaklaşık 8.275 m² arsa alanı üzerinde, Kadıköy’ün merkezi yaşam olanaklarına yakın bir konut deneyimi hedeflenir.',
+        'Modern rezidans anlayışı ve Sefa İnşaat’ın proje yaklaşımıyla, şehir hayatını konforla buluşturmak isteyenler için değerlendirilebilir bir seçenek sunar. Güncel daire ve satış bilgisi için bizimle iletişime geçebilirsiniz.',
+      ],
+      highlights: [
+        'Fikirtepe, Kadıköy konumu',
+        'Yaklaşık 8.275 m² arsa alanı',
+        'Satışı devam eden EVİNPARK projesi',
+        'Sefa İnşaat güvencesi',
+      ],
+    },
+    korupark: {
+      title: 'Koru Park',
+      tagline: 'Bostancı’da sakin ve konforlu yaşam.',
+      description:
+        'Koru Park; Bostancı Mahallesi’nde satışı devam eden projemizdir.',
+      location: 'Bostancı, Kadıköy / İstanbul',
+      status: 'Satışı devam ediyor',
+      type: 'Apartman / Rezidans',
+      paragraphs: [
+        'Koru Park, Bostancı Mahallesi Daryal Sokak’ta konumlanan ve satışı devam eden bir projedir. Yaklaşık 2.805 m² arsa alanı üzerinde, Kadıköy’ün Bostancı aksında düzenli ve yaşanabilir bir konut ortamı hedeflenir.',
+        'Sefa İnşaat’ın uygulama disipliniyle hayata geçen projede, konum ve konfor dengesi ön plandadır. Detaylı bilgilendirme ve daire seçenekleri için satış ekibimizle iletişime geçebilirsiniz.',
+      ],
+      highlights: [
+        'Bostancı, Kadıköy konumu',
+        'Yaklaşık 2.805 m² arsa alanı',
+        'Satışı devam eden proje',
+        'Sefa İnşaat kalite anlayışı',
       ],
     },
   },
@@ -318,6 +371,43 @@ const PROJECT_COPY = {
         'Sales information support',
       ],
     },
+    kadikoy: {
+      title: 'EVİNPARK Kadıköy Residence',
+      tagline: 'EVİNPARK living in Fikirtepe.',
+      description:
+        'EVİNPARK Kadıköy Residence is an ongoing sales project in Fikirtepe, Kadıköy.',
+      location: 'Fikirtepe, Kadıköy / Istanbul',
+      status: 'On sale',
+      type: 'Residence',
+      paragraphs: [
+        'EVİNPARK Kadıköy Residence is located in Fikirtepe and offers an ongoing EVİNPARK living address close to Kadıköy’s urban amenities, on a plot of about 8,275 m².',
+        'With a modern residence approach and Sefa Construction’s project standards, it is a strong option for those seeking comfortable city living. Contact us for current unit availability.',
+      ],
+      highlights: [
+        'Fikirtepe, Kadıköy location',
+        'Approx. 8,275 m² plot area',
+        'Ongoing EVİNPARK project',
+        'Sefa Construction assurance',
+      ],
+    },
+    korupark: {
+      title: 'Koru Park',
+      tagline: 'Calm, comfortable living in Bostancı.',
+      description: 'Koru Park is an ongoing sales project in Bostancı, Kadıköy.',
+      location: 'Bostancı, Kadıköy / Istanbul',
+      status: 'On sale',
+      type: 'Apartment / Residence',
+      paragraphs: [
+        'Koru Park is located on Daryal Street in Bostancı and offers orderly residential living on a plot of about 2,805 m² along Kadıköy’s Bostancı corridor.',
+        'Built with Sefa Construction’s project discipline, it balances location and everyday comfort. Reach our sales team for details and available units.',
+      ],
+      highlights: [
+        'Bostancı, Kadıköy location',
+        'Approx. 2,805 m² plot area',
+        'Ongoing sales',
+        'Sefa Construction quality',
+      ],
+    },
   },
   ar: {
     gokturk: {
@@ -445,6 +535,42 @@ const PROJECT_COPY = {
         'حياة علامة EVİNPARK',
         'بيع مستمر',
         'دعم معلومات المبيعات',
+      ],
+    },
+    kadikoy: {
+      title: 'EVİNPARK Kadıköy Rezidans',
+      tagline: 'حياة EVİNPARK في فيكيرتيبه.',
+      description: 'مشروع EVİNPARK Kadıköy Rezidans قيد البيع في فيكيرتيبه، كاديكوي.',
+      location: 'فيكيرتيبه، كاديكوي / إسطنبول',
+      status: 'قيد البيع',
+      type: 'إقامة',
+      paragraphs: [
+        'يقع EVİNPARK Kadıköy Rezidans في حي فيكيرتيبه على مساحة أرض تقارب 8,275 م²، ويوفر تجربة سكنية قريبة من خدمات كاديكوي.',
+        'بنهج إقامات حديث ومعايير سيفا للإنشاءات، يعد خياراً مناسباً لمن يبحث عن راحة الحياة المدنية. تواصل معنا لمعرفة الوحدات المتاحة.',
+      ],
+      highlights: [
+        'موقع فيكيرتيبه، كاديكوي',
+        'مساحة أرض تقارب 8,275 م²',
+        'مشروع EVİNPARK قيد البيع',
+        'ضمان سيفا للإنشاءات',
+      ],
+    },
+    korupark: {
+      title: 'Koru Park',
+      tagline: 'حياة هادئة ومريحة في بستانجي.',
+      description: 'مشروع Koru Park قيد البيع في بستانجي، كاديكوي.',
+      location: 'بستانجي، كاديكوي / إسطنبول',
+      status: 'قيد البيع',
+      type: 'شقق / إقامة',
+      paragraphs: [
+        'يقع Koru Park في شارع داريال بحي بستانجي على مساحة أرض تقارب 2,805 م²، ويقدم بيئة سكنية منظمة على محور بستانجي في كاديكوي.',
+        'بتنفيذ منضبط من سيفا للإنشاءات يوازن المشروع بين الموقع والراحة اليومية. تواصل مع فريق المبيعات للتفاصيل والوحدات المتاحة.',
+      ],
+      highlights: [
+        'موقع بستانجي، كاديكوي',
+        'مساحة أرض تقارب 2,805 م²',
+        'بيع مستمر',
+        'جودة سيفا للإنشاءات',
       ],
     },
   },

@@ -22,7 +22,7 @@ const FEATURED_PROJECTS = [
   { display: 'EVİNPARK ÇAMLICA', match: ['evinpark çamlıca'] },
   { display: 'DEDEDEN REZİDANS', match: ['dededen'] },
   { display: 'BİRLİK REZİDANS', match: ['birlik rezidans', 'birlik'] },
-  { display: 'KORU REZİDANS', match: ['koru rezidans', 'koru'] },
+  { display: 'KORU PARK', match: ['koru rezidans', 'koru park', 'koru'] },
 ];
 
 function normalize(value) {
