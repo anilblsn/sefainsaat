@@ -17,7 +17,7 @@ const FEATURED_PROJECTS = [
   { display: 'EVİNPARK ÇINAR', match: ['evinpark çınar'] },
   { display: 'EVİNPARK ADA', match: ['evinpark ada'] },
   { display: 'EVİNPARK TEPE', match: ['evinpark tepe'] },
-  { display: 'EVİNPARK DOĞA (HALİMAĞA)', match: ['halimağa', 'evinpark doğa'] },
+  { display: 'EVİNPARK DOĞA', match: ['halimağa', 'evinpark doğa'] },
   { display: 'EVİNPARK ATAŞEHİR', match: ['evinpark ataşehir'] },
   { display: 'EVİNPARK ÇAMLICA', match: ['evinpark çamlıca'] },
   { display: 'DEDEDEN REZİDANS', match: ['dededen'] },

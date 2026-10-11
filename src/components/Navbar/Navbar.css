@@ -29,9 +29,9 @@
 
 .navbar__logo-img {
   display: block;
-  height: 58px;
+  height: 70px;
   width: auto;
-  max-width: 220px;
+  max-width: 260px;
   object-fit: contain;
   object-position: left center;
 }
@@ -235,8 +235,8 @@
   }
 
   .navbar__logo-img {
-    height: 46px;
-    max-width: 160px;
+    height: 54px;
+    max-width: 190px;
   }
 
   .navbar__right {
@@ -333,7 +333,7 @@
   }
 
   .navbar__logo-img {
-    height: 40px;
-    max-width: 140px;
+    height: 48px;
+    max-width: 170px;
   }
 }
