@@ -52,14 +52,14 @@ import { resolveLang } from '../utils/lang';
 
 export const ONGOING_PROJECT_KEYS = [
   'gokturk',
+  'kadikoy',
   'kemer',
-  'orman',
+  'korupark',
   'cinar',
   'dededen',
+  'orman',
   'harput',
   'cekmekoy',
-  'kadikoy',
-  'korupark',
 ];
 
 export const PROJECT_IMAGES = {
@@ -223,15 +223,15 @@ const PROJECT_COPY = {
       ],
     },
     korupark: {
-      title: 'Koru Park',
+      title: 'Koru Rezidans',
       tagline: 'Bostancı’da sakin ve konforlu yaşam.',
       description:
-        'Koru Park; Bostancı Mahallesi’nde satışı devam eden projemizdir.',
+        'Koru Rezidans; Bostancı Mahallesi’nde satışı devam eden projemizdir.',
       location: 'Bostancı, Kadıköy / İstanbul',
       status: 'Satışı devam ediyor',
       type: 'Apartman / Rezidans',
       paragraphs: [
-        'Koru Park, Bostancı Mahallesi Daryal Sokak’ta konumlanan ve satışı devam eden bir projedir. Yaklaşık 2.805 m² arsa alanı üzerinde, Kadıköy’ün Bostancı aksında düzenli ve yaşanabilir bir konut ortamı hedeflenir.',
+        'Koru Rezidans, Bostancı Mahallesi Daryal Sokak’ta konumlanan ve satışı devam eden bir projedir. Yaklaşık 2.805 m² arsa alanı üzerinde, Kadıköy’ün Bostancı aksında düzenli ve yaşanabilir bir konut ortamı hedeflenir.',
         'Sefa İnşaat’ın uygulama disipliniyle hayata geçen projede, konum ve konfor dengesi ön plandadır. Detaylı bilgilendirme ve daire seçenekleri için satış ekibimizle iletişime geçebilirsiniz.',
       ],
       highlights: [
@@ -391,14 +391,14 @@ const PROJECT_COPY = {
       ],
     },
     korupark: {
-      title: 'Koru Park',
+      title: 'Koru Residence',
       tagline: 'Calm, comfortable living in Bostancı.',
-      description: 'Koru Park is an ongoing sales project in Bostancı, Kadıköy.',
+      description: 'Koru Residence is an ongoing sales project in Bostancı, Kadıköy.',
       location: 'Bostancı, Kadıköy / Istanbul',
       status: 'On sale',
       type: 'Apartment / Residence',
       paragraphs: [
-        'Koru Park is located on Daryal Street in Bostancı and offers orderly residential living on a plot of about 2,805 m² along Kadıköy’s Bostancı corridor.',
+        'Koru Residence is located on Daryal Street in Bostancı and offers orderly residential living on a plot of about 2,805 m² along Kadıköy’s Bostancı corridor.',
         'Built with Sefa Construction’s project discipline, it balances location and everyday comfort. Reach our sales team for details and available units.',
       ],
       highlights: [
@@ -556,14 +556,14 @@ const PROJECT_COPY = {
       ],
     },
     korupark: {
-      title: 'Koru Park',
+      title: 'Koru Rezidans',
       tagline: 'حياة هادئة ومريحة في بستانجي.',
-      description: 'مشروع Koru Park قيد البيع في بستانجي، كاديكوي.',
+      description: 'مشروع Koru Rezidans قيد البيع في بستانجي، كاديكوي.',
       location: 'بستانجي، كاديكوي / إسطنبول',
       status: 'قيد البيع',
       type: 'شقق / إقامة',
       paragraphs: [
-        'يقع Koru Park في شارع داريال بحي بستانجي على مساحة أرض تقارب 2,805 م²، ويقدم بيئة سكنية منظمة على محور بستانجي في كاديكوي.',
+        'يقع Koru Rezidans في شارع داريال بحي بستانجي على مساحة أرض تقارب 2,805 م²، ويقدم بيئة سكنية منظمة على محور بستانجي في كاديكوي.',
         'بتنفيذ منضبط من سيفا للإنشاءات يوازن المشروع بين الموقع والراحة اليومية. تواصل مع فريق المبيعات للتفاصيل والوحدات المتاحة.',
       ],
       highlights: [
