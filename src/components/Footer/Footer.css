@@ -36,27 +36,31 @@
 }
 
 .footer__logo {
+  --footer-sefa-h: 64px;
+  /* logo2.png oranı (4530×2084) → Sefa’nın ekrandaki genişliği */
+  --footer-sefa-w: calc(var(--footer-sefa-h) * 4530 / 2084);
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: var(--footer-sefa-w);
+  max-width: min(240px, 72vw);
   line-height: 1.2;
 }
 
 .footer__logo-img {
   display: block;
-  height: 64px;
+  height: var(--footer-sefa-h);
   width: auto;
-  max-width: 240px;
+  max-width: 100%;
   object-fit: contain;
   object-position: center;
 }
 
 .footer__evinpark-img {
   display: block;
-  height: 120px;
-  width: auto;
-  max-width: 280px;
-  margin-top: 1.25rem;
+  width: 100%;
+  height: auto;
+  margin-top: 0.85rem;
   object-fit: contain;
   object-position: center;
   /* Logo siyah; koyu footer üzerinde beyaz görünsün, arka plan şeffaf kalsın */
@@ -174,15 +178,13 @@
     margin-right: 0;
   }
 
-  .footer__logo-img {
-    height: 52px;
+  .footer__logo {
+    --footer-sefa-h: 52px;
     max-width: min(220px, 70vw);
   }
 
   .footer__evinpark-img {
-    height: 96px;
-    max-width: min(240px, 72vw);
-    margin-top: 1rem;
+    margin-top: 0.75rem;
   }
 
   .footer__heading {

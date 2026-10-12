@@ -38,9 +38,29 @@ export function useLang() {
 
   useEffect(() => {
     // Keep layout LTR always — Arabic only affects text direction via .lang-ar CSS
-    document.documentElement.lang = lang === 'tr' ? 'tr' : lang;
-    document.documentElement.dir = 'ltr';
-    document.documentElement.classList.toggle('lang-ar', lang === 'ar');
+    const html = document.documentElement;
+    html.lang = lang;
+    html.dir = 'ltr';
+    html.classList.toggle('lang-ar', lang === 'ar');
+
+    // Chrome often misdetects Turkish pages and offers "Translate to Turkish".
+    // Block auto-translate only when the site language is already Turkish.
+    const isTr = lang === 'tr';
+    html.classList.toggle('notranslate', isTr);
+    if (isTr) html.setAttribute('translate', 'no');
+    else html.removeAttribute('translate');
+
+    let meta = document.querySelector('meta[name="google"][content="notranslate"], meta[name="google"]');
+    if (isTr) {
+      if (!meta) {
+        meta = document.createElement('meta');
+        meta.setAttribute('name', 'google');
+        document.head.appendChild(meta);
+      }
+      meta.setAttribute('content', 'notranslate');
+    } else if (meta && meta.getAttribute('content') === 'notranslate') {
+      meta.remove();
+    }
   }, [lang]);
 
   return lang;
