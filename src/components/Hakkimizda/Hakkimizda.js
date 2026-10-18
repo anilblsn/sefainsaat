@@ -15,7 +15,7 @@ const CONTENT = {
     headingLine1: 'Dürüstlük İlkemiz,',
     headingLine2: 'Mükemmellik Hedefimizdir',
     paragraph:
-      'Sefa İnşaat, 2005 yılında insanların hayatına değer katan projeler üretmek amacıyla kurulmuştur. Kısa sürede önemli başarılara imza atan firmamız, kaliteli inşaatı zamanında teslim etmenin gururunu yaşamaktadır. Yeniliğe, büyümeye ve sektöre katkı sunmaya devam etmektedir.',
+      'Sefa İnşaat, kuruluşundan bu yana Türkiye’nin birçok bölgesinde gayrimenkul yatırımları ve inşaat taahhüt projeleri hayata geçiren, kalite odaklı bir firmadır. Güveni sağlam temellerle, kaliteyi özgün tasarımlarla birleştirerek geleceğe değer katan yaşam alanları inşa etmektedir.',
     alt1: 'İnşaat ekibi',
     alt2: 'Proje ekibi',
   },
@@ -24,7 +24,7 @@ const CONTENT = {
     headingLine1: 'Integrity is Our Principle,',
     headingLine2: 'Excellence is Our Goal',
     paragraph:
-      'Sefa Construction was founded in 2005 with the aim of creating projects that add value to people\'s lives. Our company has achieved significant success in a short time and takes pride in delivering quality construction on time. We continue to contribute to innovation, growth and the industry.',
+      'Since its founding, Sefa Construction has delivered real estate investments and contracting projects across many regions of Türkiye with a quality-focused approach. It builds living spaces that add value to the future by combining trust with solid foundations and quality with original designs.',
     alt1: 'Construction team',
     alt2: 'Project team',
   },
@@ -33,7 +33,7 @@ const CONTENT = {
     headingLine1: 'النزاهة مبدأنا،',
     headingLine2: 'والتميز هدفنا',
     paragraph:
-      'تأسست سيفا للإنشاءات عام 2005 بهدف إنشاء مشاريع تضيف قيمة لحياة الناس. حققت شركتنا نجاحات مهمة في وقت قصير وتفخر بتسليم أعمال البناء عالية الجودة في الموعد المحدد. نواصل الإسهام في الابتكار والنمو والقطاع.',
+      'منذ تأسيسها تنفّذ سيفا للإنشاءات استثمارات عقارية ومشاريع مقاولات في مناطق عديدة من تركيا بنهج يركّز على الجودة. تبني مساحات معيشة تضيف قيمة للمستقبل، بجمع الثقة مع أسس متينة والجودة مع تصاميم أصيلة.',
     alt1: 'فريق البناء',
     alt2: 'فريق المشروع',
   },
