@@ -1,8 +1,12 @@
 import React, { useMemo, useState, useCallback, useEffect, useRef } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Iletisim from '../components/Iletisim';
 import Footer from '../components/Footer';
-import { COMPLETED_PROJECT_ORDER } from '../data/completedProjectOrder';
+import {
+  buildCompletedProjectOrder,
+  COMPLETED_PROJECT_DISPLAY_NAMES,
+} from '../data/completedProjectOrder';
 import { pickContent, useLang } from '../utils/lang';
 import { pickCoverFile } from '../utils/projectImages';
 import './TamamlananProjeler.css';
@@ -111,17 +115,11 @@ const imageContext = require.context(
 );
 
 function displayProjectName(folderName) {
-  return folderName.replace(/^\d+\s*-\s*/, '').trim();
-}
-
-function folderSortIndex(folder) {
-  const exact = COMPLETED_PROJECT_ORDER.indexOf(folder);
-  if (exact >= 0) return exact;
-  const n = parseInt((folder.match(/^(\d+)/) || [])[1] || '9999', 10);
-  const byNum = COMPLETED_PROJECT_ORDER.findIndex(
-    (f) => parseInt((f.match(/^(\d+)/) || [])[1] || '-1', 10) === n
-  );
-  return byNum >= 0 ? byNum : 1000 + n;
+  const raw = folderName.replace(/^\d+\s*-\s*/, '').trim();
+  const key = raw.toLocaleUpperCase('tr-TR');
+  return COMPLETED_PROJECT_DISPLAY_NAMES[raw]
+    || COMPLETED_PROJECT_DISPLAY_NAMES[key]
+    || raw;
 }
 
 function dedupeGalleryFiles(files) {
@@ -163,7 +161,7 @@ function getProjectsFromContext() {
     if (!byFolder[folder]) byFolder[folder] = [];
     byFolder[folder].push({ path: key, fullPath: path });
   });
-  const folders = Object.keys(byFolder).sort((a, b) => folderSortIndex(a) - folderSortIndex(b));
+  const folders = buildCompletedProjectOrder(Object.keys(byFolder));
   return folders.map((folder) => {
     const files = byFolder[folder];
     const name = displayProjectName(folder);
@@ -232,6 +230,7 @@ const IconPause = () => (
 function TamamlananProjeler() {
   const lang = useLang();
   const t = pickContent(CONTENT, lang);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const projects = useMemo(() => getProjectsFromContext(), []);
   const [currentPage, setCurrentPage] = useState(1);
@@ -243,6 +242,7 @@ function TamamlananProjeler() {
   const lightboxRef = useRef(null);
   const stageRef = useRef(null);
   const thumbsRef = useRef(null);
+  const openedFromQueryRef = useRef(false);
 
   const lightboxImages = lightbox?.images ?? [];
   const lightboxTotal = lightboxImages.length;
@@ -275,7 +275,34 @@ function TamamlananProjeler() {
     setZoomed(false);
     setAutoplay(false);
     setIsFullscreen(false);
-  }, []);
+    if (searchParams.get('proje')) {
+      const next = new URLSearchParams(searchParams);
+      next.delete('proje');
+      setSearchParams(next, { replace: true });
+    }
+  }, [searchParams, setSearchParams]);
+
+  useEffect(() => {
+    if (openedFromQueryRef.current || !projects.length) return;
+    const raw = searchParams.get('proje');
+    if (!raw) return;
+    let id = raw;
+    try {
+      id = decodeURIComponent(raw);
+    } catch {
+      /* keep raw */
+    }
+    const idx = projects.findIndex((p) => p.id === id);
+    if (idx < 0) return;
+    openedFromQueryRef.current = true;
+    setCurrentPage(Math.floor(idx / PER_PAGE) + 1);
+    openLightbox(projects[idx]);
+    requestAnimationFrame(() => {
+      document
+        .querySelector('.tamamlanan-projeler')
+        ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }, [projects, searchParams, openLightbox]);
 
   const toggleZoom = useCallback((e) => {
     e?.stopPropagation();

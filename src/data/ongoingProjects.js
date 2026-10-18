@@ -36,6 +36,19 @@ import harput3 from '../assets/devamedenprojects/2- EVİNPARK HARPUT/3.jpg';
 import harput4 from '../assets/devamedenprojects/2- EVİNPARK HARPUT/4.jpg';
 
 import cekmekoy0 from '../assets/planlananprojects/2-EVİNPARK ÇEKMEKÖY/0.jpg';
+import cekmekoy1 from '../assets/planlananprojects/2-EVİNPARK ÇEKMEKÖY/1.jpg';
+import cekmekoy2 from '../assets/planlananprojects/2-EVİNPARK ÇEKMEKÖY/2.jpg';
+import cekmekoy3 from '../assets/planlananprojects/2-EVİNPARK ÇEKMEKÖY/3.jpg';
+import cekmekoy4 from '../assets/planlananprojects/2-EVİNPARK ÇEKMEKÖY/4.jpg';
+import cekmekoy5 from '../assets/planlananprojects/2-EVİNPARK ÇEKMEKÖY/5.jpg';
+import cekmekoy6 from '../assets/planlananprojects/2-EVİNPARK ÇEKMEKÖY/6.jpg';
+import cekmekoy7 from '../assets/planlananprojects/2-EVİNPARK ÇEKMEKÖY/7.jpg';
+import cekmekoy8 from '../assets/planlananprojects/2-EVİNPARK ÇEKMEKÖY/8.jpg';
+import cekmekoy9 from '../assets/planlananprojects/2-EVİNPARK ÇEKMEKÖY/9.jpg';
+import cekmekoy10 from '../assets/planlananprojects/2-EVİNPARK ÇEKMEKÖY/10.jpg';
+import cekmekoy11 from '../assets/planlananprojects/2-EVİNPARK ÇEKMEKÖY/11.jpg';
+import cekmekoy12 from '../assets/planlananprojects/2-EVİNPARK ÇEKMEKÖY/12.jpg';
+import cekmekoy13 from '../assets/planlananprojects/2-EVİNPARK ÇEKMEKÖY/13.jpg';
 
 import kadikoy0 from '../assets/devamedenprojects/2-EVİNPARK KADIKÖY REZİDANS/0.jpg';
 import kadikoy1 from '../assets/devamedenprojects/2-EVİNPARK KADIKÖY REZİDANS/1.jpg';
@@ -69,7 +82,22 @@ export const PROJECT_IMAGES = {
   cinar: [cinarCover, cinar0, cinar1, cinar2, cinar3],
   dededen: [dededen0, dededen1],
   harput: [harput0, harput1, harput2, harput3, harput4],
-  cekmekoy: [cekmekoy0],
+  cekmekoy: [
+    cekmekoy0,
+    cekmekoy1,
+    cekmekoy2,
+    cekmekoy3,
+    cekmekoy4,
+    cekmekoy5,
+    cekmekoy6,
+    cekmekoy7,
+    cekmekoy8,
+    cekmekoy9,
+    cekmekoy10,
+    cekmekoy11,
+    cekmekoy12,
+    cekmekoy13,
+  ],
   kadikoy: [kadikoy0, kadikoy1, kadikoy2, kadikoy3, kadikoy4, kadikoy5],
   korupark: [korupark0, korupark1, korupark2],
 };

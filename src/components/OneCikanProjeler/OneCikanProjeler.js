@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import { useInView } from '../../hooks/useInView';
 import { pickContent, useLang, withLang } from '../../utils/lang';
 import { pickCoverFile } from '../../utils/projectImages';
@@ -110,7 +111,14 @@ function OneCikanProjeler() {
       <div className="onecikan-projeler__grid">
         {projects.map((project) => (
           <article key={project.id} className="onecikan-projeler__card">
-            <div className="onecikan-projeler__image-wrap">
+            <Link
+              to={withLang(
+                `/tamamlanan-projeler?proje=${encodeURIComponent(project.id)}`,
+                lang
+              )}
+              className="onecikan-projeler__image-wrap"
+              aria-label={project.name}
+            >
               <img
                 src={project.image}
                 alt={project.name}
@@ -146,7 +154,7 @@ function OneCikanProjeler() {
                   );
                 })()}
               </h3>
-            </div>
+            </Link>
           </article>
         ))}
       </div>

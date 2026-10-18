@@ -134,6 +134,10 @@
   aspect-ratio: 3 / 4;
   min-height: 0;
   overflow: hidden;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }
 
 .onecikan-projeler__caption {
