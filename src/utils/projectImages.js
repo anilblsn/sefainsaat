@@ -7,25 +7,15 @@ export function normalizeProjectKey(value) {
 }
 
 /**
- * Prefer a cover file named after the project (e.g. "Evinpark Göktürk.jpg"),
- * then fall back to 0.jpg/png, then first image.
- * Prefer .jpg over .png when both named covers exist.
+ * Cover is always the numbered 0 image (0.jpg / 0.png / 0.JPG).
+ * Falls back to the first file if 0.* is missing.
  */
-export function pickCoverFile(files, projectName) {
+export function pickCoverFile(files) {
   if (!files?.length) return null;
-  const target = normalizeProjectKey(projectName);
 
-  const named = files.filter((f) => {
+  const zero = files.find((f) => {
     const fileName = (f.fullPath || f.path || '').split(/[/\\]/).pop() || '';
-    const base = fileName.replace(/\.[^.]+$/, '');
-    return normalizeProjectKey(base) === target;
+    return /^0\.(jpe?g|png)$/i.test(fileName);
   });
-
-  if (named.length) {
-    const jpg = named.find((f) => /\.jpe?g$/i.test(f.fullPath || f.path || ''));
-    return jpg || named[0];
-  }
-
-  const zero = files.find((f) => /[/\\]0\.(jpe?g|png)$/i.test(f.fullPath || f.path || ''));
   return zero || files[0];
 }

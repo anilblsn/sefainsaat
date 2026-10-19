@@ -30,6 +30,10 @@ export const COMPLETED_PROJECT_PRIORITY = [
 /** Folder name (after number prefix) → display label overrides. */
 export const COMPLETED_PROJECT_DISPLAY_NAMES = {
   'EVİNPARK DOĞA': 'EVİNPARK Doğa',
+  'HALİMAĞA': 'EVİNPARK Doğa',
+  'HALIMAGA': 'EVİNPARK Doğa',
+  'HALİMAĞA APT': 'EVİNPARK Doğa',
+  'HALIMAGA APT': 'EVİNPARK Doğa',
   'EVİNPARK ATAŞEHİR REZİDANS': 'EVİNPARK Ataşehir',
   'EVİNPARK ÇAMLICA REZİDANS': 'EVİNPARK Çamlıca',
   'DEDEDEN APT': 'Dededen Apartmanı',

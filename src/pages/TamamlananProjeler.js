@@ -111,7 +111,7 @@ function renderProjectCaption(name) {
 const imageContext = require.context(
   '../assets/tamamlananprojects',
   true,
-  /\.(jpe?g|png|JPE?G|PNG)$/
+  /\.(jpe?g|png)$/
 );
 
 function displayProjectName(folderName) {
@@ -165,7 +165,7 @@ function getProjectsFromContext() {
   return folders.map((folder) => {
     const files = byFolder[folder];
     const name = displayProjectName(folder);
-    const cover = pickCoverFile(files, name) || pickCoverFile(files, folder.replace(/^\d+\s*-\s*/, '').trim());
+    const cover = pickCoverFile(files);
     const galleryFiles = dedupeGalleryFiles(files);
     const images = galleryFiles.map((f) => imageContext(f.path));
     const coverSrc = cover ? imageContext(cover.path) : images[0];

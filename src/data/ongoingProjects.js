@@ -5,28 +5,23 @@ import gokturk3 from '../assets/tamamlananprojects/1-EVİNPARK GÖKTÜRK/3.jpg';
 import gokturk4 from '../assets/tamamlananprojects/1-EVİNPARK GÖKTÜRK/4.jpg';
 import gokturk5 from '../assets/tamamlananprojects/1-EVİNPARK GÖKTÜRK/5.jpg';
 import gokturk6 from '../assets/tamamlananprojects/1-EVİNPARK GÖKTÜRK/6.jpg';
-import gokturkCover from '../assets/tamamlananprojects/1-EVİNPARK GÖKTÜRK/Evinpark Göktürk.jpg';
 
-import kemer0 from '../assets/tamamlananprojects/2-EVİNPARK KEMER/0.jpg';
+import kemer0 from '../assets/tamamlananprojects/2-EVİNPARK KEMER/0.png';
 import kemer1 from '../assets/tamamlananprojects/2-EVİNPARK KEMER/1.jpg';
-import kemer2 from '../assets/tamamlananprojects/2-EVİNPARK KEMER/2.jpg';
 import kemer3 from '../assets/tamamlananprojects/2-EVİNPARK KEMER/3.jpg';
 import kemer4 from '../assets/tamamlananprojects/2-EVİNPARK KEMER/4.jpg';
-import kemerCover from '../assets/tamamlananprojects/2-EVİNPARK KEMER/Evinpark Kemer.jpg';
 
-import orman0 from '../assets/devamedenprojects/1-EVİNPARK ORMAN/0.JPG';
-import orman1 from '../assets/devamedenprojects/1-EVİNPARK ORMAN/1.JPG';
-import orman2 from '../assets/devamedenprojects/1-EVİNPARK ORMAN/2.JPG';
-import orman3 from '../assets/devamedenprojects/1-EVİNPARK ORMAN/3.JPG';
-import orman4 from '../assets/devamedenprojects/1-EVİNPARK ORMAN/4.JPG';
+import orman0 from '../assets/devamedenprojects/1-EVİNPARK ORMAN/0.jpg';
+import orman1 from '../assets/devamedenprojects/1-EVİNPARK ORMAN/1.jpg';
+import orman2 from '../assets/devamedenprojects/1-EVİNPARK ORMAN/2.jpg';
+import orman3 from '../assets/devamedenprojects/1-EVİNPARK ORMAN/3.jpg';
+import orman4 from '../assets/devamedenprojects/1-EVİNPARK ORMAN/4.jpg';
 
-import cinar0 from '../assets/tamamlananprojects/4-EVİNPARK ÇINAR/0.png';
+import cinar0 from '../assets/tamamlananprojects/4-EVİNPARK ÇINAR/0.jpg';
 import cinar1 from '../assets/tamamlananprojects/4-EVİNPARK ÇINAR/1.png';
 import cinar2 from '../assets/tamamlananprojects/4-EVİNPARK ÇINAR/2.png';
-import cinar3 from '../assets/tamamlananprojects/4-EVİNPARK ÇINAR/3.png';
-import cinarCover from '../assets/tamamlananprojects/4-EVİNPARK ÇINAR/Evinpark Çınar.jpg';
 
-import dededen0 from '../assets/tamamlananprojects/5-DEDEDEN APT/0.png';
+import dededen0 from '../assets/tamamlananprojects/5-DEDEDEN APT/0.jpg';
 import dededen1 from '../assets/tamamlananprojects/5-DEDEDEN APT/1.jpg';
 
 import harput0 from '../assets/devamedenprojects/2- EVİNPARK HARPUT/0.jpg';
@@ -34,6 +29,7 @@ import harput1 from '../assets/devamedenprojects/2- EVİNPARK HARPUT/1.jpg';
 import harput2 from '../assets/devamedenprojects/2- EVİNPARK HARPUT/2.jpg';
 import harput3 from '../assets/devamedenprojects/2- EVİNPARK HARPUT/3.jpg';
 import harput4 from '../assets/devamedenprojects/2- EVİNPARK HARPUT/4.jpg';
+import harput5 from '../assets/devamedenprojects/2- EVİNPARK HARPUT/5.jpg';
 
 import cekmekoy0 from '../assets/planlananprojects/2-EVİNPARK ÇEKMEKÖY/0.jpg';
 import cekmekoy1 from '../assets/planlananprojects/2-EVİNPARK ÇEKMEKÖY/1.jpg';
@@ -76,12 +72,12 @@ export const ONGOING_PROJECT_KEYS = [
 ];
 
 export const PROJECT_IMAGES = {
-  gokturk: [gokturkCover, gokturk0, gokturk1, gokturk2, gokturk3, gokturk4, gokturk5, gokturk6],
-  kemer: [kemerCover, kemer0, kemer1, kemer2, kemer3, kemer4],
+  gokturk: [gokturk0, gokturk1, gokturk2, gokturk3, gokturk4, gokturk5, gokturk6],
+  kemer: [kemer0, kemer1, kemer3, kemer4],
   orman: [orman0, orman1, orman2, orman3, orman4],
-  cinar: [cinarCover, cinar0, cinar1, cinar2, cinar3],
+  cinar: [cinar0, cinar1, cinar2],
   dededen: [dededen0, dededen1],
-  harput: [harput0, harput1, harput2, harput3, harput4],
+  harput: [harput0, harput1, harput2, harput3, harput4, harput5],
   cekmekoy: [
     cekmekoy0,
     cekmekoy1,

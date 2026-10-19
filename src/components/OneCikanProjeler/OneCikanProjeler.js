@@ -8,7 +8,7 @@ import './OneCikanProjeler.css';
 const imageContext = require.context(
   '../../assets/tamamlananprojects',
   true,
-  /\.(jpe?g|png|JPE?G|PNG)$/
+  /\.(jpe?g|png)$/
 );
 
 const FEATURED_PROJECTS = [
@@ -18,7 +18,7 @@ const FEATURED_PROJECTS = [
   { display: 'EVİNPARK ÇINAR', match: ['evinpark çınar'] },
   { display: 'EVİNPARK ADA', match: ['evinpark ada'] },
   { display: 'EVİNPARK TEPE', match: ['evinpark tepe'] },
-  { display: 'EVİNPARK DOĞA', match: ['evinpark doğa', 'halimağa'] },
+  { display: 'EVİNPARK Doğa', match: ['evinpark doğa', 'halimağa', 'halimaga'] },
   { display: 'EVİNPARK ATAŞEHİR', match: ['evinpark ataşehir'] },
   { display: 'EVİNPARK ÇAMLICA', match: ['evinpark çamlıca'] },
   { display: 'DEDEDEN REZİDANS', match: ['dededen'] },
@@ -46,7 +46,7 @@ function getProjectsFromContext() {
   return Object.keys(byFolder).map((folder) => {
     const files = byFolder[folder].sort((a, b) => a.fullPath.localeCompare(b.fullPath));
     const name = folder.replace(/^\d+\s*-\s*/, '').trim();
-    const cover = pickCoverFile(files, name);
+    const cover = pickCoverFile(files);
     const imageKey = cover ? cover.path : files[0].path;
     return {
       id: folder,

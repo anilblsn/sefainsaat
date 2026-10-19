@@ -9,10 +9,10 @@ import './PlanlananProjeler.css';
 import kartal0 from '../assets/planlananprojects/1-EVİNPARK KARTAL/0.jpg';
 import kartal1 from '../assets/planlananprojects/1-EVİNPARK KARTAL/1.jpg';
 
-import kasaba0 from '../assets/planlananprojects/4- EVİNPARK KASABA/0.jpg';
+import kasaba0 from '../assets/planlananprojects/2- EVİNPARK KASABA/0.jpg';
 
-import omerli0 from '../assets/planlananprojects/5- EVİNPARK ÖMERLİ/0.jpg';
-import omerli1 from '../assets/planlananprojects/5- EVİNPARK ÖMERLİ/1.jpg';
+import omerli0 from '../assets/planlananprojects/3- EVİNPARK ÖMERLİ/0.jpg';
+import omerli1 from '../assets/planlananprojects/3- EVİNPARK ÖMERLİ/1.jpg';
 
 const KARTAL_IMAGES = [kartal0, kartal1];
 const KASABA_IMAGES = [kasaba0];
