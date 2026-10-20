@@ -1,5 +1,12 @@
-const plansContext = require.context(
+const dairelerContext = require.context(
   '../assets/daireler',
+  true,
+  /\.(jpe?g|png|pdf)$/i
+);
+
+/** Kadıköy / Koru plans live under devam eden project folders. */
+const devamPlansContext = require.context(
+  '../assets/devamedenprojects',
   true,
   /\.(jpe?g|png|pdf)$/i
 );
@@ -14,6 +21,8 @@ export const PLAN_FOLDER_BY_KEY = {
   dededen: '5- Dededen Apartmanı',
   cekmekoy: '6-Evinpark Çekmeköy',
   harput: '7-Evinpark Harput',
+  kadikoy: '2-EVİNPARK KADIKÖY REZİDANS',
+  korupark: '4-KORU REZİDANS',
 };
 
 function unitSortValue(unitType) {
@@ -25,8 +34,12 @@ function unitSortValue(unitType) {
   return main * 1000 + frac * 10 + plus;
 }
 
+function isDairelerSegment(name) {
+  return String(name || '').toLocaleLowerCase('tr-TR') === 'daireler';
+}
+
 function parseUnitInfo(parts) {
-  const dirs = parts.slice(1, -1).filter((p) => !/^daireler$/i.test(p));
+  const dirs = parts.slice(1, -1).filter((p) => !isDairelerSegment(p));
   let unitType = '';
   let layout = '';
   dirs.forEach((dir) => {
@@ -41,9 +54,8 @@ function parseUnitInfo(parts) {
   return { unitType, layout, unitLabel, sortKey };
 }
 
-const PLANS_BY_FOLDER = (() => {
-  const map = {};
-  plansContext.keys().forEach((key) => {
+function ingestContext(ctx, map) {
+  ctx.keys().forEach((key) => {
     const rel = key.replace(/^\.\//, '');
     const parts = rel.split('/');
     const folder = parts[0];
@@ -51,13 +63,20 @@ const PLANS_BY_FOLDER = (() => {
     if (/^thumbs\.db$/i.test(fileName)) return;
     const ext = (fileName.split('.').pop() || '').toLowerCase();
     const type = ext === 'pdf' ? 'pdf' : 'image';
-    const src = plansContext(key);
+    const src = ctx(key);
     const name = fileName.replace(/\.[^.]+$/, '');
     const unit = parseUnitInfo(parts);
+    // Root gallery images (0.jpg, …) have no unit folder → skipped.
     if (!unit.unitType) return;
     if (!map[folder]) map[folder] = [];
     map[folder].push({ type, src, name, ...unit });
   });
+}
+
+const PLANS_BY_FOLDER = (() => {
+  const map = {};
+  ingestContext(dairelerContext, map);
+  ingestContext(devamPlansContext, map);
   Object.keys(map).forEach((k) => {
     map[k].sort((a, b) => {
       if (a.sortKey !== b.sortKey) return a.sortKey - b.sortKey;
